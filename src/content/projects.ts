@@ -14,8 +14,9 @@ export type ProjectVisual =
 
 /**
  * ROLE values describe contribution, never method or technology.
- * TODO(stage-5): final factual review of every ROLE string against the real
- * contribution while the case studies are written. Do not add responsibilities.
+ * Audited at Stage 6.1 against the case studies and the résumé source. Every term
+ * below is backed by a statement of what was actually done; LEAD RADAR lost `BUILD`
+ * because nothing supports code authorship — the code is written by the models.
  */
 export type Project = {
   index: string;
@@ -46,7 +47,7 @@ export const projects: Project[] = [
     type: "AI / AUTOMATION",
     tags: ["AI", "AUTOMATION", "SYSTEMS"],
     year: "2026",
-    role: "PRODUCT · BUILD · REVIEW",
+    role: "PRODUCT · SETUP · REVIEW",
     status: "IN PRODUCTION",
     summary:
       "Сервис поиска лидов в Telegram: следит за реестром источников, дедуплицирует сообщения, квалифицирует их моделью и присылает владельцу ограниченный дайджест два раза в день.",

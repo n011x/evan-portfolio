@@ -11,7 +11,8 @@ export function Rail() {
       <div className="sticky top-0 flex h-svh flex-col items-center justify-between py-4">
         <span className="nano">EC</span>
         <span className="vertical-text nano" style={{ letterSpacing: "0.22em" }}>
-          {profile.wordmark} — AI PRODUCTS · WEB · AUTOMATION
+          {/* the rail carries the same classification as the hero — one source, no drift */}
+          {profile.wordmark} — {profile.roleLines.join(" · ")}
         </span>
         <span className="nano">{profile.year}</span>
       </div>

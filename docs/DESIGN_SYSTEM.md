@@ -1,4 +1,4 @@
-# DESIGN SYSTEM — STAGE 2 → STAGE 6
+# DESIGN SYSTEM — STAGE 2 → STAGE 6.1
 
 Tokens, grid, type roles and the component inventory, stage by stage. Everything here is
 implemented and visible in the running site. For what is true overall,
@@ -29,6 +29,8 @@ Rules `--rule` 14%, `--rule-soft` 7%, `--rule-strong` 32%.
 Accent `--accent #CC2E24` (Registration Red) + `--accent-on-dark #FF6B5E` +
 `--accent-mark`. Ultramarine `#2C2BE8` was the Stage-2 candidate and is superseded.
 `--gray` was darkened to `#65666B` at Stage 6 for WCAG AA.
+`--ghost-index #A4A29A` (Stage 6.1) is the oversized decorative project index: its own
+token rather than the `--paper-3` surface tint, because it is read as type.
 Motion tokens (`--ease-out`, three durations) and the field tokens are in use.
 
 Type: `--fs-display … --fs-nano`, all `clamp()`; tracking, leading and an 8px baseline
@@ -206,6 +208,24 @@ Everything else in this stage is outside the composition: metadata, canonical UR
 Open Graph (`app/opengraph-image.tsx` renders the hero's own logic at 1200×630),
 `sitemap.ts`, `robots.ts`, Person + CreativeWork JSON-LD, security headers,
 `output: "standalone"`, and the Docker/README production path.
+
+## 7g. STAGE 6.1 — FACTUAL CLEANUP
+
+No composition changed. Three things moved in the code.
+
+**`--ghost-index`.** The oversized `(01)…(04)` behind each project head was `--paper-3`
+on `--paper` at 1.21:1 — quiet to the point of looking like a printing accident. It now
+has its own token at `#A4A29A`: 2.26:1 on `--paper`, 2.09:1 on `--paper-2`. That is
+deliberately short of the 3:1 large-text threshold — the brief was 2:1–3:1, because this is
+non-semantic display material and it must not compete with the project name. Separate
+token, so the `--paper-3` surface tint keeps its own meaning.
+
+**The left rail.** It hardcoded `AI PRODUCTS · WEB · AUTOMATION` while the hero said
+`AI AGENTS`. It now renders `profile.roleLines`, so the two cannot drift again.
+
+**LEAD RADAR's ROLE.** `PRODUCT · BUILD · REVIEW` → `PRODUCT · SETUP · REVIEW`. Nothing in
+the case, the repository or the résumé supports code authorship; the résumé says plainly
+that the models write the code. See [`CANONICAL_STATE.md` §3](CANONICAL_STATE.md).
 
 ## 8. WHAT THE SITE STILL DOES NOT HAVE
 

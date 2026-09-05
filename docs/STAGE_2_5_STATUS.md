@@ -1,8 +1,11 @@
 # STAGE 2.5 — FIGMA ART DIRECTION · COMPLETE
 
-**Historical record.** Stage 2.5 closed and Stages 3–6 shipped from it. Figma is no longer
-consulted: the code is the source of truth, and
-[`CANONICAL_STATE.md`](CANONICAL_STATE.md) states what is true now.
+**Historical record — read with this warning.** Stage 2.5 closed and Stages 3–6 shipped
+from it. A read-only recheck at Stage 6.1 found that the Figma file now holds **only the
+`00_SYSTEM` page**: the hero, statement, project, motion and archive boards described below
+are **not in the file**. This document records the decisions that were taken, not artwork
+that still exists. Production and [`CANONICAL_STATE.md`](CANONICAL_STATE.md) are the source
+of truth for composition — see [§8b](CANONICAL_STATE.md).
 
 ## FINAL PASS (2026-09-04, later)
 

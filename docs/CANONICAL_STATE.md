@@ -2,7 +2,11 @@
 
 **The single authoritative snapshot of this project as it exists now.**
 
-Last synchronised: 2026-09-05, after Stage 6 and the public GitHub baseline.
+Last synchronised: 2026-09-05, after Stage 6.1.
+
+Every statement below carries one of these labels where its status is not obvious:
+**SHIPPED** · **VERIFIED FACT** · **PENDING REAL ASSET** · **NEEDS USER FACT** ·
+**LAUNCH BLOCKER** · **DEFERRED** · **REJECTED**.
 
 This file describes what **is**, not what is planned. Where any other document in `docs/`
 disagrees with this one, this one wins and the other document is wrong and must be fixed.
@@ -17,8 +21,8 @@ case studies, no runtime data fetching, no animation library, no WebGL, no canva
 
 | | |
 |---|---|
-| Stages complete | 1, 2, 2.5, 3, 4, 5, 6 |
-| Stage in scope next | 6.1 (see §10) — **not started, awaiting approval of this file** |
+| Stages complete | 1, 2, 2.5, 3, 4, 5, 6, 6.1 |
+| Stage in scope next | none scheduled — awaiting review of Stage 6.1 |
 | Repository | `n011x/evan-portfolio`, public |
 | Branch | `main` |
 | Baseline commit | `6a9e09e feat: establish portfolio production baseline` |
@@ -35,6 +39,7 @@ case studies, no runtime data fetching, no animation library, no WebGL, no canva
 | 4 | Motion: CSS keyframes on transform/opacity only, `MotionGate` (visibility + reduced-motion), `Reveal` (IntersectionObserver), media processed→clean wipe |
 | 5 | `/work` archive and `/work/[slug]` case template, five case studies, `caseRoutesEnabled = true` |
 | 6 | Responsive 320→1920, WCAG 2.2 AA, performance, SEO/OG/sitemap/JSON-LD, security headers, standalone + Docker production path |
+| 6.1 | Factual cleanup: ghost-index contrast resolved, ROLE strings audited, left-rail classification drift fixed, résumé project count synced and rebuilt, Figma rechecked read-only and its stale copy corrected |
 
 ---
 
@@ -180,6 +185,7 @@ Language: **RU prose + EN system labels**, everywhere.
 `--graphite #3A3B3E` · `--gray #65666B` · `--gray-2 #C7C7C4` · `--night #101012`.
 Rules `--rule` 14% · `--rule-soft` 7% · `--rule-strong` 32%.
 Field `--field-tone` · `--field-light` · `--field-blur` · `--field-strength` · `--grain`.
+`--ghost-index #A4A29A` — the oversized decorative project index, tuned as type (§5).
 
 `--gray` was darkened from `#7D7E83` at Stage 6: the old value read 3.58:1 and failed AA
 on every micro/metadata label. On the dark band `--gray` becomes `#8B8C91` (5.66:1).
@@ -211,6 +217,28 @@ Four project archetypes on the homepage: `01 SYSTEM` (diagram-first), `02 RUNNIN
 
 Metadata layer rules: `ROLE` = contribution, `STACK` = technology, `APPROACH` = method.
 They are never mixed. ROLE never lists prompts or tools.
+
+**ROLE strings — audited at Stage 6.1 (VERIFIED FACT).** Each term was checked against the
+case study and the résumé source, which states plainly that the code is written by the
+models and the owner's contribution is task-setting, product logic, prompts and specs,
+server setup and review.
+
+| project | ROLE | evidence |
+|---|---|---|
+| LEAD RADAR | `PRODUCT · SETUP · REVIEW` | was `PRODUCT · BUILD · REVIEW`; **`BUILD` removed** — nothing in the case, the repository or the résumé supports code authorship. `SETUP` is carried by the private VPS/systemd deployment |
+| HERMES | `PRODUCT · SETUP · REVIEW` | «Провёл установку на сервер через Codex, подключил Telegram, собрал память и workspace» |
+| ROUTE | `PRODUCT · INTERFACE · REVIEW` | «Придумал логику пути и метрики готовности. Спроектировал пять экранов и переходы… вносил правки и делал ревью» |
+| LUMA ENGLISH | `STRUCTURE · COPY · REVIEW` | «Собрал структуру страницы и промты… правил тексты программ и тарифов. Проверял вёрстку и мобильную версию, делал ревью» |
+| ЯСНОДОМ | `STRUCTURE · COPY · REVIEW` | «Собрал структуру и офферы, написал промты… правил тексты. Проверял обе формы заявки и мобильную версию» |
+
+LEAD RADAR and HERMES now carry the same ROLE because the evidenced contribution is the
+same shape. Consistency was not the goal; accuracy was.
+
+**Left rail.** It reads `EVAN CARTEX — {classification}` and derives the classification
+from `profile.roleLines`. Until Stage 6.1 it hardcoded the obsolete `AI PRODUCTS · WEB ·
+AUTOMATION` while the hero said `AI AGENTS` — a real drift, now impossible to repeat.
+`AI PRODUCTS / AGENTS` still exists as a WHAT I BUILD **capability row name**; that is the
+approved Stage-2 taxonomy and a different thing from the hero classification.
 
 ### Assets genuinely still pending
 
@@ -255,16 +283,33 @@ coverage, rendered at nano size, and is never presented as a service or business
   removable without information loss.
 - Reduced motion: the field freezes, reveals become instant, micro-motion is removed.
 
-**One known, accepted exception.** The oversized ghost project index `(01)` in
-`ProjectHead` is `--paper-3` on `--paper` = **1.21:1**. It is decorative typography,
-`aria-hidden`, and duplicates no information; WCAG treats incidental text as exempt, axe
-cannot know that. Reaching 3:1 would need roughly `#8E8F8C`, which turns a whisper into a
-numeral competing with the project name. **Left as-is by decision; costs 4 Lighthouse
-accessibility points on `/`.** Reopen only with an explicit art-direction decision.
+**One deliberate exception — resolved at Stage 6.1.** The oversized ghost project index
+`(01)…(04)` in `ProjectHead` was `--paper-3` on `--paper` = **1.21:1**, which read as a
+washed-out accident rather than a decision. It now has its own token, `--ghost-index
+#A4A29A`, measured in the running page at **2.26:1 on `--paper` and 2.09:1 on `--paper-2`**
+(project 01 sits on the recessed band).
+
+The target was 2:1–3:1, not 4.5:1: this is non-semantic display material, `aria-hidden`,
+duplicating no information, and WCAG treats incidental text as exempt. The point was to
+make it legible as an intentional layer while keeping it clearly subordinate — it sits at
+about 44% of the metadata gray's contrast (5.07:1) and 13% of the ink's (17.42:1), so it
+still cannot compete with the project name. It is a separate token rather than a changed
+`--paper-3`, so the surface tint keeps its own meaning.
+
+axe and Lighthouse still flag it, because 2.26:1 is below their 3:1 large-text threshold.
+**That is the recorded decision, not an oversight; it costs 4 Lighthouse accessibility
+points on `/`.** Reopen only as an art-direction decision.
 
 Note: in a default axe run this element is often offscreen inside a `content-visibility`
 band and the violation appears to vanish. It has not. It is confirmed with all bands
 force-rendered.
+
+**Matte glass on the dark band.** Composited for real (9% white over `--night`, effective
+`#262627`), the plate reads `--ink` at 13.39:1, `--graphite` at 7.81:1 and `--gray` at
+**4.51:1** — the last clears AA with little margin. The no-`backdrop-filter` fallback is
+`rgba(16,16,18,0.86)`, giving 16.83:1 and 5.66:1. Tooling that treats the translucent
+plate as an opaque background reports false failures here; the composited figures above
+are the real ones.
 
 ---
 
@@ -283,9 +328,9 @@ rather than what Lighthouse's Lantern model estimates:
 
 | | LCP | CLS | INP | longest task |
 |---|---|---|---|---|
-| mobile 390, `/` | 960 ms | 0.000 | 56 ms | 77 ms |
-| mobile 390, case | 780 ms | 0.000 | 72 ms | 74 ms |
-| desktop 1440 | 88–152 ms | 0.000 | 32–72 ms | 0 ms |
+| mobile 390, `/` | 980 ms | 0.000 | 64 ms | 72 ms |
+| mobile 390, case | 732 ms | 0.000 | 64 ms | 70 ms |
+| desktop 1440 | 56–128 ms | 0.000 | 40–48 ms | 0 ms |
 
 Lighthouse's simulated mobile LCP reads 2.9 s for the same pages; the LCP element is the
 decorative ASCII `<pre>`.
@@ -342,18 +387,53 @@ read to produce `public/media`.
 
 ---
 
+## 8b. FIGMA — WHAT THE FILE ACTUALLY CONTAINS
+
+Rechecked read-only at Stage 6.1. **The design file is not a mirror of production and must
+not be treated as one.**
+
+It holds **one page, `00_SYSTEM`**, with a single section and seven frames:
+`SYS / COLOR` · `SYS / ACCENT CANDIDATES — SUPERSEDED BY v3` · `SYS / TYPOGRAPHY` ·
+`SYS / INDEX` · `SYS / MEDIA TREATMENT` · `SYS / ACCENT v2 — SUPERSEDED BY v3` ·
+`SYS / ACCENT v3 — REGISTRATION RED (SELECTED)`. 42 frames, 344 text nodes in total.
+
+**There are no composition boards in the file.** No `HERO_BASE`, no `STATEMENT_A`, no
+LEAD RADAR / HERMES / ROUTE / LUMA compositions, no `DISTORTION FIELD / MOTION` board, no
+mobile compositions, and no `ZZ_ARCHIVE — REJECTED` page. `STAGE_2_5_STATUS.md` describes
+all of those as existing; they are not in the file. That document is a record of the
+decisions taken, not an index of surviving artwork.
+
+Consequence: **production and this document are the only source of truth for composition.**
+Figma is a system specimen sheet — colour, type, index language, media treatment and the
+accent decision — and nothing more. The murmuration cannot "return from Figma" because
+no board of it exists there.
+
+The accent decision in `SYS / ACCENT v3` matches production exactly: `#CC2E24` at 4.67:1
+on paper, `#FF6B5E` at 6.80:1 on night, one hue, no second accent.
+
+Stale factual copy found inside the **active** frames was corrected in place at Stage 6.1
+so the design source no longer contradicts this document: `--gray` `#7D7E83` → `#65666B`;
+`AI PRODUCTS` → `AI AGENTS`; the old hero statement → the current one; two `PRODUCT ·
+BUILD · REVIEW` labels → `PRODUCT · SETUP · REVIEW`; the rail specimen → `AI AGENTS`;
+`REMOTE · UTC` → `REMOTE` (no UTC clock was ever built); Ultramarine's "ТЕКУЩИЙ ТОКЕН"
+and "CURRENT" status labels → superseded. The two earlier accent boards were renamed
+`— SUPERSEDED BY v3` rather than deleted: they are documented explorations.
+
+No board, variant or component was created. No approved visual decision was reopened.
+
 ## 9. REJECTED AND ARCHIVED — DO NOT RESURRECT
 
 Each of these was explored and closed. None returns without a new, explicit decision.
 
 | direction | why it was closed |
 |---|---|
-| **Murmuration field** | demanded a second visual language and read as a concept on top of the concept. Archived in the Figma page `ZZ_ARCHIVE — REJECTED` |
-| **Ultramarine `#2C2BE8`** as accent | superseded by Registration Red at Stage 2.5 |
+| **Murmuration field** | demanded a second visual language and read as a concept on top of the concept. No board of it survives in the Figma file (§8b), so it exists only as this record |
+| **Ultramarine `#2C2BE8`** as accent | superseded by Registration Red at Stage 2.5; the two Figma boards that still labelled it `CURRENT` were renamed `— SUPERSEDED BY v3` at 6.1 |
 | Signal Chartreuse · Industrial Amber · Digital Magenta · Cold Cyan | documented explorations only; never selected |
 | **Per-letter typographic distortion** | rejected explicitly: distortion changes material, never metrics |
 | Kinetic typography, animated tracking, baseline shift, type scale/stretch animation | same rule |
 | `CloudField` as a named 3-layer system | superseded by `DistortionField` with six tuned variants |
+| `PRODUCT · BUILD · REVIEW` as LEAD RADAR's role | removed at 6.1 — no source supports code authorship (§3) |
 | `PixelIndex` · `PixelType` · `PixelReveal` · `DitherStrip` · `DotGrid` · `PixelMass` | Stage-1 component names that were never built; the shipped primitive is the `.pixel` CSS dot-matrix mask plus the build-time media pipeline |
 | Reveal with `blur(6px) → 0` | replaced by opacity + 14px translate; blur was too expensive and read as softness, not as system |
 | Media `PixelReveal` (pixelated → sharp in steps) and scan-smear on entry | replaced by the hard-seam processed→clean `clip-path` wipe |
@@ -361,7 +441,7 @@ Each of these was explored and closed. None returns without a new, explicit deci
 | Clip-path hairline reveal | caused a genuine deadlock — a self-clipped element reports an empty intersection rect, so its observer never fired and every band separator stayed invisible. Replaced by `scaleX` |
 | Filter UI on `/work` | five projects do not need one; `type` and `tags` stay in the data model |
 | A custom in-identity 404 with the ASCII field | specified at Stage 1, never built; Next's default is in place |
-| `UTC+3` in the hero system metadata | specified at Stage 1, never built |
+| `UTC+3` in the hero system metadata | specified at Stage 1, never built; the Figma specimen that still showed `REMOTE · UTC` was corrected at 6.1 |
 | Motion / GSAP / Lenis / Three.js / WebGL / canvas | never needed; the motion layer is CSS plus two small client components |
 | Fake pages built only to avoid a 404 | forbidden by decision |
 
@@ -369,46 +449,44 @@ Each of these was explored and closed. None returns without a new, explicit deci
 
 ## 10. OPEN — CURRENT ONLY
 
-Everything resolved has been removed from this list.
+Re-audited item by item at Stage 6.1. Anything resolved has left this list.
 
-| # | item | kind |
+| # | item | status |
 |---|---|---|
-| O1 | **Production domain.** `NEXT_PUBLIC_SITE_URL` is read at build time; canonical, OG, sitemap and robots point at `localhost:3000` until it is set | blocking for launch |
-| O2 | **ROUTE — 5 screens.** The only project whose primary evidence is missing | asset, owner-supplied |
-| O3 | **ЯсноДом — site capture** for the archive row and its case | asset, capturable |
-| O4 | **Lead Radar — sanitized digest card** | asset, owner-supplied |
-| O5 | **Ghost project index contrast** (§5). Left as-is by decision; reopen only as art direction | decision, deferred |
-| O6 | **Hermes uptime** is written as "2+ months". A date-stamped value would make it durable | fact |
-| O7 | **ROLE strings** for all five projects were derived from source descriptions and still carry a confirmation marker in `src/content/projects.ts` | fact, needs owner confirmation |
-| O8 | **AI VISUAL** has no project among the five, so its proof cell in WHAT I BUILD is empty | content gap |
-| O9 | The `myresume` HTML/PDF documents still say «четыре проекта»; `content.json` and `content.md` were synced to five, the rendered documents were not rebuilt | external, owner action |
+| O1 | **Production domain.** `NEXT_PUBLIC_SITE_URL` is read at build time. Verified at 6.1 that all six consumers — `metadataBase`, per-page canonical, Open Graph URL, `sitemap.xml`, `robots.txt`, JSON-LD — derive from the single `src/lib/site.ts` value, and that a probe build propagates one value to 20 absolute URLs on `/` and 16 on a case page. No domain is hardcoded anywhere. It is a one-value replacement. | **LAUNCH BLOCKER** |
+| O2 | **ROUTE — 5 screens.** The project's primary evidence. The filmstrip renders labelled placeholders and the page says `05 SCREENS · VISUAL PENDING`. Needed: five real screen captures (PNG) of the mockup. | **PENDING REAL ASSET** |
+| O3 | **ЯсноДом — site capture** for the archive row and its case. Capturable from the live URL; not yet shot. | **PENDING REAL ASSET** |
+| O4 | **Lead Radar — sanitized digest card.** Needed: one real digest card with the leads redacted. The architecture diagram carries the case until then. | **PENDING REAL ASSET** |
+| O5 | **Ghost project index contrast.** Resolved at 6.1 — `--ghost-index #A4A29A`, 2.26:1 / 2.09:1, inside the 2:1–3:1 target (§5). | **SHIPPED** |
+| O6 | **Hermes uptime provenance.** The metric reads `2+ MO · БЕЗ ПЕРЕЗАПУСКА`. Chronology that *is* provable: the Codex kit is stamped 2026-06-07, the staging tree is dated 2026-06-10, and the résumé dates the work «с 06.2026» — so the project **started in June 2026**. That is a build date, not an uptime window, and nothing in the repositories records when the process last restarted. Converting one into the other would be an invention, so the metric stays as it is. Needed from the owner: the date the current uptime window began, or a date-stamped reading. | **NEEDS USER FACT** |
+| O7 | **ROLE strings.** Audited at 6.1 against the case studies and the résumé source; `BUILD` removed from LEAD RADAR, every other term verified (§3). The confirmation marker in `src/content/projects.ts` is replaced by the audit note. | **VERIFIED FACT** |
+| O8 | **AI VISUAL has no project.** Re-audited: nothing in the repositories or supplied material is a publishable AI-visual project — the résumé records it as a capability with tools (Midjourney, Sora, Kling, Flux, Nano Banana, Higgsfield, Weavy) and no named deliverable. The capability stays in WHAT I BUILD, STACK and ABOUT because it is factually correct there. This is a deliberate absence, not a broken implementation. | **INTENTIONALLY NO PROJECT / FUTURE REAL ASSET** |
+| O9 | **Résumé project count.** Resolved at 6.1: `index.html`, `cv-mono.html`, `cv-blue.html` and `cv-ats.html` now state five projects and name the lead-search service; `resume.pdf`, `cv-mono.pdf`, `cv-blue.pdf` and `cv-ats.pdf` were rebuilt and verified visually. The repository's own `sync.py` fact check now passes for «Проектов всего». | **SHIPPED** |
+| O10 | **Résumé project enumeration.** New, surfaced by fixing O9: those four documents now *state* five projects but their project sections still *list* four — Lead Radar has no entry in them. Only `index-bold.html` carries a full LEAD RADAR block. Adding entries means writing new project copy (and `build.js` reports pages 1, 4 and 6 of the portfolio already at 265 mm of 265 mm, so nothing fits without a layout change). Needed from the owner: either the copy and a layout decision, or a decision to retire those older documents in favour of `index-bold`. | **NEEDS USER FACT** |
+| O11 | **`index-bold.html` is missing the «Вакансий в неделю» (20–30) fact**, so `sync.py` still reports one discrepancy. Pre-existing, unrelated to the project count, and out of Stage 6.1's stated scope. | **NEEDS USER FACT** |
+| O12 | **Lighthouse `font-size` on mobile `/`.** The ASCII sculpture is counted as illegible text; it is an `aria-hidden` graphic made of characters. Accepted as-is — the artwork is not changed. Costs 4 best-practices points. | **DEFERRED** |
 
 ---
 
-## 11. STAGE 6.1 — SCOPE
+## 11. STAGE 6.1 — WHAT IT DID
 
-Derived from what Stage 6 actually left open. **Proposed; not started; awaiting approval
-of this file.** Nothing outside this list is in scope.
+Completed 2026-09-05. Factual cleanup only: no composition, layout, type scale, motion
+behaviour, case template, route or visual system was changed.
 
-**In scope**
+1. **Ghost index** — new `--ghost-index` token at 2.26:1 / 2.09:1 (§5). One token; the
+   composition is untouched.
+2. **ROLE strings** — audited against evidence; `BUILD` removed from LEAD RADAR (§3).
+3. **Left rail** — stopped hardcoding the obsolete `AI PRODUCTS` classification and now
+   derives it from `profile.roleLines` (§3). This was real production drift.
+4. **Résumé** — four documents and their PDFs synced to five projects and rebuilt (O9).
+5. **Figma** — read-only recheck; the file holds only `00_SYSTEM` and no composition
+   boards. Nine stale text nodes and two frame names corrected in place (§8b).
+6. **Domain** — verified as a single-value replacement with a probe build (O1).
+7. **Documentation** — this file first, then every dependent document.
 
-1. Decide O5 — the ghost project index. Either accept it permanently and record it as a
-   standing exception, or set a tone that satisfies 3:1 without turning the whisper into a
-   numeral. One decision, one token, no composition change.
-2. Decide the ASCII `font-size` audit the same way — accept as a decorative graphic, or
-   change how it is represented. No change to the artwork itself.
-3. Wire the production domain end to end once it exists: build with it, then re-verify
-   canonical, OG, sitemap and robots on the built output.
-4. Final security posture check against the real origin: CSP with no console violations,
-   HSTS, and the external-link `rel` audit.
-5. Reconcile the remaining factual markers — O6 and O7 — or leave them explicitly as they
-   are, with the reason recorded.
-
-**Out of scope**
-
-Composition, layout, type scale, colour beyond the single O5 token, motion behaviour, the
-case template, new sections, new routes, new visual systems, and any change to project
-content that is not owner-confirmed.
+The ASCII `font-size` audit and the security posture check against a real origin were in
+the proposed scope and are **not** closed: the first is deferred by decision (O12), the
+second cannot run until a production origin exists (O1).
 
 ---
 

@@ -8,6 +8,10 @@ export const contentType = "image/png";
 /**
  * The OG card is the hero's own logic in one frame: the name, the classification, the
  * dateline and the proof row. Built at build time, no external assets.
+ *
+ * next/og cannot read CSS variables, so the palette is restated here. Keep these in step
+ * with `styles/tokens.css`: --paper #F2F1EE, --ink #0B0B0C, --graphite #3A3B3E,
+ * --gray #65666B.
  */
 export default function OpenGraphImage() {
   return new ImageResponse(
@@ -25,7 +29,7 @@ export default function OpenGraphImage() {
           fontFamily: "sans-serif",
         }}
       >
-        <div style={{ display: "flex", justifyContent: "space-between", fontSize: 20, letterSpacing: 2, color: "#7D7E83" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", fontSize: 20, letterSpacing: 2, color: "#65666B" }}>
           <span>{profile.year} · BUILD {profile.build}</span>
           <span>PORTFOLIO / INDEX</span>
         </div>
@@ -43,7 +47,7 @@ export default function OpenGraphImage() {
           <span style={{ fontSize: 26, maxWidth: 620, lineHeight: 1.35, color: "#3A3B3E" }}>
             {profile.statement}
           </span>
-          <div style={{ display: "flex", gap: 32, fontSize: 20, letterSpacing: 2, color: "#7D7E83" }}>
+          <div style={{ display: "flex", gap: 32, fontSize: 20, letterSpacing: 2, color: "#65666B" }}>
             {profile.proof.map((item) => (
               <span key={item.label} style={{ display: "flex", flexDirection: "column" }}>
                 <span style={{ fontSize: 40, color: "#0B0B0C" }}>{item.value}</span>

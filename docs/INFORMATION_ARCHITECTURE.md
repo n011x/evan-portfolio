@@ -173,7 +173,7 @@ This section answers *«что этот человек способен собр
 
 | # | capability | line |
 |---|---|---|
-| 01 | AI PRODUCTS / AGENTS | Telegram agent that keeps context and runs on a schedule |
+| 01 | AI PRODUCTS / AGENTS | Telegram agent that keeps context and runs on a schedule — a **capability row name**, not the hero classification, which is `AI AGENTS` |
 | 02 | AUTOMATION | scheduled jobs: morning digest, Monday summary |
 | 03 | WEB / LANDINGS | single-page sites with a working form, structure to live link |
 | 04 | INTERFACES | screens and transitions designed before any code exists |

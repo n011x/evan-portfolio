@@ -298,7 +298,7 @@ Nothing is used at 1:1 — each device is re-cut to the single identity.
 ### R3 — Health Lab (soft white sculptural)
 | Device | Reading | Adopted as | Location |
 |---|---|---|---|
-| rotated wordmark on both edges | the frame is branded, not the middle | left rail vertical `EVAN CARTEX — AI PRODUCTS` (mirrored right on wide screens) | global |
+| rotated wordmark on both edges | the frame is branded, not the middle | left rail vertical `EVAN CARTEX — {classification}`, derived from `profile.roleLines`; built on the left only | global |
 | giant centred statement between sections | the site takes a breath and asserts | the statement band (see R2), one line, oversized, half on fog | statement band |
 | soft white sculptural volumes with real shadow | fog can have volume, not just blur | `CloudField` layer 3: a single large soft-edged light body with a diffuse shadow | hero, contact |
 | circular `Go ↗` affordances | small, precise, mechanical controls | 28px circular arrow buttons on project rows and next-project link | work, case |
@@ -470,7 +470,8 @@ Single scale plus one accent. Tokens are defined once in `styles/tokens.css`.
 |---|---|---|
 | `--paper` | `#F2F1EE` | page ground (warm off-white, as R4/R5) |
 | `--paper-2` | `#E9E8E4` | recessed bands, media placeholders |
-| `--paper-3` | `#DEDCD7` | ghost numerals, the lightest tint |
+| `--paper-3` | `#DEDCD7` | the lightest surface tint |
+| `--ghost-index` | `#A4A29A` | the oversized decorative project index — read as type, so tuned for contrast (2.26:1 on paper) |
 | `--ink` | `#0B0B0C` | primary type, solid controls |
 | `--graphite` | `#3A3B3E` | secondary type, diagram strokes |
 | `--gray` | `#65666B` | micro labels, metadata — darkened at Stage 6 for AA |
@@ -607,4 +608,12 @@ place of a missing screenshot. A missing asset stays visibly missing (`VISUAL PE
 Fog, grain, dither strips, dot maps, contour lines, ghost type, reg marks, ASCII field:
 all `aria-hidden="true"`, all non-interactive, all removable without information loss
 (brief §05 condition 2). Informational text never sits on fog at less than 4.5:1, never
-blurs, never pixelates. Focus ring is accent + 2px offset, visible on every control.
+blurs, never pixelates. Focus ring is `2px solid var(--accent)` at `outline-offset: 3px`,
+visible on every control.
+
+**Decorative type is still tuned, not abandoned.** `aria-hidden` is not a licence for a
+washed-out mark. The ghost project index sits at 2.09–2.26:1 — deliberately below the 3:1
+large-text threshold, deliberately above the 1.21:1 it started at, so it reads as an
+intended layer rather than an accident. Non-semantic display material is judged by whether
+it looks decided, not by whether it clears a text threshold it was never meant to meet.
+See [`CANONICAL_STATE.md` §5](CANONICAL_STATE.md).

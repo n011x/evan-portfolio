@@ -7,7 +7,7 @@ export function ProjectIndex({ index }: { index: string }) {
     <span
       aria-hidden="true"
       className="display-2 block"
-      style={{ color: "var(--paper-3)", fontWeight: 500, lineHeight: 0.8 }}
+      style={{ color: "var(--ghost-index)", fontWeight: 500, lineHeight: 0.8 }}
     >
       ({index})
     </span>
