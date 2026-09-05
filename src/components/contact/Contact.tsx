@@ -13,7 +13,7 @@ export function Contact() {
             className="pixel col-span-1 block text-[34px] leading-none md:text-[42px]"
             style={{ color: "var(--paper)" }}
           >
-            /07
+            /08
           </span>
           <h2 id="contact-title" className="micro micro-ink col-span-3 md:col-span-3 lg:col-span-6">
             CONTACT

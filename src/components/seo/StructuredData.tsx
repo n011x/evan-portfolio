@@ -26,7 +26,10 @@ export function StructuredData() {
       description: project.summary,
       dateCreated: project.year,
       genre: project.type,
-      url: cases[project.slug] ? `${siteUrl}/work/${project.slug}` : undefined,
+      url:
+        project.tier === "core" && cases[project.slug]
+          ? `${siteUrl}/work/${project.slug}`
+          : project.links.find((l) => l.label === "LIVE")?.href,
       sameAs: project.links.filter((l) => l.href.startsWith("http")).map((l) => l.href),
     })),
   };

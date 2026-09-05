@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { projects } from "@/content/projects";
+import { coreProjects, projects, webExamples } from "@/content/projects";
 import { cases } from "@/content/cases";
 import { profile } from "@/content/profile";
 import { Reveal } from "@/components/motion/Reveal";
+import { WebExamples } from "@/components/work/WebExamples";
 import { DistortionField } from "@/components/graphics/DistortionField";
 import { RegMarks } from "@/components/ui/RegMarks";
 
@@ -19,9 +20,9 @@ export const metadata: Metadata = {
 };
 
 /**
- * The archive in v1 is one page: an editorial index of every project plus a contact sheet
- * of processed thumbnails. No filter UI — five projects do not need one, and `type`/`tags`
- * already live in the data model for the day the archive grows.
+ * The archive is one page: the three core systems as an editorial index, then the landing
+ * work as a compact examples band. No filter UI — three cases do not need one, and
+ * `type`/`tags` already live in the data model for the day the archive grows.
  */
 export default function WorkPage() {
   const live = projects.filter((p) => p.links.some((l) => l.label === "LIVE")).length;
@@ -37,7 +38,7 @@ export default function WorkPage() {
             </span>
             <span className="nano col-span-2 md:col-span-2 lg:col-span-4">WORK / INDEX</span>
             <span className="nano col-span-4 md:col-span-2 lg:col-span-5 mt-2 md:mt-0 md:justify-self-end">
-              {String(projects.length).padStart(2, "0")} PROJECTS · {String(live).padStart(2, "0")} LIVE LINKS
+              {String(coreProjects.length).padStart(2, "0")} CORE · {String(webExamples.length).padStart(2, "0")} WEB · {String(live).padStart(2, "0")} LIVE LINKS
             </span>
           </div>
 
@@ -49,7 +50,7 @@ export default function WorkPage() {
 
           {/* index rows */}
           <ul>
-            {projects.map((project) => (
+            {coreProjects.map((project) => (
               <li key={project.slug}>
                 <Reveal kind="rule" className="rule-t block" />
                 <Link href={`/work/${project.slug}`} className="grid12 items-baseline py-6 lg:py-7 group">
@@ -83,6 +84,8 @@ export default function WorkPage() {
         </div>
       </section>
 
+      <WebExamples id="02" />
+
       {/* contact sheet */}
       <section className="band pt-16 lg:pt-24 pb-20 lg:pb-28" data-field="min" aria-labelledby="sheet-title">
         <div className="wrap">
@@ -99,10 +102,18 @@ export default function WorkPage() {
           <ul className="grid12 pt-8">
             {projects.map((project) => {
               const media = project.visual.kind === "media" ? project.visual : null;
+              // a core system opens its case; a landing opens the live site it is
+              const live = project.links.find((l) => l.label === "LIVE")?.href;
+              const href = project.tier === "core" ? `/work/${project.slug}` : (live ?? "/work#web");
+              const external = href.startsWith("http");
               return (
                 <li key={project.slug} className="col-span-2 md:col-span-2 lg:col-span-3 mb-8">
                   <Reveal>
-                    <Link href={`/work/${project.slug}`} className="block">
+                    <Link
+                      href={href}
+                      className="block"
+                      {...(external ? { target: "_blank", rel: "noreferrer noopener" } : {})}
+                    >
                       <figure
                         className="relative"
                         style={{

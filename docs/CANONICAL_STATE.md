@@ -2,7 +2,7 @@
 
 **The single authoritative snapshot of this project as it exists now.**
 
-Last synchronised: 2026-09-05, after Stage 6.1.
+Last synchronised: 2026-09-05, after Stage 6.2.
 
 Every statement below carries one of these labels where its status is not obvious:
 **SHIPPED** · **VERIFIED FACT** · **PENDING REAL ASSET** · **NEEDS USER FACT** ·
@@ -16,13 +16,14 @@ Anything listed under §9 REJECTED is closed and may not return without a new de
 
 ## 1. WHERE THE PROJECT STANDS
 
-A personal portfolio, fully prerendered, self-hostable. Seven routes, five projects, five
-case studies, no runtime data fetching, no animation library, no WebGL, no canvas.
+A personal portfolio, fully prerendered, self-hostable. Five routes, **three core systems
+with case studies** and **two landing examples**, no runtime data fetching, no animation
+library, no WebGL, no canvas.
 
 | | |
 |---|---|
-| Stages complete | 1, 2, 2.5, 3, 4, 5, 6, 6.1 |
-| Stage in scope next | none scheduled — awaiting review of Stage 6.1 |
+| Stages complete | 1, 2, 2.5, 3, 4, 5, 6, 6.1, 6.2 |
+| Stage in scope next | none scheduled — awaiting review of Stage 6.2 |
 | Repository | `n011x/evan-portfolio`, public |
 | Branch | `main` |
 | Baseline commit | `6a9e09e feat: establish portfolio production baseline` |
@@ -39,6 +40,7 @@ case studies, no runtime data fetching, no animation library, no WebGL, no canva
 | 4 | Motion: CSS keyframes on transform/opacity only, `MotionGate` (visibility + reduced-motion), `Reveal` (IntersectionObserver), media processed→clean wipe |
 | 5 | `/work` archive and `/work/[slug]` case template, five case studies, `caseRoutesEnabled = true` |
 | 6 | Responsive 320→1920, WCAG 2.2 AA, performance, SEO/OG/sitemap/JSON-LD, security headers, standalone + Docker production path |
+| 6.2 | Portfolio hierarchy: three core systems with case studies, landings demoted to web examples; real sanitized Telegram evidence integrated into LEAD RADAR and HERMES; the unprovable uptime claim removed; résumé resynced and rebuilt |
 | 6.1 | Factual cleanup: ghost-index contrast resolved, ROLE strings audited, left-rail classification drift fixed, résumé project count synced and rebuilt, Figma rechecked read-only and its stale copy corrected |
 
 ---
@@ -162,6 +164,24 @@ moment on the page.
 
 Text: «Идея вечером — рабочая ссылка утром.»
 
+### HERMES — what the project is
+
+Not a vacancy bot. A **contextual personal and operational assistant in Telegram** that
+holds a working context and a workspace, runs scheduled work, continues tasks across days,
+and handles everyday requests. Career HR — ~105 vacancies a month, 20–30 a week — is one
+scenario inside it, and the metric label says so.
+
+The workspace relationship goes both ways: the assistant reads statistics and writes
+changes back. **The shipped evidence only proves reading** — the report in `hx-workspace`
+states in its own words that it made no changes that time. Capability and evidence are
+kept apart deliberately.
+
+**No uptime claim.** `2+ MO · HERMES UPTIME` is gone from the hero and
+`2+ МЕС БЕЗ ПЕРЕЗАПУСКА` from the metric block. A continuous window cannot be proven —
+nothing records the last restart. What is provable is the start: the Codex kit is stamped
+2026-06-07 and the staging tree 2026-06-10, so the metric now reads `06.2026 · РАБОТАЕТ С`
+and the case says «работает с июня 2026». The same correction was applied to the résumé.
+
 ### Hero copy and classification — current, canonical
 
 | | |
@@ -169,7 +189,7 @@ Text: «Идея вечером — рабочая ссылка утром.»
 | name | `EVAN` (display) · `EVAN CARTEX` only as the vertical rail wordmark |
 | classification | `AI AGENTS` / `WEB` / `AUTOMATION` — three oversized lines |
 | statement | «Собираю системы, веб и автоматизации — от разбора контекста до работающего продукта.» |
-| proof | `05 PROJECTS · 03 LIVE LINKS · 2+ MO · HERMES UPTIME` |
+| proof | `03 CORE BUILDS · 02 WEB EXAMPLES · 03 LIVE LINKS` |
 | closing line | «Идея вечером — рабочая ссылка утром.» |
 | availability | `STATUS: OPEN TO WORK` + `REMOTE`, rendered as system metadata beside BUILD / YEAR — never a badge or a button |
 
@@ -194,13 +214,26 @@ Focus ring: `2px solid var(--accent)`, `outline-offset: 3px`, on every control.
 
 ---
 
-## 3. ROUTING AND THE CASE SYSTEM
+## 3. PORTFOLIO HIERARCHY, ROUTING AND THE CASE SYSTEM
+
+**The portfolio is not five equal projects.** It is three systems that carry real cases,
+plus landing work shown as a range of execution. Set at Stage 6.2, and the single source
+of that split is `tier` on each project in `src/content/projects.ts`.
+
+| tier | projects | treatment |
+|---|---|---|
+| `core` | LEAD RADAR · HERMES · ROUTE | full case study, own route, own archetype composition, evidence bands |
+| `web` | LUMA ENGLISH · ЯСНОДОМ | one preview, one line, one live link, inside the WEB / LANDING band. No case page, no ROLE, no RESULT, no system map, no pagination |
+
+A landing is an execution example, not a product achievement. Nothing in the copy, the
+counters or the composition may put the two tiers on one level again.
 
 | route | render |
 |---|---|
-| `/` | static |
-| `/work` | static — editorial index + contact sheet, **no filter UI** |
-| `/work/lead-radar` · `/hermes` · `/route` · `/luma-english` · `/yasno-house` | `generateStaticParams`, static |
+| `/` | static — HERO · CORE WORK (3) · STATEMENT · WHAT I BUILD · APPROACH · STACK · WEB / LANDING · ABOUT · CONTACT |
+| `/work` | static — the three core systems as an index, then the WEB / LANDING band, then the contact sheet. **No filter UI** |
+| `/work/lead-radar` · `/hermes` · `/route` | `generateStaticParams`, static |
+| `/work/luma-english` · `/work/yasno-house` | **308 → `/work#web`**, permanent redirect in `next.config.ts`. These URLs existed, so they are never allowed to 404 |
 | `/sitemap.xml` · `/robots.txt` · `/opengraph-image` · `/icon.svg` | generated at build time |
 
 `caseRoutesEnabled = true` in `src/lib/routes.ts`; no link on the site is inert.
@@ -208,53 +241,44 @@ Focus ring: `2px solid var(--accent)`, `outline-offset: 3px`, on every control.
 404 is Next's default `_not-found`; there is **no** custom in-identity 404 page.
 
 Case template, one band per idea: `01 CONTEXT · 02 PROBLEM · 03 APPROACH ·
-04 SYSTEM / ARCHITECTURE · 05 IMPLEMENTATION (+ TECHNICAL EVIDENCE) · 06 RESULT ·
-GALLERY · pending notes · NEXT PROJECT`. Bands renumber when a project has no system
-band. The case runs a slower rhythm than the homepage; it adds no new visual system.
+04 SYSTEM / ARCHITECTURE · 05 REAL OUTPUT · 06 IMPLEMENTATION (+ TECHNICAL EVIDENCE) ·
+07 RESULT · GALLERY · pending notes · NEXT PROJECT`. Bands renumber when a project has no
+system band or no evidence band. The case runs a slower rhythm than the homepage and adds
+no new visual system.
 
-Four project archetypes on the homepage: `01 SYSTEM` (diagram-first), `02 RUNNING PRODUCT`
-(metrics-first), `03 INTERFACE` (oversized type), `04 WEB / MEDIA`.
+Three project archetypes on the homepage: `01 SYSTEM` (diagram-first), `02 RUNNING PRODUCT`
+(metrics-first), `03 INTERFACE` (oversized type). The fourth archetype, `WEB / MEDIA`, is
+retired with the demotion — `ProjectWide` is no longer used.
 
-Metadata layer rules: `ROLE` = contribution, `STACK` = technology, `APPROACH` = method.
-They are never mixed. ROLE never lists prompts or tools.
+### Counters
 
-**ROLE strings — audited at Stage 6.1 (VERIFIED FACT).** Each term was checked against the
-case study and the résumé source, which states plainly that the code is written by the
-models and the owner's contribution is task-setting, product logic, prompts and specs,
-server setup and review.
+No counter may imply five equal projects. The hero proof row reads
+`03 CORE BUILDS · 02 WEB EXAMPLES · 03 LIVE LINKS`; the CORE WORK header reads
+`03 SYSTEMS`; `/work` reads `03 CORE · 02 WEB · 03 LIVE LINKS`; the Figma index board
+reads `03 CORE · 02 WEB`. The résumé says «три системы» plus web work.
 
-| project | ROLE | evidence |
+### Real evidence, and what is still missing
+
+Integrated at Stage 6.2 from real Telegram captures:
+
+| project | evidence | what it proves |
 |---|---|---|
-| LEAD RADAR | `PRODUCT · SETUP · REVIEW` | was `PRODUCT · BUILD · REVIEW`; **`BUILD` removed** — nothing in the case, the repository or the résumé supports code authorship. `SETUP` is carried by the private VPS/systemd deployment |
-| HERMES | `PRODUCT · SETUP · REVIEW` | «Провёл установку на сервер через Codex, подключил Telegram, собрал память и workspace» |
-| ROUTE | `PRODUCT · INTERFACE · REVIEW` | «Придумал логику пути и метрики готовности. Спроектировал пять экранов и переходы… вносил правки и делал ревью» |
-| LUMA ENGLISH | `STRUCTURE · COPY · REVIEW` | «Собрал структуру страницы и промты… правил тексты программ и тарифов. Проверял вёрстку и мобильную версию, делал ревью» |
-| ЯСНОДОМ | `STRUCTURE · COPY · REVIEW` | «Собрал структуру и офферы, написал промты… правил тексты. Проверял обе формы заявки и мобильную версию» |
+| LEAD RADAR | `lr-card` · `lr-rank` · `lr-actions` | a card is qualified and explained — why it fits, what is risky, a fit score — ranked across tiers, and the owner decides |
+| HERMES | `hx-context` · `hx-workspace` | one assistant across two task types: a long everyday request resolved into a route for two people, and workspace statistics reported with the assistant's own caveat and a proposed next step |
 
-LEAD RADAR and HERMES now carry the same ROLE because the evidenced contribution is the
-same shape. Consistency was not the goal; accuracy was.
+Evidence is **CLEAN and untreated**. The media language applies to project imagery, never
+to proof: a screenshot the reader cannot read proves nothing. Panels are capped at their
+source resolution so they are never upscaled.
 
-**Left rail.** It reads `EVAN CARTEX — {classification}` and derives the classification
-from `profile.roleLines`. Until Stage 6.1 it hardcoded the obsolete `AI PRODUCTS · WEB ·
-AUTOMATION` while the hero said `AI AGENTS` — a real drift, now impossible to repeat.
-`AI PRODUCTS / AGENTS` still exists as a WHAT I BUILD **capability row name**; that is the
-approved Stage-2 taxonomy and a different thing from the hero classification.
-
-### Assets genuinely still pending
-
-| project | missing | how the page handles it |
+| project | still missing | how the page handles it |
 |---|---|---|
 | ROUTE | 5 screens | filmstrip of labelled placeholders, `05 SCREENS · VISUAL PENDING` |
-| ЯсноДом | site capture | archive row without an image, case states the gap |
-| Lead Radar | a sanitized digest card | the architecture diagram carries the case instead |
 
-Captured and shipped: LUMA and Hermes (`public/media/*.webp`, clean + processed each).
-The favicon is a neutral grid mark, not a logo. The OG image is generated from
-`content/profile.ts`, not photographed.
+Captured and shipped: LUMA, Hermes and — since Stage 6.2 — ЯсноДом, taken from the live
+site at 1440 and 390 with fonts settled and no browser chrome. The favicon is a neutral
+grid mark, not a logo. The OG image is generated from `content/profile.ts`.
 
----
-
-## 4. CONTENT RULES
+## 4. CONTENT RULES## 4. CONTENT RULES
 
 Nothing is invented. No fake clients, results, metrics, projects, stacks, dates,
 screenshots or AI imagery. Missing material is recorded in `CONTENT_TODO.md` (local, not
@@ -439,7 +463,7 @@ Each of these was explored and closed. None returns without a new, explicit deci
 | Media `PixelReveal` (pixelated → sharp in steps) and scan-smear on entry | replaced by the hard-seam processed→clean `clip-path` wipe |
 | Hover 2px displacement on projects | conflicts with static typography geometry |
 | Clip-path hairline reveal | caused a genuine deadlock — a self-clipped element reports an empty intersection rect, so its observer never fired and every band separator stayed invisible. Replaced by `scaleX` |
-| Filter UI on `/work` | five projects do not need one; `type` and `tags` stay in the data model |
+| Filter UI on `/work` | three cases do not need one; `type` and `tags` stay in the data model |
 | A custom in-identity 404 with the ASCII field | specified at Stage 1, never built; Next's default is in place |
 | `UTC+3` in the hero system metadata | specified at Stage 1, never built; the Figma specimen that still showed `REMOTE · UTC` was corrected at 6.1 |
 | Motion / GSAP / Lenis / Three.js / WebGL / canvas | never needed; the motion layer is CSS plus two small client components |
@@ -449,44 +473,52 @@ Each of these was explored and closed. None returns without a new, explicit deci
 
 ## 10. OPEN — CURRENT ONLY
 
-Re-audited item by item at Stage 6.1. Anything resolved has left this list.
+Re-audited at Stage 6.2. Nothing here is called a user blocker if the work can close it.
+
+### Real external dependencies
 
 | # | item | status |
 |---|---|---|
-| O1 | **Production domain.** `NEXT_PUBLIC_SITE_URL` is read at build time. Verified at 6.1 that all six consumers — `metadataBase`, per-page canonical, Open Graph URL, `sitemap.xml`, `robots.txt`, JSON-LD — derive from the single `src/lib/site.ts` value, and that a probe build propagates one value to 20 absolute URLs on `/` and 16 on a case page. No domain is hardcoded anywhere. It is a one-value replacement. | **LAUNCH BLOCKER** |
-| O2 | **ROUTE — 5 screens.** The project's primary evidence. The filmstrip renders labelled placeholders and the page says `05 SCREENS · VISUAL PENDING`. Needed: five real screen captures (PNG) of the mockup. | **PENDING REAL ASSET** |
-| O3 | **ЯсноДом — site capture** for the archive row and its case. Capturable from the live URL; not yet shot. | **PENDING REAL ASSET** |
-| O4 | **Lead Radar — sanitized digest card.** Needed: one real digest card with the leads redacted. The architecture diagram carries the case until then. | **PENDING REAL ASSET** |
-| O5 | **Ghost project index contrast.** Resolved at 6.1 — `--ghost-index #A4A29A`, 2.26:1 / 2.09:1, inside the 2:1–3:1 target (§5). | **SHIPPED** |
-| O6 | **Hermes uptime provenance.** The metric reads `2+ MO · БЕЗ ПЕРЕЗАПУСКА`. Chronology that *is* provable: the Codex kit is stamped 2026-06-07, the staging tree is dated 2026-06-10, and the résumé dates the work «с 06.2026» — so the project **started in June 2026**. That is a build date, not an uptime window, and nothing in the repositories records when the process last restarted. Converting one into the other would be an invention, so the metric stays as it is. Needed from the owner: the date the current uptime window began, or a date-stamped reading. | **NEEDS USER FACT** |
-| O7 | **ROLE strings.** Audited at 6.1 against the case studies and the résumé source; `BUILD` removed from LEAD RADAR, every other term verified (§3). The confirmation marker in `src/content/projects.ts` is replaced by the audit note. | **VERIFIED FACT** |
-| O8 | **AI VISUAL has no project.** Re-audited: nothing in the repositories or supplied material is a publishable AI-visual project — the résumé records it as a capability with tools (Midjourney, Sora, Kling, Flux, Nano Banana, Higgsfield, Weavy) and no named deliverable. The capability stays in WHAT I BUILD, STACK and ABOUT because it is factually correct there. This is a deliberate absence, not a broken implementation. | **INTENTIONALLY NO PROJECT / FUTURE REAL ASSET** |
-| O9 | **Résumé project count.** Resolved at 6.1: `index.html`, `cv-mono.html`, `cv-blue.html` and `cv-ats.html` now state five projects and name the lead-search service; `resume.pdf`, `cv-mono.pdf`, `cv-blue.pdf` and `cv-ats.pdf` were rebuilt and verified visually. The repository's own `sync.py` fact check now passes for «Проектов всего». | **SHIPPED** |
-| O10 | **Résumé project enumeration.** New, surfaced by fixing O9: those four documents now *state* five projects but their project sections still *list* four — Lead Radar has no entry in them. Only `index-bold.html` carries a full LEAD RADAR block. Adding entries means writing new project copy (and `build.js` reports pages 1, 4 and 6 of the portfolio already at 265 mm of 265 mm, so nothing fits without a layout change). Needed from the owner: either the copy and a layout decision, or a decision to retire those older documents in favour of `index-bold`. | **NEEDS USER FACT** |
-| O11 | **`index-bold.html` is missing the «Вакансий в неделю» (20–30) fact**, so `sync.py` still reports one discrepancy. Pre-existing, unrelated to the project count, and out of Stage 6.1's stated scope. | **NEEDS USER FACT** |
-| O12 | **Lighthouse `font-size` on mobile `/`.** The ASCII sculpture is counted as illegible text; it is an `aria-hidden` graphic made of characters. Accepted as-is — the artwork is not changed. Costs 4 best-practices points. | **DEFERRED** |
+| O1 | **Production domain.** Verified again at 6.2: all six consumers — `metadataBase`, per-page canonical, Open Graph URL, `sitemap.xml`, `robots.txt`, JSON-LD — derive from the single `src/lib/site.ts` value, and a probe build propagates one value everywhere. No domain is hardcoded. A one-value replacement, and nothing else waits on it. | **LAUNCH BLOCKER** |
+| O2 | **ROUTE — 5 screens.** ROUTE is a mockup that was never deployed, so there is no running version to capture from: the files have to come from the owner. The filmstrip renders labelled placeholders and the page says `05 SCREENS · VISUAL PENDING`. | **PENDING REAL ASSET** |
+
+### Closed at Stage 6.2
+
+| # | item | outcome |
+|---|---|---|
+| O3 | ЯсноДом capture | **SHIPPED** — captured from the live site at 1440 and 390, fonts settled, no chrome, no loading state. It was never a user blocker, only an unshot page. |
+| O4 | Lead Radar digest card | **SHIPPED** — three sanitized panels from the real bot: the qualified card with its reasoning and 92/100, a second card at 78/100, and the decision row. |
+| O6 | Hermes uptime provenance | **SHIPPED** — resolved by removing the claim rather than by asking for a fact. The metric now states the provable start month. |
+| O9 · O10 | Résumé count and enumeration | **SHIPPED** — five documents now say «три системы» plus web work, matching the portfolio. The registry fact changed with them, and all five PDFs were rebuilt inside the page-fit constraints. |
+| O11 | `index-bold` missing «20–30 в неделю» | **SHIPPED** — the figure was already in `content.json` and `content.md`; the document was simply out of step. `sync.py` now reports **no discrepancies at all**, for the first time. |
+
+### Standing decisions, not blockers
+
+| # | item | status |
+|---|---|---|
+| O5 | Ghost project index at 2.09–2.26:1 (§5) | **SHIPPED** at 6.1; below the 3:1 tool threshold by decision |
+| O8 | **AI VISUAL has no project.** Re-audited again: nothing in the repositories is a publishable AI-visual deliverable — the résumé records it as a capability with tools and no named output. The capability stays in WHAT I BUILD, STACK and ABOUT because it is factually correct there. A deliberate absence. | **INTENTIONALLY NO PROJECT / FUTURE REAL ASSET** |
+| O12 | Lighthouse `font-size` on mobile `/` — the ASCII sculpture counted as illegible text | **DEFERRED** |
 
 ---
 
-## 11. STAGE 6.1 — WHAT IT DID
+## 11. STAGE 6.2 — WHAT IT DID
 
-Completed 2026-09-05. Factual cleanup only: no composition, layout, type scale, motion
-behaviour, case template, route or visual system was changed.
+Completed 2026-09-05. The portfolio did not get bigger; it got more accurate.
 
-1. **Ghost index** — new `--ghost-index` token at 2.26:1 / 2.09:1 (§5). One token; the
-   composition is untouched.
-2. **ROLE strings** — audited against evidence; `BUILD` removed from LEAD RADAR (§3).
-3. **Left rail** — stopped hardcoding the obsolete `AI PRODUCTS` classification and now
-   derives it from `profile.roleLines` (§3). This was real production drift.
-4. **Résumé** — four documents and their PDFs synced to five projects and rebuilt (O9).
-5. **Figma** — read-only recheck; the file holds only `00_SYSTEM` and no composition
-   boards. Nine stale text nodes and two frame names corrected in place (§8b).
-6. **Domain** — verified as a single-value replacement with a probe build (O1).
-7. **Documentation** — this file first, then every dependent document.
-
-The ASCII `font-size` audit and the security posture check against a real origin were in
-the proposed scope and are **not** closed: the first is deferred by decision (O12), the
-second cannot run until a production origin exists (O1).
+1. **Hierarchy.** `tier` on every project. Three core systems keep their cases; the two
+   landings became a WEB / LANDING band with one preview, one line and one live link each.
+   `ProjectWide` retired, old case URLs 308 to `/work#web`.
+2. **Counters.** Every "five projects" reading replaced across production, Figma and the
+   résumé with three systems plus web work.
+3. **Real evidence.** Five sanitized panels from real Telegram interfaces, integrated as
+   `REAL OUTPUT` bands inside the two case studies that had them.
+4. **HERMES repositioned** from vacancy bot to contextual operational assistant, and the
+   unprovable uptime claim removed everywhere it appeared.
+5. **ЯсноДом captured** from the live site.
+6. **Figma** archive cleanup: the superseded Ultramarine specimen no longer calls itself
+   current or selected, and the index board carries the new counts.
+7. **Résumé** resynced and rebuilt; its own fact checker passes clean.
 
 ---
 

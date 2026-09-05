@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
-import { projects, leadRadarPipeline } from "@/content/projects";
+import { notFound, redirect } from "next/navigation";
+import { coreProjects, projects, leadRadarPipeline } from "@/content/projects";
 import { cases } from "@/content/cases";
 import { profile } from "@/content/profile";
 import { CaseBand } from "@/components/case/CaseBand";
 import { CaseGallery } from "@/components/case/CaseGallery";
+import { EvidenceBand } from "@/components/case/EvidenceBand";
 import { SystemMap } from "@/components/graphics/SystemMap";
 import { DistortionField } from "@/components/graphics/DistortionField";
 import { MetaTable } from "@/components/ui/MetaTable";
@@ -13,7 +14,8 @@ import { Reveal } from "@/components/motion/Reveal";
 import { ProjectMedia } from "@/components/graphics/ProjectMedia";
 
 export function generateStaticParams() {
-  return projects.filter((p) => cases[p.slug]).map((p) => ({ slug: p.slug }));
+  // only the three core systems have a case page; the landings are shown as examples
+  return coreProjects.filter((p) => cases[p.slug]).map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({
@@ -39,11 +41,15 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const project = projects.find((p) => p.slug === slug);
   const study = cases[slug];
+  // the landings used to have case pages; their URLs now resolve to the examples band
+  if (project?.tier === "web") redirect("/work#web");
   if (!project || !study) notFound();
 
-  const order = projects.findIndex((p) => p.slug === slug);
-  const next = projects[(order + 1) % projects.length]!;
+  const order = coreProjects.findIndex((p) => p.slug === slug);
+  const next = coreProjects[(order + 1) % coreProjects.length]!;
   const media = project.visual.kind === "media" ? project.visual : null;
+  /** the evidence band takes a number of its own, so everything after it moves up one */
+  const bandId = (n: number) => String(study.evidence ? n + 1 : n).padStart(2, "0");
 
   return (
     <>
@@ -57,7 +63,7 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
               {project.type} · {project.year}
             </span>
             <span className="nano col-span-4 md:col-span-2 lg:col-span-6 mt-2 md:mt-0 md:justify-self-end">
-              CASE STUDY · {projects.length > 0 ? `0${order + 1}/0${projects.length}` : ""}
+              CASE STUDY · {`0${order + 1}/0${coreProjects.length}`}
             </span>
           </div>
 
@@ -140,7 +146,16 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
         </CaseBand>
       ) : null}
 
-      <CaseBand id={study.system ? "05" : "04"} title="IMPLEMENTATION">
+      {study.evidence ? (
+        <EvidenceBand
+          id={study.system ? "05" : "04"}
+          title={study.evidence.title}
+          note={study.evidence.note}
+          panels={study.evidence.panels}
+        />
+      ) : null}
+
+      <CaseBand id={bandId(study.system ? 5 : 4)} title="IMPLEMENTATION">
         <ul>
           {study.implementation.map((line) => (
             <Reveal
@@ -169,7 +184,7 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
       </CaseBand>
 
       {study.result ? (
-        <CaseBand id={study.system ? "06" : "05"} title="RESULT">
+        <CaseBand id={bandId(study.system ? 6 : 5)} title="RESULT">
           <ul>
             {study.result.map((line) => (
               <Reveal

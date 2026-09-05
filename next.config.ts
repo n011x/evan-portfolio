@@ -54,6 +54,14 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   // self-hosting: a standalone server bundle, no Vercel-only assumptions
   output: "standalone",
+  // the landings had case pages until Stage 6.2; they are examples now, so their old
+  // URLs move to the examples band instead of turning into a 404
+  async redirects() {
+    return [
+      { source: "/work/luma-english", destination: "/work#web", permanent: true },
+      { source: "/work/yasno-house", destination: "/work#web", permanent: true },
+    ];
+  },
   async headers() {
     return [
       { source: "/:path*", headers: securityHeaders },

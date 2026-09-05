@@ -3,7 +3,7 @@ import { chromium } from "playwright";
 
 const BASE = process.env.BASE ?? "http://localhost:3112";
 const WIDTHS = [320, 375, 390, 430, 768, 1024, 1280, 1440, 1920];
-const ROUTES = ["/", "/work", "/work/lead-radar", "/work/hermes", "/work/route", "/work/luma-english", "/work/yasno-house"];
+const ROUTES = ["/", "/work", "/work/lead-radar", "/work/hermes", "/work/route"];
 
 const browser = await chromium.launch({ channel: "chrome" });
 const problems = [];

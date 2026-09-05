@@ -36,7 +36,12 @@ export type Project = {
   metrics?: { value: string; label: string }[];
   links: { label: string; href: string }[];
   visual: ProjectVisual;
-  featured: boolean;
+  /**
+   * `core` — a system or product with a full case study of its own.
+   * `web`  — an execution example. It shows that a landing can be built to a working
+   *          link; it is not a separate product achievement and never gets a case page.
+   */
+  tier: "core" | "web";
 };
 
 export const projects: Project[] = [
@@ -58,7 +63,7 @@ export const projects: Project[] = [
       { label: "VIEW CASE", href: "/work/lead-radar" },
     ],
     visual: { kind: "diagram" },
-    featured: true,
+    tier: "core",
   },
   {
     index: "02",
@@ -70,12 +75,12 @@ export const projects: Project[] = [
     role: "PRODUCT · SETUP · REVIEW",
     status: "LIVE",
     summary:
-      "Личный ассистент в Telegram: держит рабочий контекст, память и workspace, работает по расписанию и продолжает задачу на следующий день.",
+      "Личный ассистент в Telegram: держит рабочий контекст и workspace, работает по расписанию, продолжает задачи и разбирает бытовые запросы — от статистики по сделкам до маршрута на вечер.",
     stack: ["Ubuntu VDS", "Telegram Gateway", "systemd", "Python 3.11", "skills"],
     result: ["20–30 вакансий в неделю"],
     metrics: [
-      { value: "105", label: "ВАКАНСИЙ / МЕС" },
-      { value: "2+", label: "МЕС БЕЗ ПЕРЕЗАПУСКА" },
+      { value: "105", label: "ВАКАНСИЙ / МЕС · ОДИН ИЗ СЦЕНАРИЕВ" },
+      { value: "06.2026", label: "РАБОТАЕТ С" },
       { value: "~5", label: "ЧАСОВ НА СБОРКУ" },
     ],
     links: [
@@ -91,7 +96,7 @@ export const projects: Project[] = [
       status: "ready",
       note: "PROCESSED · ORDERED DITHER",
     },
-    featured: true,
+    tier: "core",
   },
   {
     index: "03",
@@ -108,7 +113,7 @@ export const projects: Project[] = [
     result: ["5 экранов", "4 этапа пути"],
     links: [{ label: "VIEW CASE", href: "/work/route" }],
     visual: { kind: "filmstrip", frames: 5, ratio: "9 / 19.5", status: "pending", note: "VISUAL PENDING" },
-    featured: true,
+    tier: "core",
   },
   {
     index: "04",
@@ -120,12 +125,11 @@ export const projects: Project[] = [
     role: "STRUCTURE · COPY · REVIEW",
     status: "LIVE · DEMO",
     summary:
-      "Демо-лендинг онлайн-школы английского: программы, методика, тарифы и запись. Оплата не подключена.",
+      "Демо-лендинг онлайн-школы: семь секций от программ до записи, собственная мобильная вёрстка. Оплата не подключена.",
     stack: ["React", "Vite", "Vercel"],
     result: ["7 секций", "3 программы", "3 тарифа", "~3 часа"],
     links: [
       { label: "LIVE", href: "https://luma-english-ten.vercel.app" },
-      { label: "VIEW CASE", href: "/work/luma-english" },
     ],
     visual: {
       kind: "media",
@@ -136,7 +140,7 @@ export const projects: Project[] = [
       status: "ready",
       note: "PROCESSED → CLEAN",
     },
-    featured: true,
+    tier: "web",
   },
   {
     index: "05",
@@ -148,20 +152,29 @@ export const projects: Project[] = [
     role: "STRUCTURE · COPY · REVIEW",
     status: "LIVE · DEMO",
     summary:
-      "Лендинг под одно действие: имя и телефон — и человек сразу получает PDF-подборку домов, без ожидания звонка. Цифры, фото и бренд помечены как плейсхолдеры на самой странице.",
+      "Лендинг под одно действие: заявка сразу отдаёт PDF-подборку, без ожидания звонка. Цифры и бренд помечены как плейсхолдеры на самой странице.",
     stack: ["React", "Vite", "Vercel"],
     result: ["6 блоков", "2 формы", "~3 часа"],
     links: [
       { label: "LIVE", href: "https://ysnohousereffwebsite.vercel.app" },
-      { label: "VIEW CASE", href: "/work/yasno-house" },
     ],
-    visual: { kind: "media", ratio: "16 / 10", status: "capture", note: "SITE CAPTURE · PENDING" },
-    featured: false,
+    visual: {
+      kind: "media",
+      ratio: "16 / 10",
+      clean: "yasno-clean",
+      processed: "yasno-clean",
+      alt: "Главный экран лендинга ЯсноДом с формой заявки",
+      status: "ready",
+      note: "SITE CAPTURE · CLEAN",
+    },
+    tier: "web",
   },
 ];
 
-export const featuredProjects = projects.filter((p) => p.featured);
-export const archiveProjects = projects.filter((p) => !p.featured);
+/** The three systems that carry a full case study. */
+export const coreProjects = projects.filter((p) => p.tier === "core");
+/** Landing work, shown as a capability rather than as separate products. */
+export const webExamples = projects.filter((p) => p.tier === "web");
 
 /**
  * Real Lead Radar pipeline — the primary visual object of project 01.

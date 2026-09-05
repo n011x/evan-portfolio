@@ -4,6 +4,7 @@ import { StatementBand } from "@/components/ui/StatementBand";
 import { WhatIBuild } from "@/components/capabilities/WhatIBuild";
 import { Approach } from "@/components/approach/Approach";
 import { Stack } from "@/components/capabilities/Stack";
+import { WebExamples } from "@/components/work/WebExamples";
 import { About } from "@/components/about/About";
 import { Contact } from "@/components/contact/Contact";
 
@@ -16,6 +17,7 @@ export default function HomePage() {
       <WhatIBuild />
       <Approach />
       <Stack />
+      <WebExamples />
       <About />
       <Contact />
     </>

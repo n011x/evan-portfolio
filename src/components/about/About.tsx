@@ -5,7 +5,7 @@ import { DistortionField } from "@/components/graphics/DistortionField";
 export function About() {
   return (
     <section id="about" className="band pt-16 lg:pt-24" data-field="min" aria-labelledby="about-title">
-      <SectionHeader id="06" name="ABOUT" right="REMOTE · SOLO" />
+      <SectionHeader id="07" name="ABOUT" right="REMOTE · SOLO" />
       <span id="about-title" className="sr-only">
         Обо мне
       </span>

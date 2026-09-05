@@ -1,4 +1,4 @@
-# DESIGN SYSTEM — STAGE 2 → STAGE 6.1
+# DESIGN SYSTEM — STAGE 2 → STAGE 6.2
 
 Tokens, grid, type roles and the component inventory, stage by stage. Everything here is
 implemented and visible in the running site. For what is true overall,
@@ -226,6 +226,21 @@ token, so the `--paper-3` surface tint keeps its own meaning.
 **LEAD RADAR's ROLE.** `PRODUCT · BUILD · REVIEW` → `PRODUCT · SETUP · REVIEW`. Nothing in
 the case, the repository or the résumé supports code authorship; the résumé says plainly
 that the models write the code. See [`CANONICAL_STATE.md` §3](CANONICAL_STATE.md).
+
+## 7h. STAGE 6.2 — HIERARCHY AND EVIDENCE
+
+**Two tiers, one source.** `tier` on each project decides everything: `core` gets a case
+page and a homepage archetype, `web` gets a row in the WEB / LANDING band. Nothing else in
+the code asks "is this featured?" any more — `featured` is gone.
+
+| piece | file |
+|---|---|
+| web band | `components/work/WebExamples.tsx` — preview, name, type, one line, stack, `VIEW LIVE ↗`. Deliberately carries none of the case grammar |
+| evidence band | `components/case/EvidenceBand.tsx` — real interface fragments as `REAL OUTPUT`, CLEAN and untreated, capped at their source resolution so they are never upscaled |
+| sanitizer | `scripts/sanitize-evidence.mjs` — crops the raw captures, strips Telegram chrome, masks private detail. Raw sources stay in `.private-assets/`, never committed |
+| ЯсноДом capture | `scripts/capture-yasno.mjs` — the live page at 1440 and 390, fonts settled, no chrome |
+
+`ProjectWide` (archetype D, WEB / MEDIA) is retired: no project uses it now.
 
 ## 8. WHAT THE SITE STILL DOES NOT HAVE
 

@@ -17,10 +17,14 @@ export const profile = {
   workMode: "REMOTE",
   year: "2026",
   build: "0.1.0",
+  /**
+   * Three systems carry a case study; the landings are execution examples, not separate
+   * products. No uptime claim: the start month is provable, a continuous window is not.
+   */
   proof: [
-    { value: "05", label: "PROJECTS" },
+    { value: "03", label: "CORE BUILDS" },
+    { value: "02", label: "WEB EXAMPLES" },
     { value: "03", label: "LIVE LINKS" },
-    { value: "2+", label: "MO · HERMES UPTIME" },
   ],
   /** Small facts for the hero glass plate — system metadata, not a badge. */
   systemPlate: [

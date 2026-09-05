@@ -8,7 +8,7 @@ import { readFileSync } from "node:fs";
 
 const BASE = process.env.BASE ?? "http://localhost:3112";
 const AXE = readFileSync("node_modules/axe-core/axe.min.js", "utf8");
-const ROUTES = ["/", "/work", "/work/lead-radar", "/work/hermes", "/work/route", "/work/luma-english", "/work/yasno-house"];
+const ROUTES = ["/", "/work", "/work/lead-radar", "/work/hermes", "/work/route"];
 
 const browser = await chromium.launch({ channel: "chrome" });
 let violations = 0;

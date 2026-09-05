@@ -6,7 +6,7 @@
  */
 import { chromium } from "playwright";
 const BASE = process.env.BASE ?? "http://localhost:3112";
-const ROUTES = ["/", "/work", "/work/lead-radar", "/work/hermes", "/work/route", "/work/luma-english", "/work/yasno-house"];
+const ROUTES = ["/", "/work", "/work/lead-radar", "/work/hermes", "/work/route"];
 const b = await chromium.launch({ channel: "chrome" });
 const fail = [];
 

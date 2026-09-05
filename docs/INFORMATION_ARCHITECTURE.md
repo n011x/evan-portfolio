@@ -23,8 +23,9 @@ Above the fold, in this reading order:
 3. **supporting statement (RU)** — «Собираю системы, веб и автоматизации — от разбора
    контекста до работающего продукта.» This is the shipped wording; the meaning may not
    change.
-4. **proof marker** — `05 PROJECTS · 03 LIVE LINKS · 2+ MO HERMES UPTIME` (the uptime
-   metric names the project it comes from — it is Hermes', not a platform statistic)
+4. **proof marker** — `03 CORE BUILDS · 02 WEB EXAMPLES · 03 LIVE LINKS`. Since Stage 6.2
+   the portfolio is three systems plus landing work, and no counter may read as five equal
+   projects. There is no uptime figure: a continuous window cannot be proven
 5. **primary action** — `VIEW WORK ↓`
 6. **secondary actions** — `TELEGRAM ↗ · EMAIL ↗ · GITHUB ↗` (micro type, right edge)
 7. **system metadata** — `STATUS: OPEN TO WORK` · `REMOTE` · build string · year
@@ -51,17 +52,18 @@ work link.
 | route | purpose | render |
 |---|---|---|
 | `/` | full self-contained pitch: identity → work → what → how → stack → about → contact | Server Component, static |
-| `/work` | complete archive: **editorial work index + contact sheet**, no filter UI in v1 | static |
-| `/work/[slug]` | case study, one per project | `generateStaticParams`, static |
+| `/work` | the three core systems as an index, then the WEB / LANDING band, then the contact sheet. No filter UI | static |
+| `/work/[slug]` | case study, **one per core system only** | `generateStaticParams`, static |
+| `/work/luma-english` · `/work/yasno-house` | 308 → `/work#web` — the landings had case pages until Stage 6.2 and their URLs must not 404 | redirect |
 | `/_not-found` | Next's default 404 — the in-identity ASCII version was specified at Stage 1 and **not built** | static |
 | later, optional | `/about` — only if the About band outgrows the homepage | — |
 
 `/about` is deliberately **not** a route: the homepage About band carries it.
 
-**`/work` in v1** — one page that shows the whole range at a glance: project index rows
+**`/work`** — one page that shows the whole range at a glance: core index rows
 (`INDEX · NAME · TYPE · YEAR · STATUS · one line · LIVE ↗ / CASE ↗`) plus a contact-sheet
 grid of processed thumbnails at varying scale, on a strong grid, with calibration and
-system details. **No tabs, no filter control** — five projects do not need one, and the
+system details. **No tabs, no filter control** — three cases do not need one, and the
 control would be pure UI overhead. `type` and `tags` are carried in the project data
 model so filtering can be added later without a data migration.
 
@@ -131,7 +133,7 @@ statement is never read as archive navigation.
 
 `/work` and `/work/[slug]` exist from Stage 5: `caseRoutesEnabled` is on, every case link
 navigates, and nothing in the composition moved when the flag flipped (`MaybeLink` swaps a
-`span` for a `Link` with the same classes). All five projects are prerendered as static
+`span` for a `Link` with the same classes). The three core cases are prerendered as static
 HTML. Rationale: four full compositions is the maximum before the
 run loses rhythm, and Yasno is self-declared as a placeholder-content demo.
 

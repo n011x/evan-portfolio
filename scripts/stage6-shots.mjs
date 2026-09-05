@@ -38,6 +38,14 @@ for (const [name, route, widths] of jobs) {
     const page = await browser.newPage({ viewport: { width: w, height: 900 }, deviceScaleFactor: dpr });
     await page.goto(BASE + route, { waitUntil: "networkidle" });
 
+    await page.addStyleTag({ content: CAPTURE_CSS });
+    // a proof sheet shows the whole page at once, so nothing may stay lazy
+    await page.evaluate(() => {
+      for (const img of document.images) {
+        img.loading = "eager";
+        img.setAttribute("fetchpriority", "high");
+      }
+    });
     // walk once so every reveal has fired
     await page.evaluate(async () => {
       const step = innerHeight * 0.75;
@@ -47,8 +55,23 @@ for (const [name, route, widths] of jobs) {
       }
       scrollTo(0, 0);
     });
-    await page.addStyleTag({ content: CAPTURE_CSS });
     await page.waitForTimeout(1200);
+    // lazy images below the fold must finish before the sheet is captured — but a lazy
+    // image that never enters the viewport never fires, so the wait is bounded
+    await page.evaluate(async () => {
+      const settle = (img) =>
+        img.complete
+          ? Promise.resolve()
+          : new Promise((r) => {
+              img.addEventListener("load", r, { once: true });
+              img.addEventListener("error", r, { once: true });
+            });
+      await Promise.race([
+        Promise.all([...document.images].map(settle)),
+        new Promise((r) => setTimeout(r, 8000)),
+      ]);
+    });
+    await page.waitForTimeout(600);
 
     const H = await page.evaluate(() => document.documentElement.scrollHeight);
     await page.screenshot({ path: `shots/stage6/${name}-${w}.png`, fullPage: true });

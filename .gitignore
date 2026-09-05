@@ -55,3 +55,6 @@ Thumbs.db
 
 # internal working notes — open questions and fact gaps, not for the public repo
 docs/CONTENT_TODO.md
+
+# raw Telegram captures — private chat content, never published
+.private-assets/

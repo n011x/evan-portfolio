@@ -1,11 +1,11 @@
 import type { MetadataRoute } from "next";
-import { projects } from "@/content/projects";
+import { coreProjects } from "@/content/projects";
 import { cases } from "@/content/cases";
 import { siteUrl } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  const caseUrls = projects
+  const caseUrls = coreProjects
     .filter((p) => cases[p.slug])
     .map((p) => ({
       url: `${siteUrl}/work/${p.slug}`,
