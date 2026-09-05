@@ -20,15 +20,15 @@ const jobs = [
   [".assets/h1-clean.png", "hermes-clean", 1400],
   [".assets/h2-dither.png", "hermes-processed", 1400],
   [".assets/yasno-hero.png", "yasno-clean", 1600],
-  [".private-assets/evidence/lr-card.png", "lr-card", 992],
-  [".private-assets/evidence/lr-rank.png", "lr-rank", 992],
-  [".private-assets/evidence/lr-actions.png", "lr-actions", 1080],
-  [".private-assets/evidence/hx-context.png", "hx-context", 992],
-  [".private-assets/evidence/hx-workspace.png", "hx-workspace", 992],
-  [".private-assets/evidence/lr-card-m.png", "lr-card-m", 992],
-  [".private-assets/evidence/lr-rank-m.png", "lr-rank-m", 992],
-  [".private-assets/evidence/hx-context-m.png", "hx-context-m", 992],
-  [".private-assets/evidence/hx-workspace-m.png", "hx-workspace-m", 992],
+  // evidence ships at its native width — never resized up or down here
+  [".private-assets/evidence/lr-01-brief.png", "lr-01-brief", 518],
+  [".private-assets/evidence/lr-02-risk.png", "lr-02-risk", 518],
+  [".private-assets/evidence/lr-03-decide.png", "lr-03-decide", 518],
+  [".private-assets/evidence/lr-04-rank.png", "lr-04-rank", 518],
+  [".private-assets/evidence/hx-01-request.png", "hx-01-request", 522],
+  [".private-assets/evidence/hx-02-answer.png", "hx-02-answer", 518],
+  [".private-assets/evidence/hx-03-workspace.png", "hx-03-workspace", 518],
+  [".private-assets/evidence/hx-04-replyrate.png", "hx-04-replyrate", 518],
 ];
 
 import { existsSync } from "node:fs";

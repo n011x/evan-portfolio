@@ -2,7 +2,7 @@
 
 **The single authoritative snapshot of this project as it exists now.**
 
-Last synchronised: 2026-09-05, after Stage 6.2.1.
+Last synchronised: 2026-09-05, after Stage 6.2.2 (EvidencePlate v2).
 
 Every statement below carries one of these labels where its status is not obvious:
 **SHIPPED** · **VERIFIED FACT** · **PENDING REAL ASSET** · **NEEDS USER FACT** ·
@@ -40,6 +40,7 @@ library, no WebGL, no canvas.
 | 4 | Motion: CSS keyframes on transform/opacity only, `MotionGate` (visibility + reduced-motion), `Reveal` (IntersectionObserver), media processed→clean wipe |
 | 5 | `/work` archive and `/work/[slug]` case template, five case studies, `caseRoutesEnabled = true` |
 | 6 | Responsive 320→1920, WCAG 2.2 AA, performance, SEO/OG/sitemap/JSON-LD, security headers, standalone + Docker production path |
+| 6.2.2 | EvidencePlate v2: evidence designed in Figma first, every capture re-cut on real message boundaries, the window built from the capture's own geometry, and a layout-crop check that runs at every breakpoint |
 | 6.2.1 | EvidencePlate: real captures presented as states of the system rather than screenshots attached to a case, tied to the pipeline by id; Hermes date metric reworded; Figma typography board's residual drift fixed |
 | 6.2 | Portfolio hierarchy: three core systems with case studies, landings demoted to web examples; real sanitized Telegram evidence integrated into LEAD RADAR and HERMES; the unprovable uptime claim removed; résumé resynced and rebuilt |
 | 6.1 | Factual cleanup: ghost-index contrast resolved, ROLE strings audited, left-rail classification drift fixed, résumé project count synced and rebuilt, Figma rechecked read-only and its stale copy corrected |
@@ -278,24 +279,55 @@ in as many words: `ЭТОТ СНИМОК — ЧТЕНИЕ, НЕ ЗАПИСЬ`.
 
 #### EvidencePlate — the presentation rule
 
-**REAL OUTPUT MUST REMAIN REAL. ART DIRECTION MAY FRAME EVIDENCE, BUT MUST NOT
-RECONSTRUCT OR OBSCURE IT.**
+Two rules govern every real capture on this site:
+
+> **SANITIZE MAY CROP. LAYOUT MUST NOT CROP REAL OUTPUT.**
+>
+> **REAL OUTPUT MUST REMAIN REAL. ART DIRECTION MAY STRUCTURE, FRAME, INDEX AND INTERPRET
+> EVIDENCE, BUT MUST NOT RECONSTRUCT, DEFORM OR OBSCURE IT.**
+
+Sanitisation happens once, in `scripts/sanitize-evidence.mjs`, and its output is the
+canonical evidence asset. Every crop lands on a real boundary — the message bubble's own
+edge, or a complete block inside one message — never mid-sentence, never mid-card. Where a
+message needs two windows they are cut between blocks and the case marks the second as a
+continuation. After that, **nothing in the page may take a pixel off the file.**
 
 A plate is not a card, a phone mockup, a gallery tile or a floating image. It is an
-editorial information plate sitting in the case's own column grid:
+editorial object in the case's own column grid, and the capture is one layer of it:
+
+```
+SYSTEM ID  ·  TITLE                              ← PROVENANCE NODE
+────────────────────────────────────────────────────────────────
+[ REAL EVIDENCE WINDOW ]          SYSTEM READOUT
+  capture, clean, contain,          EXTRACTED SIGNAL / OBSERVED OUTPUT
+  safe inset, reg marks             key · value rows in the site's own mono
+                                    continuation and sanitisation notes
+```
 
 | part | rule |
 |---|---|
-| the capture | **CLEAN and untreated, always.** No dither, no halftone, no distortion, no blur, no overlay, no redraw. Capped at its source width (320px desktop) so it is never upscaled |
-| the id | echoes the system map — `05 QUALIFY` produces `05.A`, `07 DIGEST` produces `07.A`. The plate whose node carries the accent in the map carries it here too |
-| provenance | `← 05 QUALIFY` names the node the output comes from. No connector lines are drawn across the page: the link is id, label, grid position and one shared metadata grammar |
-| metadata | a mono key/value table **under** the capture, never overlaid on it, saying what the frame proves — never what it would be convenient for it to prove |
-| frame | inset hairline, registration marks, column-aligned edges. The hairline is drawn inside the aspect box so it cannot skew the ratio and crop a line off the capture |
-| mobile | its own tighter crop of the same source, never a shrunk desktop frame |
+| the capture | **CLEAN and untreated.** No dither, halftone, distortion, blur, overlay or redraw |
+| geometry | the box carries the capture's own aspect ratio; the image is `object-fit: contain`. **Never `cover`, never `clip-path`, never a transform** |
+| size | `max-width` is the source width — 518 or 522 px. The capture is never enlarged past the file that exists |
+| safe inset | 10px between capture and frame, so the hairline never sits on content |
+| id | echoes the system map — `05 QUALIFY` produces `05.A`, `07 DIGEST` produces `07.A`. One Registration Red signal per band, on the plate whose node carries it in the map |
+| provenance | `← 05 QUALIFY`. No connector lines are drawn across the page: the link is id, label, grid position and one shared metadata grammar |
+| readout | the interpretation layer, set in the site's own mono under `EXTRACTED SIGNAL` / `OBSERVED OUTPUT` / `SYSTEM READOUT`. It sits beside the window on desktop and under it on mobile, **never over it**, and never imitates the source interface |
+| mobile | the same plate stacked, capture first and readout under it — not a shrunk desktop frame, and not a tighter re-crop that would cut a message |
 
-A raster seam on the plate edge was built and then removed: these captures are dense text
-that starts at the very edge, so any edge treatment ate the first character of every line.
-Systemness comes from the grid, the ids and the metadata, not from a filter.
+**Source resolution is 591×1280.** That is what Telegram delivered; no higher-resolution
+original exists on the machine. The windows are therefore 518–522px wide and are rendered
+at most 1:1 in CSS pixels. Sharper evidence would need the phone-native files.
+
+`scripts/evidence-boundary-check.mjs` asserts all of this against the running site at
+320 / 375 / 390 / 430 / 768 / 1024 / 1280 / 1440 / 1920: object-fit, aspect ratio against
+the declared source size, no upscale, and no clipping by any ancestor.
+
+**Designed in Figma before code.** `SYS / REAL OUTPUT — EVIDENCE PLATE` (node `104:2`)
+holds the rules and the anatomy; the `REVIEW — EVIDENCE COMPOSITIONS` section holds four
+real compositions built from the real assets: `107:2` Lead Radar desktop, `108:127` Lead
+Radar mobile, `108:2` Hermes desktop, `108:211` Hermes mobile. `SYS / MEDIA TREATMENT`
+remains the source of processing rules; this board is the source of composition rules.
 
 **Scores are not product metrics.** `92/100` and `78/100` are the fit scores of two
 specific leads. They are labelled `FIT / ЭТОТ ЛИД` and must never be presented as accuracy,

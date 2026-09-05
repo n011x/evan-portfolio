@@ -582,8 +582,12 @@ and `scripts/treat-media.mjs`. Kept for the reasoning.
 **ART DIRECTION MUST NOT HIDE EVIDENCE.** A project screenshot is proof of work.
 Since Stage 6.2 there is a stricter case: real interface fragments shown as `REAL OUTPUT`
 are **CLEAN and untreated, always**. No dither, no halftone, no crop-for-effect, no
-distortion — a screenshot the reader cannot read proves nothing. They are also never
-displayed larger than their source resolution. The
+distortion — a screenshot the reader cannot read proves nothing.
+
+And since 6.2.2 the rule has a second half: **SANITIZE MAY CROP, LAYOUT MUST NOT.** The
+sanitised file is canonical; no responsive wrapper may trim a letter, a bubble edge, a
+rounded corner or an action row off it, and it is never displayed larger than the source.
+Composition rules live in the Figma board `SYS / REAL OUTPUT — EVIDENCE PLATE`. The
 raster language is identity, but the visitor must always be able to actually look at the
 interface. Halftone is therefore a *state*, never the only state.
 

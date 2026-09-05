@@ -1,14 +1,24 @@
 /**
- * Turns the raw Telegram captures into publishable evidence panels.
+ * Turns the raw Telegram captures into publishable evidence assets.
+ *
+ * TWO RULES GOVERN THIS FILE
+ *
+ *   SANITIZE MAY CROP.  Removing Telegram chrome and masking private detail happens
+ *   here, once, and the result is the canonical evidence asset.
+ *
+ *   LAYOUT MUST NOT CROP.  Nothing downstream may take a pixel off these files. Every
+ *   crop below therefore lands on a real boundary of the message it comes from — the
+ *   bubble's own edge, or a complete block inside it — never mid-sentence and never
+ *   mid-card. Where one message needs two windows, they are cut between blocks and the
+ *   case marks the second as a continuation.
  *
  * The raw files live in `.private-assets/telegram-raw/` and are NEVER committed: they are
- * real chat content. This script removes Telegram chrome (status bar, bot title, date
- * pills, scroll affordances, composer) and masks the private detail — geolocation, third
- * party handles — with flat bars. Nothing is redrawn, invented or re-typeset: what remains
- * is the real interface.
+ * real chat content. Sources are 591×1280 (Telegram's own re-compression of the phone
+ * capture — no higher-resolution original exists), so the windows are ~518px wide and are
+ * rendered at most 1:1 in CSS pixels.
  *
- *   node scripts/sanitize-evidence.mjs      → .private-assets/evidence/*.png
- *   node scripts/build-media.mjs            → public/media/*.webp
+ *   node scripts/sanitize-evidence.mjs   → .private-assets/evidence/*.png
+ *   node scripts/build-media.mjs         → public/media/*.webp
  */
 import sharp from "sharp";
 import { mkdir } from "node:fs/promises";
@@ -17,115 +27,97 @@ const RAW = ".private-assets/telegram-raw";
 const OUT = ".private-assets/evidence";
 await mkdir(OUT, { recursive: true });
 
-/** a flat bar in the bubble's own graphite, one step lighter so the masking is legible */
-const bar = (x, y, w, h) => ({
-  input: { create: { width: Math.round(w), height: Math.round(h), channels: 3, background: "#4a4a4c" } },
-  left: Math.round(x),
-  top: Math.round(y),
-});
-/** a patch in the bubble colour, for removing Telegram's own affordances */
-const patch = (x, y, w, h, colour = "#212121") => ({
+/** a flat bar over private detail — reads as a deliberate redaction, not a gap */
+const bar = (x, y, w, h, colour = "#4a4a4c") => ({
   input: { create: { width: Math.round(w), height: Math.round(h), channels: 3, background: colour } },
   left: Math.round(x),
   top: Math.round(y),
 });
 
-/**
- * Mobile gets its own crop of the same capture, never a shrunk desktop one: the frame is
- * tightened onto the part that proves the claim, so the text stays readable at 390px.
- */
 const jobs = [
+  // ---------------------------------------------------------------- LEAD RADAR
   {
-    // LEAD RADAR — why it fits, the risks, and the score. The channel handle is dropped
-    // with the crop rather than masked: it is a third party and proves nothing.
-    name: "lr-card",
-    src: "raw-01",
-    crop: { left: 30, top: 168, width: 496, height: 690 },
+    // window 01 of the qualified card: from the bubble's top edge through the whole
+    // "why it fits" block. Ends between blocks, inside one message.
+    name: "lr-01-brief",
+    src: "raw-02",
+    crop: { left: 14, top: 156, width: 518, height: 812 },
     ops: [],
   },
   {
-    // LEAD RADAR — the owner's decision row. This is the point of the whole service:
-    // the system ranks and explains, the human decides.
-    name: "lr-actions",
+    // window 02 of the same card: the risks, the fit score, and the card's own bottom
+    // edge. The channel handle is masked — it is a third party and proves nothing.
+    name: "lr-02-risk",
     src: "raw-01",
-    crop: { left: 14, top: 928, width: 540, height: 132 },
+    crop: { left: 14, top: 570, width: 518, height: 374 },
+    ops: [{ t: "bar", x: 136, y: 285, w: 290, h: 38 }],
+  },
+  {
+    // the decision row, both buttons complete including their rounded edges
+    name: "lr-03-decide",
+    src: "raw-01",
+    crop: { left: 14, top: 932, width: 518, height: 140 },
     ops: [],
   },
   {
-    // LEAD RADAR — a second card at a lower tier, to show that cards are ranked.
-    name: "lr-rank",
+    // a second card at a lower tier, from its top edge through its fit score
+    name: "lr-04-rank",
     src: "raw-06",
-    // the crop stops on the score: the channel handle below it is a third party
-    crop: { left: 30, top: 168, width: 496, height: 962 },
-    // Telegram's scroll-to-bottom affordance clips the corner; painted out in the
-    // bubble's own colour, sampled from the image
-    ops: [{ t: "patch", x: 446, y: 892, w: 50, h: 70, c: "#313131" }],
-  },
-  {
-    // HERMES — two people, two starting points, one meeting point. Every place name is
-    // masked: the structure is the evidence, the geography is private.
-    name: "hx-context",
-    src: "raw-11",
-    crop: { left: 30, top: 318, width: 496, height: 452 },
+    crop: { left: 14, top: 156, width: 518, height: 990 },
+    // Telegram's scroll-to-bottom affordance sits over the card's right edge; painted
+    // out in the two colours it covers, sampled from the image itself
     ops: [
-      { t: "bar", x: 146, y: 102, w: 244, h: 38 }, // "м. …"
-      { t: "bar", x: 248, y: 138, w: 236, h: 38 }, // "Парку … /"
-      { t: "bar", x: 0, y: 168, w: 302, h: 38 },   // "… набережной"
-      { t: "bar", x: 316, y: 238, w: 100, h: 38 },  // the origin, mid-sentence
-      { t: "bar", x: 0, y: 268, w: 138, h: 38 },
-      { t: "bar", x: 0, y: 410, w: 120, h: 34 },   // origin B
-      { t: "bar", x: 136, y: 410, w: 208, h: 34 }, // destination
+      { t: "bar", x: 474, y: 924, w: 42, h: 66, c: "#303030" },
+      { t: "bar", x: 500, y: 924, w: 18, h: 66, c: "#b7b7b7" },
+    ],
+  },
+
+  // ---------------------------------------------------------------- HERMES
+  {
+    // the owner's own request, one complete bubble. Places are masked.
+    name: "hx-01-request",
+    src: "raw-12",
+    crop: { left: 62, top: 282, width: 522, height: 332 },
+    ops: [
+      { t: "bar", x: 228, y: 85, w: 110, h: 32 },
+      { t: "bar", x: 92, y: 115, w: 206, h: 32 },
+      { t: "bar", x: 230, y: 216, w: 126, h: 34 },
     ],
   },
   {
-    // mobile crops — tighter frames on the same captures
-    // the phone frame keeps the risks and the score together — the part that proves
-    // the card was qualified, not forwarded
-    name: "lr-card-m",
-    src: "raw-01",
-    crop: { left: 30, top: 570, width: 496, height: 282 },
-    ops: [],
-  },
-  {
-    name: "lr-rank-m",
-    src: "raw-06",
-    crop: { left: 30, top: 168, width: 496, height: 420 },
-    ops: [],
-  },
-  {
-    name: "hx-context-m",
-    src: "raw-11",
-    crop: { left: 30, top: 318, width: 496, height: 300 },
+    // the reply, from its own top edge through the recommendation paragraph
+    name: "hx-02-answer",
+    src: "raw-12",
+    crop: { left: 14, top: 672, width: 518, height: 276 },
     ops: [
-      { t: "bar", x: 146, y: 102, w: 244, h: 38 },
-      { t: "bar", x: 248, y: 138, w: 236, h: 38 },
-      { t: "bar", x: 0, y: 168, w: 302, h: 38 },
-      { t: "bar", x: 316, y: 238, w: 100, h: 38 },
-      { t: "bar", x: 0, y: 268, w: 138, h: 38 },
+      { t: "bar", x: 127, y: 120, w: 300, h: 32 },
+      { t: "bar", x: 17, y: 152, w: 120, h: 32 },
+      { t: "bar", x: 241, y: 189, w: 175, h: 32 },
     ],
   },
   {
-    name: "hx-workspace-m",
-    src: "raw-07",
-    crop: { left: 30, top: 385, width: 496, height: 330 },
-    ops: [],
+    // the workspace report, from its top edge through the 30-day figures. The assistant's
+    // own first line states it only read — that is the honest guardrail, kept in frame.
+    name: "hx-03-workspace",
+    src: "raw-08",
+    crop: { left: 14, top: 254, width: 518, height: 620 },
+    // the floating date pill is Telegram chrome, not part of the message
+    ops: [{ t: "bar", x: 196, y: 0, w: 152, h: 26, c: "#ededed" }],
   },
   {
-    // HERMES — workspace statistics, including the assistant's own caveat that the sample
-    // is too small to be meaningful and what it proposes to do next.
-    name: "hx-workspace",
+    // continuation of the same report: reply rate and the caveat that the sample is too
+    // small to mean anything. Cut between blocks.
+    name: "hx-04-replyrate",
     src: "raw-07",
-    crop: { left: 30, top: 385, width: 496, height: 500 },
+    crop: { left: 14, top: 400, width: 518, height: 462 },
     ops: [],
   },
 ];
 
 for (const job of jobs) {
   const base = sharp(`${RAW}/${job.src}.jpeg`).extract(job.crop);
-  const composites = job.ops.map((o) =>
-    o.t === "bar" ? bar(o.x, o.y, o.w, o.h) : patch(o.x, o.y, o.w, o.h, o.c),
-  );
+  const composites = job.ops.map((o) => bar(o.x, o.y, o.w, o.h, o.c));
   const out = composites.length ? base.composite(composites) : base;
   await out.png().toFile(`${OUT}/${job.name}.png`);
-  console.log(job.name, `${job.crop.width}×${job.crop.height}`, `masks=${job.ops.length}`);
+  console.log(job.name.padEnd(18), `${job.crop.width}×${job.crop.height}`, `masks=${job.ops.length}`);
 }

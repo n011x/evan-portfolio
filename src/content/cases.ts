@@ -33,14 +33,15 @@ export type CaseStudy = {
       id: string;
       title: string;
       src: string;
-      srcMobile?: string;
-      ratio: string;
-      ratioMobile?: string;
+      /** the capture's real pixel size — the window is built from this and nothing else */
+      width: number;
+      height: number;
       alt: string;
-      meta: { k: string; v: string }[];
+      readoutLabel: string;
+      readout: { k: string; v: string }[];
       from?: string;
       signal?: boolean;
-      span?: "half" | "third" | "wide";
+      note?: string;
     }[];
   };
   implementation: string[];
@@ -93,43 +94,63 @@ export const cases: Record<string, CaseStudy> = {
           title: "QUALIFICATION",
           from: "05 QUALIFY",
           signal: true,
-          src: "lr-card",
-          srcMobile: "lr-card-m",
-          ratio: "496 / 690",
-          ratioMobile: "496 / 282",
-          alt: "Карточка лида: разбор «Почему подходит», блок «Риски» и оценка совпадения 92 из 100",
-          meta: [
-            { k: "FIT / ЭТОТ ЛИД", v: "92 / 100" },
+          src: "lr-01-brief",
+          width: 518,
+          height: 812,
+          alt: "Карточка лида целиком: тир «Приоритет», описание запроса, бюджет и разбор «Почему подходит»",
+          readoutLabel: "EXTRACTED SIGNAL",
+          readout: [
+            { k: "ТИР", v: "ПРИОРИТЕТ" },
+            { k: "НАПРАВЛЕНИЕ", v: "ПАРСИНГ" },
+            { k: "БЮДЖЕТ", v: "1 000 – 3 000 ₽" },
             { k: "РАЗБОР", v: "ПОЧЕМУ ПОДХОДИТ" },
-            { k: "ОГОВОРКИ", v: "РИСКИ" },
+          ],
+          note: "ОКНО 01 ИЗ 02 · КАРТОЧКА ПРОДОЛЖАЕТСЯ",
+        },
+        {
+          id: "05.B",
+          title: "RISK & FIT",
+          from: "05 QUALIFY",
+          src: "lr-02-risk",
+          width: 518,
+          height: 374,
+          alt: "Продолжение той же карточки: блок «Риски», оценка совпадения 92 из 100 и дата публикации",
+          readoutLabel: "EXTRACTED SIGNAL",
+          readout: [
+            { k: "FIT / ЭТОТ ЛИД", v: "92 / 100" },
+            { k: "ОГОВОРКИ", v: "2 РИСКА" },
+            { k: "ОПУБЛИКОВАНО", v: "02.09.2026" },
+            { k: "САНИТИЗАЦИЯ", v: "КАНАЛ СКРЫТ" },
+          ],
+          note: "ОКНО 02 ИЗ 02 · НИЖНЯЯ ГРАНИЦА КАРТОЧКИ ЦЕЛАЯ",
+        },
+        {
+          id: "07.A",
+          title: "HUMAN DECISION",
+          from: "07 DIGEST",
+          src: "lr-03-decide",
+          width: 518,
+          height: 140,
+          alt: "Строка действий под карточкой целиком: «Интересно», «Мимо», «Оригинал»",
+          readoutLabel: "OBSERVED OUTPUT",
+          readout: [
+            { k: "ДЕЙСТВИЯ", v: "3 КНОПКИ" },
+            { k: "РЕШАЕТ", v: "ВЛАДЕЛЕЦ" },
           ],
         },
         {
           id: "06.A",
           title: "COMPARISON",
           from: "06 RANK",
-          src: "lr-rank",
-          srcMobile: "lr-rank-m",
-          ratio: "496 / 962",
-          ratioMobile: "496 / 420",
-          alt: "Вторая карточка тиром ниже: та же структура разбора, оценка совпадения 78 из 100",
-          meta: [
+          src: "lr-04-rank",
+          width: 518,
+          height: 990,
+          alt: "Вторая карточка целиком: тир «Подходит», разбор, риски и оценка совпадения 78 из 100",
+          readoutLabel: "EXTRACTED SIGNAL",
+          readout: [
             { k: "FIT / ЭТОТ ЛИД", v: "78 / 100" },
             { k: "ТИР", v: "ПОДХОДИТ" },
-            { k: "ЧТО ПОКАЗЫВАЕТ", v: "РАНЖИРОВАНИЕ" },
-          ],
-        },
-        {
-          id: "07.A",
-          title: "HUMAN DECISION",
-          from: "07 DIGEST",
-          src: "lr-actions",
-          ratio: "540 / 132",
-          alt: "Строка действий под карточкой: «Интересно», «Мимо», «Оригинал»",
-          span: "half",
-          meta: [
-            { k: "ДЕЙСТВИЯ", v: "ИНТЕРЕСНО · МИМО · ОРИГИНАЛ" },
-            { k: "РЕШАЕТ", v: "ВЛАДЕЛЕЦ" },
+            { k: "ПОКАЗЫВАЕТ", v: "РАНЖИРОВАНИЕ" },
           ],
         },
       ],
@@ -173,37 +194,67 @@ export const cases: Record<string, CaseStudy> = {
     ],
     evidence: {
       title: "REAL OUTPUT",
-      note: "Два состояния одного ассистента: разбор длинного бытового запроса и чтение рабочей статистики. Названия мест и личные детали закрыты — доказательством служит структура ответа, а не география.",
+      note: "Два разных типа задачи в одном ассистенте: разбор длинного бытового запроса и чтение рабочей статистики. Названия мест и личные детали закрыты — доказательством служит структура ответа, а не география.",
       plates: [
         {
-          id: "A",
-          title: "CONTEXT → ROUTE",
-          src: "hx-context",
-          srcMobile: "hx-context-m",
-          ratio: "496 / 452",
-          ratioMobile: "496 / 300",
-          alt: "Ответ ассистента: пошаговый маршрут и отдельный маршрут для второго человека; названия мест закрыты плашками",
-          span: "half",
-          meta: [
-            { k: "INPUT", v: "ЕСТЕСТВЕННЫЙ ЯЗЫК" },
-            { k: "STATE", v: "ДВА ЧЕЛОВЕКА · ОТКРЫТОЕ ВРЕМЯ" },
-            { k: "OUTPUT", v: "МАРШРУТ + АЛЬТЕРНАТИВА" },
+          id: "A.1",
+          title: "REQUEST",
+          src: "hx-01-request",
+          width: 522,
+          height: 332,
+          alt: "Запрос владельца целиком: два человека в разных точках, открытое время и общая цель",
+          readoutLabel: "INPUT",
+          readout: [
+            { k: "ФОРМАТ", v: "ЕСТЕСТВЕННЫЙ ЯЗЫК" },
+            { k: "УЧАСТНИКОВ", v: "2" },
+            { k: "ОГРАНИЧЕНИЯ", v: "ОТКРЫТОЕ ВРЕМЯ" },
+            { k: "САНИТИЗАЦИЯ", v: "МЕСТА СКРЫТЫ" },
           ],
         },
         {
-          id: "B",
+          id: "A.2",
+          title: "CONTEXT → ROUTE",
+          signal: true,
+          src: "hx-02-answer",
+          width: 518,
+          height: 276,
+          alt: "Ответ ассистента: точка встречи и что делать до неё; названия мест закрыты плашками",
+          readoutLabel: "OBSERVED OUTPUT",
+          readout: [
+            { k: "РЕШЕНИЕ", v: "ТОЧКА ВСТРЕЧИ" },
+            { k: "УЧИТЫВАЕТ", v: "ОБА МАРШРУТА" },
+            { k: "ЗАПАС", v: "ПРОГУЛКА ДО ВСТРЕЧИ" },
+          ],
+          note: "ОКНО 01 ИЗ 02 · ОТВЕТ ПРОДОЛЖАЕТСЯ МАРШРУТАМИ",
+        },
+        {
+          id: "B.1",
           title: "WORKSPACE / 30D",
-          src: "hx-workspace",
-          srcMobile: "hx-workspace-m",
-          ratio: "496 / 500",
-          ratioMobile: "496 / 330",
-          alt: "Отчёт ассистента по рабочей статистике: reply rate и оговорка о том, что выборка слишком мала",
-          span: "half",
-          meta: [
-            { k: "ЧИТАЕТ", v: "СТАТИСТИКУ WORKSPACE" },
-            { k: "АНАЛИЗИРУЕТ", v: "REPLY RATE · ОГОВОРКА" },
+          src: "hx-03-workspace",
+          width: 518,
+          height: 620,
+          alt: "Отчёт ассистента по рабочей таблице за 30 дней; первой строкой он сам отмечает, что изменений не вносил",
+          readoutLabel: "SYSTEM READOUT",
+          readout: [
+            { k: "ПЕРИОД", v: "30 ДНЕЙ" },
+            { k: "ЧИТАЕТ", v: "СТАТИСТИКУ CRM" },
             { k: "ЭТОТ СНИМОК", v: "ЧТЕНИЕ, НЕ ЗАПИСЬ" },
           ],
+        },
+        {
+          id: "B.2",
+          title: "ANALYSIS",
+          src: "hx-04-replyrate",
+          width: 518,
+          height: 462,
+          alt: "Продолжение отчёта: reply rate и оговорка ассистента о том, что выборка слишком мала",
+          readoutLabel: "OBSERVED OUTPUT",
+          readout: [
+            { k: "СЧИТАЕТ", v: "REPLY RATE" },
+            { k: "ОГОВАРИВАЕТ", v: "ВЫБОРКА МАЛА" },
+            { k: "ПРЕДЛАГАЕТ", v: "СЛЕДУЮЩИЙ ШАГ" },
+          ],
+          note: "ОКНО 02 ИЗ 02",
         },
       ],
     },
