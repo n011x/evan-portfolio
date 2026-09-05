@@ -43,7 +43,10 @@ No animation library, no WebGL, no canvas, no runtime data fetching.
 - restrained matte glass, 1–3% of surface
 - responsive 320→1920, WCAG 2.2 AA, full `prefers-reduced-motion` fallback
 
-Detail in [`docs/VISUAL_LANGUAGE.md`](docs/VISUAL_LANGUAGE.md),
+[`docs/CANONICAL_STATE.md`](docs/CANONICAL_STATE.md) is the authoritative snapshot of the
+project as it stands — current decisions, what is implemented, what is rejected, what is
+still open. The reasoning behind it lives in
+[`docs/VISUAL_LANGUAGE.md`](docs/VISUAL_LANGUAGE.md),
 [`docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md) and
 [`docs/INFORMATION_ARCHITECTURE.md`](docs/INFORMATION_ARCHITECTURE.md).
 

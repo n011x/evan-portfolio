@@ -1,7 +1,9 @@
-# DESIGN SYSTEM — STAGE 2 → STAGE 5
+# DESIGN SYSTEM — STAGE 2 → STAGE 6
 
-Structural foundation only. Fog, final raster, motion and the accent's visual role
-arrive in Stage 3/4. Everything here is implemented and visible in the running site.
+Tokens, grid, type roles and the component inventory, stage by stage. Everything here is
+implemented and visible in the running site. For what is true overall,
+[`CANONICAL_STATE.md`](CANONICAL_STATE.md) is the arbiter — where the two disagree, that
+file wins.
 
 ## 1. STACK
 
@@ -15,17 +17,19 @@ arrive in Stage 3/4. Everything here is implemented and visible in the running s
 | package manager | pnpm 10.20.0 via corepack | lockfile committed |
 | screenshots | Playwright 1.62.1 driving the installed Chrome (`channel: "chrome"`, no browser download) | review artifacts, and the base for Stage 6 tests |
 
-No Motion/GSAP/Lenis/Three yet — nothing on the page needs them before Stage 4.
-All components are Server Components; there is no client JS in the page tree.
+No Motion/GSAP/Lenis/Three — Stage 4 shipped without them and they are now closed
+(CANONICAL_STATE §9). Every component is a Server Component **except three**:
+`MotionGate`, `Reveal` and `MediaStates`. There is no other client JS in the page tree.
 
 ## 2. TOKENS — `src/styles/tokens.css`
 
 Surfaces `--paper #F2F1EE`, `--paper-2 #E9E8E4`, `--paper-3`, `--night #101012`.
 Ink `--ink #0B0B0C`, `--graphite`, `--gray`, `--gray-2`.
 Rules `--rule` 14%, `--rule-soft` 7%, `--rule-strong` 32%.
-Accent `--accent #2C2BE8` + `--accent-mark` — **Stage 2 uses it only for the focus ring
-and text selection**, so composition is judged without colour.
-Motion tokens (`--ease-out`, three durations) are declared now, unused until Stage 4.
+Accent `--accent #CC2E24` (Registration Red) + `--accent-on-dark #FF6B5E` +
+`--accent-mark`. Ultramarine `#2C2BE8` was the Stage-2 candidate and is superseded.
+`--gray` was darkened to `#65666B` at Stage 6 for WCAG AA.
+Motion tokens (`--ease-out`, three durations) and the field tokens are in use.
 
 Type: `--fs-display … --fs-nano`, all `clamp()`; tracking, leading and an 8px baseline
 step. Grid: `--rail`, `--margin`, `--gutter`, `--maxw 1512px`, `--band`, `--band-lg`,
@@ -72,7 +76,7 @@ Used for: section IDs `/01…/07`. Everything else pixel-related is Stage 3.
 
 layout — `Rail`, `SiteHeader` (44px touch targets), `SiteFooter`
 ui — `SectionHeader`, `MetaTable`, `MetaRow`, `ArrowLink`, `RegMarks`, `StatementBand`,
-`MaybeLink` (renders an inert element while a route is unbuilt — `src/lib/routes.ts`)
+`MaybeLink` (gated by `caseRoutesEnabled` in `src/lib/routes.ts`; since Stage 5 that flag is on, so it always renders a real link)
 graphics — `GridGuides`, `MediaSlot`, `AsciiFieldSlot`, `SystemMap`
 work — `SelectedWork`, `ProjectDiagram` (system-first), `ProjectMetrics` (metrics-first),
 `ProjectTypographic`, `ProjectWide`, `ProjectHead` (index / links / stack line / fact list)
@@ -203,12 +207,16 @@ Open Graph (`app/opengraph-image.tsx` renders the hero's own logic at 1200×630)
 `sitemap.ts`, `robots.ts`, Person + CreativeWork JSON-LD, security headers,
 `output: "standalone"`, and the Docker/README production path.
 
-## 8. WHAT STAGE 2 DELIBERATELY DOES NOT HAVE
+## 8. WHAT THE SITE STILL DOES NOT HAVE
 
-CloudField, animated fog, the real ASCII artwork, dithering, halftone assets, glitch,
-scan smear, pixel reveal, scroll motion, hover treatments, line drawing, grain, final
-calibration graphics, page transitions. `/work` and `/work/[slug]` are Stage 5; until then their
-links render inert rather than 404, and no placeholder pages exist.
+The Stage-2 exclusion list is spent: animated fog, the ASCII artwork, dithering, halftone
+assets, scroll reveals, hover treatments, line drawing, grain and the calibration graphics
+all shipped in Stage 3/4, and `/work` + `/work/[slug]` shipped in Stage 5 — no link on the
+site is inert.
+
+What is still absent, by decision rather than by schedule: page transitions, scan smear,
+media pixel reveal, glitch as a hover state, a custom 404, and a UTC clock in the hero
+metadata. See [`CANONICAL_STATE.md` §9](CANONICAL_STATE.md) for why each is closed.
 
 Review screenshots are captured from `pnpm build` + `pnpm start` (production render), so
 no dev indicator or toolbar can appear in them.

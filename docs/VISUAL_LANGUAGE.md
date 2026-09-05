@@ -1,8 +1,11 @@
 # VISUAL LANGUAGE
 
-Status: STAGE 1 — proposal, awaiting approval. Nothing here is implemented yet.
-Decided at review: RU prose + EN system labels → type set = **Inter Tight** (display/text) +
-**IBM Plex Mono** (micro), pixel type via **CSS dot-matrix mask** (no bitmap font, Cyrillic-safe).
+**Status: implemented.** This document holds the reasoning and the reference DNA behind the
+identity. For what is true in the running site, [`CANONICAL_STATE.md`](CANONICAL_STATE.md)
+is the arbiter — where the two disagree, that file wins.
+
+Type set: **Inter Tight** (display/text) + **IBM Plex Mono** (micro), pixel type via a
+**CSS dot-matrix mask** (no bitmap font, Cyrillic-safe). RU prose + EN system labels.
 
 ---
 
@@ -403,24 +406,24 @@ Nothing is used at 1:1 — each device is re-cut to the single identity.
 ## 4. VISUAL INTEGRATION MATRIX (required checklist)
 
 Every principle A–N from the brief must be present. `INTENSITY` is how loud it is
-allowed to be. Status is updated at Stage 3 and Stage 7.
+allowed to be. STATUS reflects the running site as of Stage 6.
 
 | # | PRINCIPLE (brief) | IMPLEMENTATION | SITE LOCATION | INTENSITY | STATUS |
 |---|---|---|---|---|---|
-| A | Editorial / Swiss grid | 12-col editorial grid, asymmetric offsets, visible hairline column rules, baseline rhythm, section IDs, wide margins | entire site | high | planned |
-| B | System / interface language | `SectionTag`, `MetaTable`, `MetaBlock` coordinates, status strings, footer status bar, UTC clock, build string, `↗ ↓` arrows, reg marks | header, hero, work, footer, case | high | planned |
-| C | Pixel / dot matrix | `PixelIndex` section IDs, `PixelType` hero word, pixel numerals for metrics, `PixelReveal` on media, pixel-mass corner accents | hero, work, metrics, footer, transitions | high (signature) | planned |
-| D | ASCII / text graphics | hero character-field artwork (one strong computational composition), monospace structures in stack, ASCII rule dividers | hero, stack, dividers | high (one hero moment) | planned |
-| E | Halftone / raster | build-time Bayer 8×8 ordered dither producing a **processed asset alongside a clean one**; processed is the default on `/` previews and archive thumbnails, clean is the default in case galleries; dither strips on boundaries | work, /work, case | high | planned |
-| F | Soft cloud / blur | `CloudField` — 3-layer irregular multi-radial-gradient fog with mask-broken silhouettes, drifting; horizon arc; bottom-anchored dark fog | hero, statement, stack, about, contact, footer | high | planned |
-| G | Soft-focus typography | decorative words start at `blur(6px)` → sharpen on scroll; ghost echo layers; one dissolving tracked word per band | statement, section headers, contact | medium | planned |
-| H | Glitch / scan / displacement | one-pass scan-smear on media reveal, 2px displacement on project hover, contour break in case hero | work, case | low (accent only) | planned |
-| I | Oversized typography | project names clipped at the viewport edge, oversized parenthetical numbers, hero name at display scale | hero, work, statement | high | planned |
-| J | Micro typography | 10–11px mono labels: year, role, stack, status, section ID, coordinates, counters, captions | everywhere | high | planned |
-| K | Diagram language | 5-node approach pipeline with drawn connectors and dot joints, Lead Radar architecture diagram, stacked strata, micro-diagram glyphs | approach, case 01, what i build | high | planned |
-| L | Print / poster texture | global grain overlay, registration marks, calibration step wedge, raster imperfection on media edges | global, footer, /work | medium | planned |
-| M | Extreme whitespace | statement band ~70vh with one line; stack section keeps a 4-column void; hero bottom third empty | statement, stack, hero | high | planned |
-| N | Minimal black/white UI | paper / ink / graphite / cool-gray scale + exactly one accent used as a highlighter | global | high | planned |
+| A | Editorial / Swiss grid | 12-col editorial grid, asymmetric offsets, visible hairline column rules, baseline rhythm, section IDs, wide margins | entire site | high | built |
+| B | System / interface language | `SectionTag`, `MetaTable`, `MetaBlock` coordinates, status strings, footer status bar, build string, `↗ ↓` arrows, reg marks | header, hero, work, footer, case | high | built — no UTC clock (§CANONICAL_STATE §9) |
+| C | Pixel / dot matrix | `.pixel` CSS dot-matrix mask on section IDs and the contact index; pixel numerals for metrics | section headers, contact, metrics | high (signature) | built — the named `Pixel*` components were not (§11) |
+| D | ASCII / text graphics | hero character-field artwork (one strong computational composition), monospace structures in stack, ASCII rule dividers | hero, stack, dividers | high (one hero moment) | built |
+| E | Halftone / raster | build-time Bayer 8×8 ordered dither producing a **processed asset alongside a clean one**; processed is the default on `/` previews and archive thumbnails, clean is the default in case galleries; dither strips on boundaries | work, /work, case | high | built |
+| F | Soft cloud / blur | `DistortionField` — six tuned variants, two masked masses that cross-fade plus a light volume, drifting | hero, work, route, media, calm, contact | high | built — as `DistortionField`, not `CloudField` (§10) |
+| G | Soft-focus typography | **not built.** Blur-to-sharp on type conflicts with static typography geometry. Softness lives in the fog behind the type instead, and in the `--paper-3` ghost index | — | — | rejected (§9, CANONICAL_STATE §9) |
+| H | Glitch / scan / displacement | hard-seam `clip-path` wipe from processed to clean media; the SCAN WINDOW primitive on type. Scan-smear and 2px hover displacement were rejected | work, case | low (accent only) | built — in the reduced form (§9) |
+| I | Oversized typography | project names clipped at the viewport edge, oversized parenthetical numbers, hero name at display scale | hero, work, statement | high | built |
+| J | Micro typography | 10–11px mono labels: year, role, stack, status, section ID, coordinates, counters, captions | everywhere | high | built |
+| K | Diagram language | 5-node approach pipeline with drawn connectors and dot joints, Lead Radar architecture diagram, stacked strata, micro-diagram glyphs | approach, case 01, what i build | high | built |
+| L | Print / poster texture | global grain overlay, registration marks, calibration step wedge, raster imperfection on media edges | global, footer, /work | medium | built |
+| M | Extreme whitespace | statement band ~70vh with one line; stack section keeps a 4-column void; hero bottom third empty | statement, stack, hero | high | built |
+| N | Minimal black/white UI | paper / ink / graphite / cool-gray scale + exactly one accent used as a highlighter | global | high | built |
 
 Additional identity devices not in A–N but extracted from references, tracked here so
 they are not lost: selection-highlight `Mark` (R13), window-chrome frames (R13),
@@ -463,29 +466,31 @@ vertical edge wordmark (R3/R11), parenthetical oversized index (R6/R10),
 
 Single scale plus one accent. Tokens are defined once in `styles/tokens.css`.
 
-| token | value (proposed) | use |
+| token | value | use |
 |---|---|---|
 | `--paper` | `#F2F1EE` | page ground (warm off-white, as R4/R5) |
 | `--paper-2` | `#E9E8E4` | recessed bands, media placeholders |
+| `--paper-3` | `#DEDCD7` | ghost numerals, the lightest tint |
 | `--ink` | `#0B0B0C` | primary type, solid controls |
 | `--graphite` | `#3A3B3E` | secondary type, diagram strokes |
-| `--gray` | `#8A8B8F` | micro labels, metadata |
+| `--gray` | `#65666B` | micro labels, metadata — darkened at Stage 6 for AA |
 | `--gray-2` | `#C7C7C4` | hairlines at 100%, dither mid-tone |
-| `--rule` | `rgba(11,11,12,0.13)` | hairline rules, column guides |
-| `--fog-light` | `rgba(255,255,255,0.85)` | cloud highlight body |
-| `--fog-dark` | `rgba(58,59,62,0.16)` | cloud graphite body |
+| `--rule` / `--rule-soft` / `--rule-strong` | 14% / 7% / 32% of ink | hairline rules, column guides |
+| `--field-light` | `rgba(255,255,255,0.95)` | fog highlight body |
+| `--field-tone` | `rgba(58,59,62,0.2)` | fog graphite body |
 | `--night` | `#101012` | the single dark band (Contact) |
-| `--accent` | `#2C2BE8` (ultramarine) | links, dot joints, 1px signals, focus ring |
-| `--accent-mark` | `rgba(44,43,232,0.16)` | **the selection-highlight `Mark` block** |
+| `--accent` | `#CC2E24` **Registration Red** | links, dot joints, 1px signals, focus ring |
+| `--accent-on-dark` | `#FF6B5E` | the same hue on `--night` |
+| `--accent-mark` | `rgba(204,46,36,0.14)` | text-selection highlight |
+
+Ultramarine `#2C2BE8` was the Stage-2 candidate and is **superseded** — see §1c.
 
 Rules: accent appears at most 6–8 times on the homepage; it is never a background
 larger than a line of text; every accent-on-paper pairing is checked ≥ 4.5:1 for text.
 Dark band inverts to `--paper` type on `--night`. **Never a second accent.**
 
-**Stage 2 constraint:** the low-fidelity structural pass is built in paper / ink /
-graphite / gray only, so that composition, scale, density, hierarchy, whitespace and
-rhythm are judged without colour helping. `--accent` ships as a token candidate and is
-used only for the focus ring until Stage 3, where its final visual role is decided.
+The Stage-2 constraint that held the accent to the focus ring is spent: Stage 3 gave
+Registration Red its full role.
 
 ## 7. TYPOGRAPHY
 
@@ -499,14 +504,10 @@ Three voices, self-hosted, subset, `font-display: swap`, variable where possible
   every label, meta row, counter, coordinate and caption.
 - **BITMAP / PIXEL** — dot-matrix numerals and one hero word.
 
-Final family selection depends on the **language decision** (see risks): a Cyrillic
-site rules out most bitmap fonts and several grotesks. Two prepared sets:
-
-| voice | if RU (or RU+EN) | if EN-only |
-|---|---|---|
-| display/text | Inter Tight / Inter Variable (full Cyrillic) | Archivo Variable (wght+wdth, cropped-poster feel) |
-| mono/micro | IBM Plex Mono (full Cyrillic) | IBM Plex Mono or JetBrains Mono |
-| bitmap | **CSS dot-matrix mask** over the mono face (script-independent) | Departure Mono / Silkscreen (Latin only) + CSS mask |
+**Settled:** the site is RU + EN, so the set is **Inter Tight** (display/text, full
+Cyrillic) + **IBM Plex Mono** (mono/micro, full Cyrillic), with pixel type as a **CSS
+dot-matrix mask** over the mono face — script-independent, no bitmap font. The EN-only
+alternatives (Archivo, Departure Mono, Silkscreen) were never needed.
 
 Type scale (desktop): 200 / 128 / 84 / 56 / 34 / 22 / 17 / 13 / 11 px, fluid via
 `clamp()`, snapped to an 8px baseline. Extreme contrast (200px against 11px in the same
@@ -524,18 +525,28 @@ composition) is a stated principle, not an accident.
   overflow at the viewport edge, and hairline column guides that can be shown at 8%
 - vertical rhythm on an 8px baseline; section padding 120/160/200px desktop, 72/96 mobile
 
-## 9. MOTION LANGUAGE (defined now, built in Stage 4)
+## 9. MOTION LANGUAGE (as built in Stage 4)
 
-- fog: 40–90s drift/scale loops, transform + opacity only, never layout
-- reveal: opacity + 8–16px translate + `blur(6px)→0`, 500–700ms, custom ease-out
-- media: `PixelReveal` — pixelated → sharp in 4–5 steps, plus one scan-smear pass
-- diagram: connectors draw with `stroke-dashoffset`, nodes fade in sequence
-- hover: 2px displacement, halftone→grayscale crossfade, grid overlay in, 180ms
-- no scroll-jacking, no smooth-scroll library, no pinned sections, no parallax >12%
-- `prefers-reduced-motion`: fog freezes at a composed position, reveals become instant
-  opacity, pixel/scan effects render their final frame only
+- field: 22–40s drift/morph loops, transform + opacity only, never layout
+- reveal: opacity + a 14px translate, 620ms, custom ease-out
+- hairline reveal: `scaleX(0) → scaleX(1)` from the left, 720ms, compositor-only
+- media: hard-seam `clip-path` wipe from PROCESSED to CLEAN — no scale, no deformation
+- micro-motion: link, button and media states at 180–420ms, no spring, no bounce
+- no scroll-jacking, no smooth-scroll library, no pinned sections, no parallax
+- motion pauses when `document.hidden`; there is no render loop and no scroll listener
+- `prefers-reduced-motion`: the field freezes, reveals become instant, micro-motion is
+  removed
 
-## 10. CLOUD SYSTEM (spec)
+Three Stage-1 proposals here were **rejected** rather than built and must not return: the
+`blur(6px)→0` reveal, media `PixelReveal` (pixelated → sharp in steps) with a scan-smear
+pass, and 2px hover displacement — the last conflicts with static typography geometry.
+See [`CANONICAL_STATE.md` §9](CANONICAL_STATE.md).
+
+## 10. FOG SYSTEM — original spec, superseded in build
+
+Shipped as `DistortionField` with six tuned variants (`hero` / `work` / `route` / `media` /
+`calm` / `contact`), not as the three-layer `CloudField` described below. The technique
+survived; the component name and layer count did not. Kept for the reasoning.
 
 `CloudField` = up to 3 `CloudLayer`s per band. A layer is one element with:
 1. 4–6 offset `radial-gradient`s at different radii and opacities (breaks the ellipse),
@@ -548,7 +559,13 @@ Layers: (1) light body — near-white, volume + diffuse shadow (R3/R12); (2) gra
 Grain is a separate global overlay, not part of the layers. Canvas is used **only** if
 CSS cannot hold the irregularity; default is CSS.
 
-## 11. PIXEL / RASTER SYSTEM (spec)
+## 11. PIXEL / RASTER SYSTEM — original spec, partially built
+
+Of the names below only the dot-matrix mask and the build-time halftone pipeline exist.
+`PixelIndex`, `PixelType`, `PixelReveal`, `DitherStrip`, `DotGrid` and `PixelMass` were
+never built: the shipped primitive is the `.pixel` CSS mask plus `scripts/build-media.mjs`
+and `scripts/treat-media.mjs`. Kept for the reasoning.
+
 
 - `PixelIndex` — section IDs and counters in dot-matrix
 - `PixelType` — one hero word; dot-matrix via CSS mask so it is script-independent

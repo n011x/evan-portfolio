@@ -1,11 +1,16 @@
 # INFORMATION ARCHITECTURE
 
-Status: STAGE 1 — proposal, awaiting approval.
-Decided at review: name `EVAN`; language = RU prose + EN system labels; Lead Radar is project 01 with a repo link.
+**Status: implemented.** This document holds the structure and the content contract. For
+what is true in the running site, [`CANONICAL_STATE.md`](CANONICAL_STATE.md) is the
+arbiter — where the two disagree, that file wins.
+
+Settled: name `EVAN`; language = RU prose + EN system labels; Lead Radar is project 01
+with a repo link.
 
 Content source of truth: the `myresume` sibling repository (`content.md` +
 `content.json` (fact registry), plus the real repositories `lead-radar`, `hermes_agent_ai`.
-Everything below marked `TODO` has **no confirmed source** and must not be invented.
+Nothing here may be invented. Material with no confirmed source is recorded as an open
+item in [`CANONICAL_STATE.md` §10](CANONICAL_STATE.md) and stated on the page as missing.
 
 ---
 
@@ -14,15 +19,16 @@ Everything below marked `TODO` has **no confirmed source** and must not be inven
 Above the fold, in this reading order:
 
 1. **name** — `EVAN` (display scale) — confirmed
-2. **what** — `AI PRODUCTS · WEB · AUTOMATION` (three lines, oversized)
-3. **supporting statement (RU)** — «Собираю AI-продукты, веб и автоматизации — от
-   постановки задачи до работающего продукта.» Wording may be adapted to the
-   composition; the meaning may not.
+2. **what** — `AI AGENTS · WEB · AUTOMATION` (three lines, oversized)
+3. **supporting statement (RU)** — «Собираю системы, веб и автоматизации — от разбора
+   контекста до работающего продукта.» This is the shipped wording; the meaning may not
+   change.
 4. **proof marker** — `05 PROJECTS · 03 LIVE LINKS · 2+ MO HERMES UPTIME` (the uptime
    metric names the project it comes from — it is Hermes', not a platform statistic)
 5. **primary action** — `VIEW WORK ↓`
 6. **secondary actions** — `TELEGRAM ↗ · EMAIL ↗ · GITHUB ↗` (micro type, right edge)
-7. **system metadata** — `STATUS: OPEN TO WORK` · `REMOTE` · `UTC+3` · build string
+7. **system metadata** — `STATUS: OPEN TO WORK` · `REMOTE` · build string · year
+   (no UTC clock — specified here at Stage 1, never built)
 
 ### OUTPUT FIRST, TOOLS SECOND
 
@@ -47,10 +53,10 @@ work link.
 | `/` | full self-contained pitch: identity → work → what → how → stack → about → contact | Server Component, static |
 | `/work` | complete archive: **editorial work index + contact sheet**, no filter UI in v1 | static |
 | `/work/[slug]` | case study, one per project | `generateStaticParams`, static |
-| `/not-found` | in-identity 404 with the ASCII field | static |
+| `/_not-found` | Next's default 404 — the in-identity ASCII version was specified at Stage 1 and **not built** | static |
 | later, optional | `/about` — only if the About band outgrows the homepage | — |
 
-`/about` is deliberately **not** built in Stage 5: the homepage About band carries it.
+`/about` is deliberately **not** a route: the homepage About band carries it.
 
 **`/work` in v1** — one page that shows the whole range at a glance: project index rows
 (`INDEX · NAME · TYPE · YEAR · STATUS · one line · LIVE ↗ / CASE ↗`) plus a contact-sheet
@@ -109,8 +115,8 @@ says what the project is. A status shown as `INTERFACE MOCKUP` is not repeated a
 | # | project | composition | visual asset | confirmed facts available |
 |---|---|---|---|---|
 | 01 | **LEAD RADAR** | full-bleed, diagram-led: the real ingest→qualify→rank→digest pipeline drawn in our node language | own architecture diagram (no screenshot needed) | production Python service, source registry, SQLite/WAL ledger, deterministic pre-filter, Groq structured qualification, ranking + dedupe, 10:00/16:00 digest windows, max 10 cards/window, owner-only Telegram actions, systemd hardening, sanitized public snapshot |
-| 02 | **HERMES PERSONAL AGENT** | split: left oversized name + meta, right halftoned interface fragment; pixel numerals for the metrics | screenshot of the presentation site / Telegram fragment `TODO` | Telegram agent on Ubuntu VDS, Telegram Gateway as a systemd service, Python 3.11, workspace + memory + rules + skills + schedules; ~105 vacancies/month, 20–30/week; 2+ months without a restart; built in ~5 hours; live link |
-| 03 | **ROUTE** | oversized typography + cropped mobile screens as a filmstrip; explicitly labelled `INTERFACE MOCKUP — NO CODE` | 5 screens `TODO` (asset missing) | 5 screens, 4 stages portfolio→applications→interview→offer, day goal + bottleneck + timeboxed tasks, built in Codex, in progress, not deployed |
+| 02 | **HERMES PERSONAL AGENT** | split: left oversized name + meta, right halftoned interface fragment; pixel numerals for the metrics | presentation-site capture — **shipped** (`public/media/hermes-{clean,processed}.webp`) | Telegram agent on Ubuntu VDS, Telegram Gateway as a systemd service, Python 3.11, workspace + memory + rules + skills + schedules; ~105 vacancies/month, 20–30/week; 2+ months without a restart; built in ~5 hours; live link |
+| 03 | **ROUTE** | oversized typography + cropped mobile screens as a filmstrip; explicitly labelled `INTERFACE MOCKUP — NO CODE` | 5 screens — **still missing** (CANONICAL_STATE §10, O2); filmstrip renders labelled placeholders | 5 screens, 4 stages portfolio→applications→interview→offer, day goal + bottleneck + timeboxed tasks, built in Codex, in progress, not deployed |
 | 04 | **LUMA ENGLISH** | large interface fragment, near-full-bleed, clipped name over it | screenshot of the live site (capturable) | demo landing for an online English school, React + Vite + Vercel, local fonts, 7 sections, 3 programmes, 3 tariffs, payment not connected, ~3 hours, live link |
 | 05 | **ЯСНОДОМ / YASNO HOUSE** | archive row on `/`, full case on `/work/yasno-house` | screenshot of the live site (capturable) | one-action landing, name+phone → PDF selection, 6 blocks, 2 forms, consent, React + Vite + Vercel + Manrope, numbers/photos/brand are marked placeholders, ~3 hours, live link |
 
@@ -242,8 +248,9 @@ memory contents, credentials.
 
 ## 12. SEO / METADATA SHAPE
 
-- `<title>` — `Evan — AI products, web, automation` (pending name + language decision)
+- `<title>` — `EVAN — системы, веб, автоматизации` (shipped)
 - one `h1` per page; project names are `h2` on `/`, `h1` on the case
 - JSON-LD: `Person` + `hasPart` `CreativeWork` per project
 - OG image: generated from the hero ASCII field at build time (`next/og`)
-- `sitemap.ts`, `robots.ts`, canonical URLs — domain `TODO`
+- `sitemap.ts`, `robots.ts`, per-page canonical URLs — **shipped**; absolute URLs fall back
+  to `http://localhost:3000` until `NEXT_PUBLIC_SITE_URL` is set (CANONICAL_STATE §10, O1)

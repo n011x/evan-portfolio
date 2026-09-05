@@ -1,4 +1,8 @@
-# STAGE 2.5 — FIGMA ART DIRECTION · COMPLETE · READY FOR STAGE 3
+# STAGE 2.5 — FIGMA ART DIRECTION · COMPLETE
+
+**Historical record.** Stage 2.5 closed and Stages 3–6 shipped from it. Figma is no longer
+consulted: the code is the source of truth, and
+[`CANONICAL_STATE.md`](CANONICAL_STATE.md) states what is true now.
 
 ## FINAL PASS (2026-09-04, later)
 

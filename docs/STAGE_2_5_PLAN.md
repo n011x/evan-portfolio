@@ -1,5 +1,8 @@
 # STAGE 2.5 — FIGMA EXECUTION QUEUE
 
+**Historical record.** The queue is spent; see
+[`CANONICAL_STATE.md`](CANONICAL_STATE.md) for the current state.
+
 Written while the Figma MCP connector is rate-limited, so that when quota returns not a
 single call is spent improvising. File key is kept out of this repository.
 Rules in force: [VISUAL_LANGUAGE.md §1c amendment](VISUAL_LANGUAGE.md).
