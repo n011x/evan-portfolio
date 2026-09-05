@@ -2,7 +2,7 @@
 
 **The single authoritative snapshot of this project as it exists now.**
 
-Last synchronised: 2026-09-05, after Stage 6.2.2 (EvidencePlate v2).
+Last synchronised: 2026-09-05, after Stage 6.2.2 (EvidencePlate v2, final polish).
 
 Every statement below carries one of these labels where its status is not obvious:
 **SHIPPED** · **VERIFIED FACT** · **PENDING REAL ASSET** · **NEEDS USER FACT** ·
@@ -308,16 +308,26 @@ SYSTEM ID  ·  TITLE                              ← PROVENANCE NODE
 |---|---|
 | the capture | **CLEAN and untreated.** No dither, halftone, distortion, blur, overlay or redraw |
 | geometry | the box carries the capture's own aspect ratio; the image is `object-fit: contain`. **Never `cover`, never `clip-path`, never a transform** |
-| size | `max-width` is the source width — 518 or 522 px. The capture is never enlarged past the file that exists |
+| size | **SOURCE = 591 px · WINDOW ≤ SOURCE · DEFAULT WINDOW = 518 px.** Source width and rendering width are different numbers and are never conflated: 591px is what Telegram delivered, 518px is the default window, and an asset with a different source width carries it in its own metadata (`hx-01-request` is 522px). Every plate declares its real file size in `data-source-width` / `data-source-height` |
 | safe inset | 10px between capture and frame, so the hairline never sits on content |
 | id | echoes the system map — `05 QUALIFY` produces `05.A`, `07 DIGEST` produces `07.A`. One Registration Red signal per band, on the plate whose node carries it in the map |
 | provenance | `← 05 QUALIFY`. No connector lines are drawn across the page: the link is id, label, grid position and one shared metadata grammar |
 | readout | the interpretation layer, set in the site's own mono under `EXTRACTED SIGNAL` / `OBSERVED OUTPUT` / `SYSTEM READOUT`. It sits beside the window on desktop and under it on mobile, **never over it**, and never imitates the source interface |
 | mobile | the same plate stacked, capture first and readout under it — not a shrunk desktop frame, and not a tighter re-crop that would cut a message |
 
+**Redaction is one canonical treatment.** Private detail is covered with a solid
+`--graphite #3A3B3E` bar — never blurred, never a gradient, never textured, never
+Registration Red, never a light patch that reads as a sticker, and never replaced with
+invented content. It stays visibly a redaction and stays quieter than the evidence.
+
+**Chrome removal is a different operation** and is invisible by design: Telegram's own
+furniture — date pills, scroll affordances — is painted out in a colour sampled from the
+image itself. It is only ever applied to pixels Telegram's overlay already covered, so no
+message content is lost. Where chrome cannot be removed without touching the message, the
+window is cut to a boundary that excludes it instead.
+
 **Source resolution is 591×1280.** That is what Telegram delivered; no higher-resolution
-original exists on the machine. The windows are therefore 518–522px wide and are rendered
-at most 1:1 in CSS pixels. Sharper evidence would need the phone-native files.
+original exists on the machine. Sharper evidence would need the phone-native files.
 
 `scripts/evidence-boundary-check.mjs` asserts all of this against the running site at
 320 / 375 / 390 / 430 / 768 / 1024 / 1280 / 1440 / 1920: object-fit, aspect ratio against

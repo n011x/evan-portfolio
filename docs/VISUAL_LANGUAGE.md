@@ -587,7 +587,10 @@ distortion — a screenshot the reader cannot read proves nothing.
 And since 6.2.2 the rule has a second half: **SANITIZE MAY CROP, LAYOUT MUST NOT.** The
 sanitised file is canonical; no responsive wrapper may trim a letter, a bubble edge, a
 rounded corner or an action row off it, and it is never displayed larger than the source.
-Composition rules live in the Figma board `SYS / REAL OUTPUT — EVIDENCE PLATE`. The
+Composition rules live in the Figma board `SYS / REAL OUTPUT — EVIDENCE PLATE`.
+
+Redaction has one form: solid `--graphite`, no blur, no gradient, no texture, no accent,
+no light patch. Removing Telegram's own chrome is a different operation and is invisible. The
 raster language is identity, but the visitor must always be able to actually look at the
 interface. Halftone is therefore a *state*, never the only state.
 

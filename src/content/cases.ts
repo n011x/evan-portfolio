@@ -113,7 +113,7 @@ export const cases: Record<string, CaseStudy> = {
           from: "05 QUALIFY",
           src: "lr-02-risk",
           width: 518,
-          height: 374,
+          height: 365,
           alt: "Продолжение той же карточки: блок «Риски», оценка совпадения 92 из 100 и дата публикации",
           readoutLabel: "EXTRACTED SIGNAL",
           readout: [
@@ -232,7 +232,7 @@ export const cases: Record<string, CaseStudy> = {
           title: "WORKSPACE / 30D",
           src: "hx-03-workspace",
           width: 518,
-          height: 620,
+          height: 613,
           alt: "Отчёт ассистента по рабочей таблице за 30 дней; первой строкой он сам отмечает, что изменений не вносил",
           readoutLabel: "SYSTEM READOUT",
           readout: [

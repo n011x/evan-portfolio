@@ -237,7 +237,8 @@ the code asks "is this featured?" any more — `featured` is gone.
 |---|---|
 | web band | `components/work/WebExamples.tsx` — preview, name, type, one line, stack, `VIEW LIVE ↗`. Deliberately carries none of the case grammar |
 | evidence plate | `components/case/EvidencePlate.tsx` — evidence window + system readout in one editorial object. The window is built from the capture's own pixel size, `object-fit: contain`, safe inset, never enlarged. See [`CANONICAL_STATE.md` §3](CANONICAL_STATE.md) |
-| boundary check | `scripts/evidence-boundary-check.mjs` — asserts at nine widths that no layout crops, stretches or enlarges a capture |
+| boundary check | `scripts/evidence-boundary-check.mjs` — asserts at nine widths that no layout crops, stretches or enlarges a capture. Ratio drift must stay ≤0.25% **and** ≤1 CSS px |
+| redaction | solid `--graphite #3A3B3E`, one treatment everywhere. Chrome removal is separate and uses a colour sampled from the image |
 | sanitizer | `scripts/sanitize-evidence.mjs` — crops the raw captures, strips Telegram chrome, masks private detail. Raw sources stay in `.private-assets/`, never committed |
 | ЯсноДом capture | `scripts/capture-yasno.mjs` — the live page at 1440 and 390, fonts settled, no chrome |
 

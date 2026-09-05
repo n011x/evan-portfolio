@@ -65,9 +65,16 @@ for (const route of ROUTES) {
       checked++;
       const where = `${route} @${w} ${r.src}`;
       if (r.fit !== "contain") failures.push(`${where}: object-fit is "${r.fit}", must be contain`);
+      // 0.25% — at these window sizes that is well under one CSS pixel of drift, so
+      // nothing can be letterboxed or trimmed without the check seeing it
       const srcAr = r.sourceWidth / r.sourceHeight, boxAr = r.boxW / r.boxH;
-      if (Math.abs(srcAr - boxAr) / srcAr > 0.01) {
-        failures.push(`${where}: box ratio ${boxAr.toFixed(3)} vs source ${srcAr.toFixed(3)} — the capture would be letterboxed or cropped`);
+      const drift = Math.abs(srcAr - boxAr) / srcAr;
+      const pxDrift = Math.abs(r.boxW / srcAr - r.boxH);
+      if (drift > 0.0025 || pxDrift > 1) {
+        failures.push(
+          `${where}: box ratio ${boxAr.toFixed(4)} vs source ${srcAr.toFixed(4)} — ` +
+            `${(drift * 100).toFixed(3)}% / ${pxDrift.toFixed(2)}px of drift`,
+        );
       }
       // next/image may serve a narrower variant, so compare against the real source file
       if (!r.sourceWidth) failures.push(`${where}: no declared source size`);
@@ -81,5 +88,5 @@ for (const route of ROUTES) {
 
 await browser.close();
 console.log(`evidence images checked: ${checked}`);
-console.log(failures.length ? "FAILURES:\n  " + failures.join("\n  ") : "NO LAYOUT CROP · NO UPSCALE · NO DEFORMATION");
+console.log(failures.length ? "FAILURES:\n  " + failures.join("\n  ") : "NO LAYOUT CROP · NO UPSCALE · NO DEFORMATION · NO ANCESTOR CLIPPING (ratio drift ≤0.25% and ≤1px)");
 process.exit(failures.length ? 1 : 0);
