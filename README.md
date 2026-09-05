@@ -2,6 +2,8 @@
 
 Personal portfolio for systems, web and automation work.
 
+**Live: [evancartex.com](https://evancartex.com)**
+
 ## About
 
 «Собираю системы, веб и автоматизации — от разбора контекста до работающего продукта.»
@@ -109,6 +111,32 @@ because the site is static and a nonce policy would force per-request rendering 
 no third-party script, no remote font and no `eval`. No secrets reach the frontend: the one
 environment variable is a public URL.
 
+## Deployment
+
+Production runs on a VPS as a systemd service behind Caddy, which terminates TLS and
+reverse-proxies to the application on loopback:
+
+```
+Caddy :80/:443  →  reverse_proxy 127.0.0.1:3000  →  evan-portfolio.service (Next.js standalone)
+```
+
+`www` redirects permanently to the apex. The application never listens publicly. Releases
+are immutable `releases/<sha>` directories with a `current` symlink, so a rollback is
+repointing the symlink and restarting.
+
+Verify a deployment against its public origin:
+
+```bash
+node scripts/launch-gate.mjs https://evancartex.com
+```
+
+It checks TLS, the plain-HTTP redirect, every route, the security headers on the real
+response, and that no `localhost` leaked into the build — the failure mode that is
+invisible until someone reads the page source.
+
+The Docker path in this repository still works and is kept as an alternative; production
+uses systemd because that is the convention the host already runs.
+
 ## Status
 
-Portfolio is under active development.
+Released. `docs/CANONICAL_STATE.md` is the authoritative snapshot.

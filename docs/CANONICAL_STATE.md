@@ -2,7 +2,7 @@
 
 **The single authoritative snapshot of this project as it exists now.**
 
-Last synchronised: 2026-09-05, after Stage 7 — whole-site product review and pre-launch.
+Last synchronised: 2026-09-06, after Stage 8 — **the site is live at https://evancartex.com**.
 
 Every statement below carries one of these labels where its status is not obvious:
 **SHIPPED** · **VERIFIED FACT** · **PENDING REAL ASSET** · **NEEDS USER FACT** ·
@@ -22,12 +22,13 @@ library, no WebGL, no canvas.
 
 | | |
 |---|---|
-| Stages complete | 1, 2, 2.5, 3, 4, 5, 6, 6.1, 6.2, 6.2.1, 6.2.2, 7 |
-| Stage in scope next | none — the site is production-ready pending one external value and one asset (§10) |
+| Stages complete | 1, 2, 2.5, 3, 4, 5, 6, 6.1, 6.2, 6.2.1, 6.2.2, 7, 8 |
+| Stage in scope next | none — released |
+| Production | **https://evancartex.com** — released 2026-09-06 |
 | Repository | `n011x/evan-portfolio`, public |
 | Branch | `main` |
 | Baseline commit | `6a9e09e feat: establish portfolio production baseline` |
-| Blocking for launch | production domain (`NEXT_PUBLIC_SITE_URL`) |
+| Blocking for launch | nothing |
 
 ### What each completed stage actually produced
 
@@ -40,6 +41,7 @@ library, no WebGL, no canvas.
 | 4 | Motion: CSS keyframes on transform/opacity only, `MotionGate` (visibility + reduced-motion), `Reveal` (IntersectionObserver), media processed→clean wipe |
 | 5 | `/work` archive and `/work/[slug]` case template, five case studies, `caseRoutesEnabled = true` |
 | 6 | Responsive 320→1920, WCAG 2.2 AA, performance, SEO/OG/sitemap/JSON-LD, security headers, standalone + Docker production path |
+| 8 | Deployed to production: VPS + systemd + Caddy, apex canonical with `www` redirecting to it, the app bound to loopback only, and the launch gate run against the public origin |
 | 7 | Whole-site product review: the surviving `UPTIME 2+ MO` claim removed from the Hermes glass plate, the Hermes date metric reset into the numeral slot, capability rows and the contact sheet stopped numbering the landings as peers of the core three, and ROUTE given a stage map so its case reads as deliberately pending rather than unfinished |
 | 6.2.2 | EvidencePlate v2: evidence designed in Figma first, every capture re-cut on real message boundaries, the window built from the capture's own geometry, and a layout-crop check that runs at every breakpoint |
 | 6.2.1 | EvidencePlate: real captures presented as states of the system rather than screenshots attached to a case, tied to the pipeline by id; Hermes date metric reworded; Figma typography board's residual drift fixed |
@@ -534,6 +536,48 @@ and "CURRENT" status labels → superseded. The two earlier accent boards were r
 
 No board, variant or component was created. No approved visual decision was reopened.
 
+## 8c. PRODUCTION
+
+Live at **https://evancartex.com** since 2026-09-06.
+
+```
+Internet → DNS → Caddy :80/:443 (TLS, Let's Encrypt)
+                   ├─ www.evancartex.com  → 301 → https://evancartex.com{uri}
+                   └─ evancartex.com      → reverse_proxy 127.0.0.1:3000
+                                              └─ evan-portfolio.service
+                                                   Next.js standalone, Node 22
+```
+
+| | |
+|---|---|
+| Model | VPS + **systemd**, matching the convention the owner's other services already use. **No Docker** — the repository's Dockerfile stays as an alternative path, but adding a container runtime for one service would have introduced a layer the machine did not have |
+| Runtime | Node 22 LTS, installed for this deployment; the standalone bundle needs a Node runtime and nothing else |
+| Service | `evan-portfolio.service` — unprivileged dedicated user, `Restart=on-failure`, enabled at boot, `NoNewPrivileges`, `ProtectSystem=strict`, `ProtectHome`, journald logging |
+| Binding | **`127.0.0.1:3000` only.** The application is not reachable from outside; Caddy is the sole public listener and port 3000 is not opened in the firewall |
+| Releases | Immutable `releases/<sha>` directories with a `current` symlink, so a rollback is repointing the symlink and restarting |
+| Config | `NEXT_PUBLIC_SITE_URL=https://evancartex.com`, set at build time — the single canonical source, verified to reach canonical tags, Open Graph, sitemap, robots and JSON-LD with no `localhost` left anywhere |
+| Coexistence | Two Hermes services and Lead Radar run on the same machine under their own users and directories. None was stopped, modified or exposed; the portfolio adds one loopback port and shares only Caddy |
+
+**One deployment defect was found and fixed by the QA, not by systemd.** `ProtectSystem=strict`
+left the release tree read-only, so Next could not create `.next/cache` and every
+`/_next/image` request re-optimised and then failed to cache — the responses were still
+200, so the service looked healthy while two image requests never settled in a browser.
+`<release>/.next/cache` now symlinks to a shared writable directory. This is why a green
+`systemctl is-active` is not a launch verdict.
+
+**Launch gate, run against the public origin:** 31/31 — TLS, the plain-HTTP 308, all five
+routes 200, both landing redirects 308, all eight security headers on the real response,
+no `x-powered-by`, no localhost or example.com leakage on any route, and absolute
+production URLs in canonical, sitemap, robots and JSON-LD.
+
+**Measured on the live origin** (real Chrome, 4× CPU + slow 4G): LCP 1252 ms home /
+1076 ms case, **CLS 0.000**. Lighthouse mobile 97 / 99 / 98 across home, `/work` and the
+case — *better* than the pre-launch local baseline, because Caddy compresses and serves
+over real HTTP/2.
+
+The operational runbook — host, deploy, rollback, neighbour inventory — is kept out of
+this public repository in `docs/DEPLOYMENT.local.md`.
+
 ## 9. REJECTED AND ARCHIVED — DO NOT RESURRECT
 
 Each of these was explored and closed. None returns without a new, explicit decision.
@@ -566,9 +610,10 @@ Re-audited at Stage 6.2. Nothing here is called a user blocker if the work can c
 
 ### Real external dependencies
 
+O1, the production domain, is **closed**: the site is live at https://evancartex.com (§8c).
+
 | # | item | status |
 |---|---|---|
-| O1 | **Production domain.** Verified again at 6.2: all six consumers — `metadataBase`, per-page canonical, Open Graph URL, `sitemap.xml`, `robots.txt`, JSON-LD — derive from the single `src/lib/site.ts` value, and a probe build propagates one value everywhere. No domain is hardcoded. A one-value replacement, and nothing else waits on it. | **LAUNCH BLOCKER** |
 | O2 | **ROUTE — 5 screens.** ROUTE is a mockup that was never deployed, so there is no running version to capture from: the files have to come from the owner. The homepage filmstrip renders labelled placeholders, and since Stage 7 the case carries a stage map of its documented path, so the project reads as deliberately pending rather than unfinished. **This does not block launch.** | **PENDING REAL ASSET** |
 
 ### Closed at Stage 6.2

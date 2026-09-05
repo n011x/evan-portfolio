@@ -58,3 +58,6 @@ docs/CONTENT_TODO.md
 
 # raw Telegram captures — private chat content, never published
 .private-assets/
+
+# private deployment runbook — names the host and its neighbours
+docs/DEPLOYMENT.local.md
