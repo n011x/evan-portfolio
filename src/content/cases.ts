@@ -22,6 +22,13 @@ export type CaseStudy = {
   /** the architecture band — Lead Radar draws the real system map instead */
   system?: { k: string; v: string }[];
   /**
+   * A case whose primary evidence does not exist yet still has a structure. ROUTE's
+   * four stages are documented, so the case draws them in the same node language the
+   * pipeline uses — the shape of the product, not a picture of an interface nobody
+   * has seen. Nothing here is invented: it is the stage sequence, nothing more.
+   */
+  stageMap?: { id: string; label: string; note: string; x: number; y: number }[];
+  /**
    * Real, sanitized interface fragments presented as states of the system. `id` echoes
    * the system map, `from` names the node the output comes out of, `meta` says what the
    * frame proves — never what it would be nice for it to prove.
@@ -278,6 +285,13 @@ export const cases: Record<string, CaseStudy> = {
   route: {
     slug: "route",
     deck: "Макет мобильного приложения: путь к цели «найти удалённую AI-работу».",
+    stageMap: [
+      // the notes carry the documented sequence, not a restatement of the node number
+      { id: "01", label: "ПОРТФОЛИО", note: "→ отклики", x: 2, y: 26 },
+      { id: "02", label: "ОТКЛИКИ", note: "→ интервью", x: 31, y: 68 },
+      { id: "03", label: "ИНТЕРВЬЮ", note: "→ оффер", x: 60, y: 26 },
+      { id: "04", label: "ОФФЕР", note: "цель пути", x: 88, y: 68 },
+    ],
     context: [
       "Поиск работы разваливается на десятки мелких действий, и непонятно, на каком ты этапе и что именно тормозит.",
       "ROUTE — попытка собрать этот путь в один интерфейс: этап, узкое место и задачи на сегодня.",

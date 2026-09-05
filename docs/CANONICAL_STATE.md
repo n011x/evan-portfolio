@@ -2,7 +2,7 @@
 
 **The single authoritative snapshot of this project as it exists now.**
 
-Last synchronised: 2026-09-05, after Stage 6.2.2 (EvidencePlate v2, final polish).
+Last synchronised: 2026-09-05, after Stage 7 — whole-site product review and pre-launch.
 
 Every statement below carries one of these labels where its status is not obvious:
 **SHIPPED** · **VERIFIED FACT** · **PENDING REAL ASSET** · **NEEDS USER FACT** ·
@@ -22,8 +22,8 @@ library, no WebGL, no canvas.
 
 | | |
 |---|---|
-| Stages complete | 1, 2, 2.5, 3, 4, 5, 6, 6.1, 6.2, 6.2.1 |
-| Stage in scope next | none scheduled — awaiting review of Stage 6.2.1 |
+| Stages complete | 1, 2, 2.5, 3, 4, 5, 6, 6.1, 6.2, 6.2.1, 6.2.2, 7 |
+| Stage in scope next | none — the site is production-ready pending one external value and one asset (§10) |
 | Repository | `n011x/evan-portfolio`, public |
 | Branch | `main` |
 | Baseline commit | `6a9e09e feat: establish portfolio production baseline` |
@@ -40,6 +40,7 @@ library, no WebGL, no canvas.
 | 4 | Motion: CSS keyframes on transform/opacity only, `MotionGate` (visibility + reduced-motion), `Reveal` (IntersectionObserver), media processed→clean wipe |
 | 5 | `/work` archive and `/work/[slug]` case template, five case studies, `caseRoutesEnabled = true` |
 | 6 | Responsive 320→1920, WCAG 2.2 AA, performance, SEO/OG/sitemap/JSON-LD, security headers, standalone + Docker production path |
+| 7 | Whole-site product review: the surviving `UPTIME 2+ MO` claim removed from the Hermes glass plate, the Hermes date metric reset into the numeral slot, capability rows and the contact sheet stopped numbering the landings as peers of the core three, and ROUTE given a stage map so its case reads as deliberately pending rather than unfinished |
 | 6.2.2 | EvidencePlate v2: evidence designed in Figma first, every capture re-cut on real message boundaries, the window built from the capture's own geometry, and a layout-crop check that runs at every breakpoint |
 | 6.2.1 | EvidencePlate: real captures presented as states of the system rather than screenshots attached to a case, tied to the pipeline by id; Hermes date metric reworded; Figma typography board's residual drift fixed |
 | 6.2 | Portfolio hierarchy: three core systems with case studies, landings demoted to web examples; real sanitized Telegram evidence integrated into LEAD RADAR and HERMES; the unprovable uptime claim removed; résumé resynced and rebuilt |
@@ -181,8 +182,13 @@ kept apart deliberately.
 **No uptime claim.** `2+ MO · HERMES UPTIME` is gone from the hero and
 `2+ МЕС БЕЗ ПЕРЕЗАПУСКА` from the metric block. A continuous window cannot be proven —
 nothing records the last restart. What is provable is the start: the Codex kit is stamped
-2026-06-07 and the staging tree 2026-06-10, so the metric now reads `SINCE 06.2026 · LIVE`
+2026-06-07 and the staging tree 2026-06-10, so the metric reads `06.2026 · LIVE SINCE`
 and the case says «работает с июня 2026». The same correction was applied to the résumé.
+
+Stage 7 found the claim had survived in one more place — the glass plate over the Hermes
+media still read `UPTIME · 2+ MO`. It now reads `SINCE · 06.2026`. The date also moved out
+of the display slot into the numeral slot: `SINCE 06.2026` wrapped onto two lines and
+competed with the 105 next to it, and a date is not a hero metric.
 
 ### Hero copy and classification — current, canonical
 
@@ -254,10 +260,15 @@ retired with the demotion — `ProjectWide` is no longer used.
 
 ### Counters
 
-No counter may imply five equal projects. The hero proof row reads
-`03 CORE BUILDS · 02 WEB EXAMPLES · 03 LIVE LINKS`; the CORE WORK header reads
-`03 SYSTEMS`; `/work` reads `03 CORE · 02 WEB · 03 LIVE LINKS`; the Figma index board
-reads `03 CORE · 02 WEB`. The résumé says «три системы» plus web work.
+No counter may imply five equal projects, and **no numbering may run across the two
+tiers**. The hero proof row reads `03 CORE BUILDS · 02 WEB EXAMPLES · 03 LIVE LINKS`; the
+CORE WORK header reads `03 SYSTEMS`; `/work` reads `03 CORE · 02 WEB · 03 LIVE LINKS`; the
+Figma index board reads `03 CORE · 02 WEB`. The résumé says «три системы» plus web work.
+
+The contact sheet labels core tiles `(01)…(03)` and landing tiles `WEB · NAME` rather than
+continuing to `(04)(05)`. WHAT I BUILD points its web row at `WEB`, not at project numbers.
+A tile only says `VISUAL PENDING` when something is actually missing: Lead Radar's tile
+says `SYSTEM MAP`, because its visual is a diagram and nothing is pending for it.
 
 ### Real evidence, and what is still missing
 
@@ -345,7 +356,12 @@ success rate or result.
 
 | project | still missing | how the page handles it |
 |---|---|---|
-| ROUTE | 5 screens | filmstrip of labelled placeholders, `05 SCREENS · VISUAL PENDING` |
+| ROUTE | 5 screens | filmstrip of labelled placeholders on the homepage, `05 SCREENS · VISUAL PENDING`; the case draws a **stage map** of its documented four-stage path in the same node language the pipeline uses |
+
+**A pending case still has a shape.** ROUTE's screens do not exist, and nothing is drawn in
+their place — but the product's structure is documented, so the case states it: four
+stages, five screens, what was designed, what has not been shot. The absence is a labelled
+fact rather than an empty page. Nothing about the interface is reconstructed.
 
 Captured and shipped: LUMA, Hermes and — since Stage 6.2 — ЯсноДом, taken from the live
 site at 1440 and 390 with fonts settled and no browser chrome. The favicon is a neutral
@@ -553,7 +569,7 @@ Re-audited at Stage 6.2. Nothing here is called a user blocker if the work can c
 | # | item | status |
 |---|---|---|
 | O1 | **Production domain.** Verified again at 6.2: all six consumers — `metadataBase`, per-page canonical, Open Graph URL, `sitemap.xml`, `robots.txt`, JSON-LD — derive from the single `src/lib/site.ts` value, and a probe build propagates one value everywhere. No domain is hardcoded. A one-value replacement, and nothing else waits on it. | **LAUNCH BLOCKER** |
-| O2 | **ROUTE — 5 screens.** ROUTE is a mockup that was never deployed, so there is no running version to capture from: the files have to come from the owner. The filmstrip renders labelled placeholders and the page says `05 SCREENS · VISUAL PENDING`. | **PENDING REAL ASSET** |
+| O2 | **ROUTE — 5 screens.** ROUTE is a mockup that was never deployed, so there is no running version to capture from: the files have to come from the owner. The homepage filmstrip renders labelled placeholders, and since Stage 7 the case carries a stage map of its documented path, so the project reads as deliberately pending rather than unfinished. **This does not block launch.** | **PENDING REAL ASSET** |
 
 ### Closed at Stage 6.2
 

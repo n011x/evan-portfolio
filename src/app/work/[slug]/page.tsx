@@ -112,6 +112,13 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
             <span className="nano">SYSTEM MAP · 08 NODES</span>
             <SystemMap nodes={leadRadarPipeline} />
           </div>
+        ) : study.stageMap ? (
+          <div className="wrap pt-10 lg:pt-14">
+            <span className="nano">
+              STAGE MAP · 0{study.stageMap.length} ЭТАПА · 05 ЭКРАНОВ
+            </span>
+            <SystemMap nodes={study.stageMap} />
+          </div>
         ) : media && media.processed ? (
           <div className="wrap pt-10 lg:pt-14">
             <ProjectMedia

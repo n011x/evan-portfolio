@@ -1,4 +1,4 @@
-# DESIGN SYSTEM — STAGE 2 → STAGE 6.2.2
+# DESIGN SYSTEM — STAGE 2 → STAGE 7
 
 Tokens, grid, type roles and the component inventory, stage by stage. Everything here is
 implemented and visible in the running site. For what is true overall,
@@ -243,6 +243,26 @@ the code asks "is this featured?" any more — `featured` is gone.
 | ЯсноДом capture | `scripts/capture-yasno.mjs` — the live page at 1440 and 390, fonts settled, no chrome |
 
 `ProjectWide` (archetype D, WEB / MEDIA) is retired: no project uses it now.
+
+## 7i. STAGE 7 — PRODUCT REVIEW
+
+Four corrections, all found by reading the built pages rather than by running a test.
+
+**The uptime claim had one hiding place left.** `GlassPlate` over the Hermes media still
+read `UPTIME · 2+ MO` — the exact claim removed everywhere else at Stage 6.2, sitting on
+top of the project's own screenshot. Now `SINCE · 06.2026`.
+
+**A date is not a hero metric.** `SINCE 06.2026` in the display slot wrapped to two lines
+and competed with the `105` beside it. The numeral slot now holds `06.2026` and the word
+moved to the label, where words belong: `LIVE SINCE`.
+
+**Numbering must not run across tiers.** WHAT I BUILD pointed its web row at `→ 04 · 05`,
+and the contact sheet numbered all five `(01)…(05)`. Both implied five peers. The web row
+now points at `WEB`, and landing tiles read `WEB · NAME`.
+
+**A pending case still has a shape.** `SystemMap` is now reused for a `stageMap` on any
+case that has a documented structure but no capture: ROUTE draws its four stages, so the
+page reads as deliberately pending instead of empty. Nothing about the interface is drawn.
 
 ## 8. WHAT THE SITE STILL DOES NOT HAVE
 

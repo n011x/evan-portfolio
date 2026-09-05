@@ -3,6 +3,10 @@
  * PROMPT ENGINEERING deliberately lives in APPROACH + STACK instead.
  * DIGITAL SYSTEMS is used as the umbrella term for the section, not as a sixth row:
  * as a row it only repeats 01/02/04.
+ *
+ * `proof` points at the work that backs the row. Core systems are named by their index;
+ * landing work is named `WEB`, because it is a capability example rather than a numbered
+ * project in the same series — the numbering must not imply five peers.
  */
 export const capabilities = [
   {
@@ -23,7 +27,7 @@ export const capabilities = [
     index: "03",
     name: "WEB / LANDINGS",
     line: "Одностраничные сайты с формой заявки: от структуры до рабочей ссылки.",
-    proof: ["04", "05"],
+    proof: ["WEB"],
     glyph: "frame",
   },
   {

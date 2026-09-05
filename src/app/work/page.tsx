@@ -95,10 +95,12 @@ export default function WorkPage() {
               CONTACT SHEET
             </h2>
             <span className="nano col-span-4 md:col-span-2 lg:col-span-6 mt-2 md:mt-0 md:justify-self-end">
-              PROCESSED · ORDERED DITHER
+              03 CORE · 02 WEB
             </span>
           </div>
 
+          {/* the sheet keeps the two tiers apart: core tiles carry their index, landing
+              tiles are labelled WEB rather than continuing the same numbering */}
           <ul className="grid12 pt-8">
             {projects.map((project) => {
               const media = project.visual.kind === "media" ? project.visual : null;
@@ -131,12 +133,17 @@ export default function WorkPage() {
                             style={{ objectFit: "cover" }}
                           />
                         ) : (
-                          <span className="nano absolute left-3 top-3">VISUAL PENDING</span>
+                          <span className="nano absolute left-3 top-3">
+                            {/* only ROUTE is actually waiting on an asset; Lead Radar's
+                                visual is a diagram, and it is not missing anything */}
+                            {project.visual.kind === "diagram" ? "SYSTEM MAP" : "VISUAL PENDING"}
+                          </span>
                         )}
                         <RegMarks inset={6} size={8} />
                       </figure>
                       <span className="nano mt-2 block">
-                        ({project.index}) {project.name}
+                        {project.tier === "core" ? `(${project.index}) ` : "WEB · "}
+                        {project.name}
                       </span>
                     </Link>
                   </Reveal>

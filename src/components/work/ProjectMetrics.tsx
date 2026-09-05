@@ -137,7 +137,7 @@ export function ProjectMetrics({ project }: { project: Project }) {
                 <GlassPlate
                   rows={[
                     { k: "PROJECT 02", v: "LIVE · 2026" },
-                    { k: "UPTIME", v: "2+ MO" },
+                    { k: "SINCE", v: "06.2026" },
                   ]}
                   className="absolute right-[var(--margin)] top-5 hidden md:block w-[190px]"
                 />
