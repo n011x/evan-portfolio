@@ -6,7 +6,7 @@ import { cases } from "@/content/cases";
 import { profile } from "@/content/profile";
 import { CaseBand } from "@/components/case/CaseBand";
 import { CaseGallery } from "@/components/case/CaseGallery";
-import { EvidenceBand } from "@/components/case/EvidenceBand";
+import { EvidenceBand } from "@/components/case/EvidencePlate";
 import { SystemMap } from "@/components/graphics/SystemMap";
 import { DistortionField } from "@/components/graphics/DistortionField";
 import { MetaTable } from "@/components/ui/MetaTable";
@@ -151,7 +151,7 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
           id={study.system ? "05" : "04"}
           title={study.evidence.title}
           note={study.evidence.note}
-          panels={study.evidence.panels}
+          plates={study.evidence.plates}
         />
       ) : null}
 

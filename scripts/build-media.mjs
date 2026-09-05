@@ -25,6 +25,10 @@ const jobs = [
   [".private-assets/evidence/lr-actions.png", "lr-actions", 1080],
   [".private-assets/evidence/hx-context.png", "hx-context", 992],
   [".private-assets/evidence/hx-workspace.png", "hx-workspace", 992],
+  [".private-assets/evidence/lr-card-m.png", "lr-card-m", 992],
+  [".private-assets/evidence/lr-rank-m.png", "lr-rank-m", 992],
+  [".private-assets/evidence/hx-context-m.png", "hx-context-m", 992],
+  [".private-assets/evidence/hx-workspace-m.png", "hx-workspace-m", 992],
 ];
 
 import { existsSync } from "node:fs";

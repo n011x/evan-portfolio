@@ -80,7 +80,7 @@ export const projects: Project[] = [
     result: ["20–30 вакансий в неделю"],
     metrics: [
       { value: "105", label: "ВАКАНСИЙ / МЕС · ОДИН ИЗ СЦЕНАРИЕВ" },
-      { value: "06.2026", label: "РАБОТАЕТ С" },
+      { value: "SINCE 06.2026", label: "LIVE" },
       { value: "~5", label: "ЧАСОВ НА СБОРКУ" },
     ],
     links: [

@@ -1,4 +1,4 @@
-# DESIGN SYSTEM — STAGE 2 → STAGE 6.2
+# DESIGN SYSTEM — STAGE 2 → STAGE 6.2.1
 
 Tokens, grid, type roles and the component inventory, stage by stage. Everything here is
 implemented and visible in the running site. For what is true overall,
@@ -236,7 +236,7 @@ the code asks "is this featured?" any more — `featured` is gone.
 | piece | file |
 |---|---|
 | web band | `components/work/WebExamples.tsx` — preview, name, type, one line, stack, `VIEW LIVE ↗`. Deliberately carries none of the case grammar |
-| evidence band | `components/case/EvidenceBand.tsx` — real interface fragments as `REAL OUTPUT`, CLEAN and untreated, capped at their source resolution so they are never upscaled |
+| evidence plate | `components/case/EvidencePlate.tsx` — a real capture presented as a state of the system: pipeline id, provenance, mono metadata table, inset hairline, registration marks, its own mobile crop. The capture itself is never treated. See [`CANONICAL_STATE.md` §3](CANONICAL_STATE.md) |
 | sanitizer | `scripts/sanitize-evidence.mjs` — crops the raw captures, strips Telegram chrome, masks private detail. Raw sources stay in `.private-assets/`, never committed |
 | ЯсноДом capture | `scripts/capture-yasno.mjs` — the live page at 1440 and 390, fonts settled, no chrome |
 

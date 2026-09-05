@@ -30,6 +30,10 @@ const patch = (x, y, w, h, colour = "#212121") => ({
   top: Math.round(y),
 });
 
+/**
+ * Mobile gets its own crop of the same capture, never a shrunk desktop one: the frame is
+ * tightened onto the part that proves the claim, so the text stays readable at 390px.
+ */
 const jobs = [
   {
     // LEAD RADAR — why it fits, the risks, and the score. The channel handle is dropped
@@ -72,6 +76,39 @@ const jobs = [
       { t: "bar", x: 0, y: 410, w: 120, h: 34 },   // origin B
       { t: "bar", x: 136, y: 410, w: 208, h: 34 }, // destination
     ],
+  },
+  {
+    // mobile crops — tighter frames on the same captures
+    // the phone frame keeps the risks and the score together — the part that proves
+    // the card was qualified, not forwarded
+    name: "lr-card-m",
+    src: "raw-01",
+    crop: { left: 30, top: 570, width: 496, height: 282 },
+    ops: [],
+  },
+  {
+    name: "lr-rank-m",
+    src: "raw-06",
+    crop: { left: 30, top: 168, width: 496, height: 420 },
+    ops: [],
+  },
+  {
+    name: "hx-context-m",
+    src: "raw-11",
+    crop: { left: 30, top: 318, width: 496, height: 300 },
+    ops: [
+      { t: "bar", x: 146, y: 102, w: 244, h: 38 },
+      { t: "bar", x: 248, y: 138, w: 236, h: 38 },
+      { t: "bar", x: 0, y: 168, w: 302, h: 38 },
+      { t: "bar", x: 316, y: 238, w: 100, h: 38 },
+      { t: "bar", x: 0, y: 268, w: 138, h: 38 },
+    ],
+  },
+  {
+    name: "hx-workspace-m",
+    src: "raw-07",
+    crop: { left: 30, top: 385, width: 496, height: 330 },
+    ops: [],
   },
   {
     // HERMES — workspace statistics, including the assistant's own caveat that the sample

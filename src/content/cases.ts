@@ -21,11 +21,27 @@ export type CaseStudy = {
   approach: string[];
   /** the architecture band — Lead Radar draws the real system map instead */
   system?: { k: string; v: string }[];
-  /** Real, sanitized interface fragments. Proof, not decoration. */
+  /**
+   * Real, sanitized interface fragments presented as states of the system. `id` echoes
+   * the system map, `from` names the node the output comes out of, `meta` says what the
+   * frame proves — never what it would be nice for it to prove.
+   */
   evidence?: {
     title: string;
     note: string;
-    panels: { src: string; ratio: string; alt: string; caption: string; wide?: boolean }[];
+    plates: {
+      id: string;
+      title: string;
+      src: string;
+      srcMobile?: string;
+      ratio: string;
+      ratioMobile?: string;
+      alt: string;
+      meta: { k: string; v: string }[];
+      from?: string;
+      signal?: boolean;
+      span?: "half" | "third" | "wide";
+    }[];
   };
   implementation: string[];
   /** only when confirmed; omitted entirely otherwise */
@@ -70,26 +86,51 @@ export const cases: Record<string, CaseStudy> = {
     ],
     evidence: {
       title: "REAL OUTPUT",
-      note: "Так выглядит то, что доходит до владельца: не пересланный пост, а карточка с разбором — почему подходит, чем рискованно, насколько совпадает с профилем. Решение остаётся за человеком.",
-      panels: [
+      note: "Три состояния одного конвейера: как выглядит квалифицированная карточка, чем она отличается от карточки тиром ниже и что с ней делает владелец. Совпадение — оценка конкретного лида, а не точность сервиса.",
+      plates: [
         {
+          id: "05.A",
+          title: "QUALIFICATION",
+          from: "05 QUALIFY",
+          signal: true,
           src: "lr-card",
+          srcMobile: "lr-card-m",
           ratio: "496 / 690",
-          alt: "Карточка лида: блок «Почему подходит», блок «Риски» и оценка совпадения 92 из 100",
-          caption: "01 · КВАЛИФИКАЦИЯ · 92/100",
+          ratioMobile: "496 / 282",
+          alt: "Карточка лида: разбор «Почему подходит», блок «Риски» и оценка совпадения 92 из 100",
+          meta: [
+            { k: "FIT / ЭТОТ ЛИД", v: "92 / 100" },
+            { k: "РАЗБОР", v: "ПОЧЕМУ ПОДХОДИТ" },
+            { k: "ОГОВОРКИ", v: "РИСКИ" },
+          ],
         },
         {
+          id: "06.A",
+          title: "COMPARISON",
+          from: "06 RANK",
           src: "lr-rank",
+          srcMobile: "lr-rank-m",
           ratio: "496 / 962",
-          alt: "Вторая карточка тиром ниже: те же блоки, оценка совпадения 78 из 100",
-          caption: "02 · ТИРОМ НИЖЕ · 78/100",
+          ratioMobile: "496 / 420",
+          alt: "Вторая карточка тиром ниже: та же структура разбора, оценка совпадения 78 из 100",
+          meta: [
+            { k: "FIT / ЭТОТ ЛИД", v: "78 / 100" },
+            { k: "ТИР", v: "ПОДХОДИТ" },
+            { k: "ЧТО ПОКАЗЫВАЕТ", v: "РАНЖИРОВАНИЕ" },
+          ],
         },
         {
+          id: "07.A",
+          title: "HUMAN DECISION",
+          from: "07 DIGEST",
           src: "lr-actions",
           ratio: "540 / 132",
           alt: "Строка действий под карточкой: «Интересно», «Мимо», «Оригинал»",
-          caption: "03 · РЕШЕНИЕ ВЛАДЕЛЬЦА",
-          wide: true,
+          span: "half",
+          meta: [
+            { k: "ДЕЙСТВИЯ", v: "ИНТЕРЕСНО · МИМО · ОРИГИНАЛ" },
+            { k: "РЕШАЕТ", v: "ВЛАДЕЛЕЦ" },
+          ],
         },
       ],
     },
@@ -132,19 +173,37 @@ export const cases: Record<string, CaseStudy> = {
     ],
     evidence: {
       title: "REAL OUTPUT",
-      note: "Два разных типа задачи в одном ассистенте: разбор длинного бытового контекста с маршрутом на двоих и чтение рабочей статистики с выводом следующего шага. Названия мест и личные детали закрыты.",
-      panels: [
+      note: "Два состояния одного ассистента: разбор длинного бытового запроса и чтение рабочей статистики. Названия мест и личные детали закрыты — доказательством служит структура ответа, а не география.",
+      plates: [
         {
+          id: "A",
+          title: "CONTEXT → ROUTE",
           src: "hx-context",
+          srcMobile: "hx-context-m",
           ratio: "496 / 452",
-          alt: "Ответ ассистента с пошаговым маршрутом и вторым маршрутом для второго человека; названия станций закрыты плашками",
-          caption: "01 · КОНТЕКСТ · МАРШРУТ НА ДВОИХ",
+          ratioMobile: "496 / 300",
+          alt: "Ответ ассистента: пошаговый маршрут и отдельный маршрут для второго человека; названия мест закрыты плашками",
+          span: "half",
+          meta: [
+            { k: "INPUT", v: "ЕСТЕСТВЕННЫЙ ЯЗЫК" },
+            { k: "STATE", v: "ДВА ЧЕЛОВЕКА · ОТКРЫТОЕ ВРЕМЯ" },
+            { k: "OUTPUT", v: "МАРШРУТ + АЛЬТЕРНАТИВА" },
+          ],
         },
         {
+          id: "B",
+          title: "WORKSPACE / 30D",
           src: "hx-workspace",
+          srcMobile: "hx-workspace-m",
           ratio: "496 / 500",
+          ratioMobile: "496 / 330",
           alt: "Отчёт ассистента по рабочей статистике: reply rate и оговорка о том, что выборка слишком мала",
-          caption: "02 · WORKSPACE · СТАТИСТИКА И ОГОВОРКА",
+          span: "half",
+          meta: [
+            { k: "ЧИТАЕТ", v: "СТАТИСТИКУ WORKSPACE" },
+            { k: "АНАЛИЗИРУЕТ", v: "REPLY RATE · ОГОВОРКА" },
+            { k: "ЭТОТ СНИМОК", v: "ЧТЕНИЕ, НЕ ЗАПИСЬ" },
+          ],
         },
       ],
     },

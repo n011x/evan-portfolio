@@ -307,6 +307,30 @@ a {
   );
 }
 
+/* ============================================================
+   EVIDENCE PLATE — a real capture presented as system output
+   No treatment is applied to the capture at all. A raster seam on the left edge
+   was tried and removed: these frames are dense text that starts at the very
+   edge, so any edge treatment eats the first character of every line, and art
+   direction must not hide evidence. The plate reads as system output through the
+   grid, the hairlines, the registration marks, the mono metadata and the id that
+   points back at the node the output comes out of — not through a filter.
+   ============================================================ */
+
+.evidence-plate {
+  position: relative;
+  /* the hairline is drawn inside, not as a border: a border would sit outside the
+     aspect-ratio box and skew wide plates enough to crop a line off the capture */
+  box-shadow: inset 0 0 0 1px var(--rule);
+  background: var(--paper-2);
+  /* a phone capture has a real pixel width — the plate never renders it larger */
+  max-width: 320px;
+}
+
+@media (max-width: 767px) {
+  .evidence-plate { max-width: none; }
+}
+
 .statement-void {
   min-height: clamp(300px, 46vh, 520px);
 }

@@ -2,7 +2,7 @@
 
 **The single authoritative snapshot of this project as it exists now.**
 
-Last synchronised: 2026-09-05, after Stage 6.2.
+Last synchronised: 2026-09-05, after Stage 6.2.1.
 
 Every statement below carries one of these labels where its status is not obvious:
 **SHIPPED** · **VERIFIED FACT** · **PENDING REAL ASSET** · **NEEDS USER FACT** ·
@@ -22,8 +22,8 @@ library, no WebGL, no canvas.
 
 | | |
 |---|---|
-| Stages complete | 1, 2, 2.5, 3, 4, 5, 6, 6.1, 6.2 |
-| Stage in scope next | none scheduled — awaiting review of Stage 6.2 |
+| Stages complete | 1, 2, 2.5, 3, 4, 5, 6, 6.1, 6.2, 6.2.1 |
+| Stage in scope next | none scheduled — awaiting review of Stage 6.2.1 |
 | Repository | `n011x/evan-portfolio`, public |
 | Branch | `main` |
 | Baseline commit | `6a9e09e feat: establish portfolio production baseline` |
@@ -40,6 +40,7 @@ library, no WebGL, no canvas.
 | 4 | Motion: CSS keyframes on transform/opacity only, `MotionGate` (visibility + reduced-motion), `Reveal` (IntersectionObserver), media processed→clean wipe |
 | 5 | `/work` archive and `/work/[slug]` case template, five case studies, `caseRoutesEnabled = true` |
 | 6 | Responsive 320→1920, WCAG 2.2 AA, performance, SEO/OG/sitemap/JSON-LD, security headers, standalone + Docker production path |
+| 6.2.1 | EvidencePlate: real captures presented as states of the system rather than screenshots attached to a case, tied to the pipeline by id; Hermes date metric reworded; Figma typography board's residual drift fixed |
 | 6.2 | Portfolio hierarchy: three core systems with case studies, landings demoted to web examples; real sanitized Telegram evidence integrated into LEAD RADAR and HERMES; the unprovable uptime claim removed; résumé resynced and rebuilt |
 | 6.1 | Factual cleanup: ghost-index contrast resolved, ROLE strings audited, left-rail classification drift fixed, résumé project count synced and rebuilt, Figma rechecked read-only and its stale copy corrected |
 
@@ -179,7 +180,7 @@ kept apart deliberately.
 **No uptime claim.** `2+ MO · HERMES UPTIME` is gone from the hero and
 `2+ МЕС БЕЗ ПЕРЕЗАПУСКА` from the metric block. A continuous window cannot be proven —
 nothing records the last restart. What is provable is the start: the Codex kit is stamped
-2026-06-07 and the staging tree 2026-06-10, so the metric now reads `06.2026 · РАБОТАЕТ С`
+2026-06-07 and the staging tree 2026-06-10, so the metric now reads `SINCE 06.2026 · LIVE`
 and the case says «работает с июня 2026». The same correction was applied to the résumé.
 
 ### Hero copy and classification — current, canonical
@@ -266,9 +267,39 @@ Integrated at Stage 6.2 from real Telegram captures:
 | LEAD RADAR | `lr-card` · `lr-rank` · `lr-actions` | a card is qualified and explained — why it fits, what is risky, a fit score — ranked across tiers, and the owner decides |
 | HERMES | `hx-context` · `hx-workspace` | one assistant across two task types: a long everyday request resolved into a route for two people, and workspace statistics reported with the assistant's own caveat and a proposed next step |
 
-Evidence is **CLEAN and untreated**. The media language applies to project imagery, never
-to proof: a screenshot the reader cannot read proves nothing. Panels are capped at their
-source resolution so they are never upscaled.
+**LEAD RADAR — system map answers *how it works*, evidence answers *what it produces*.**
+The map stays; the plates do not replace it. Their sequence is QUALIFY → RANK → DECIDE,
+carrying the map's own node numbers.
+
+**HERMES — the evidence demonstrates contextual use and workspace reading, not the whole
+capability surface.** The workspace relationship goes both ways in the copy because that is
+an owner-confirmed fact; the shipped capture proves reading only, and its metadata says so
+in as many words: `ЭТОТ СНИМОК — ЧТЕНИЕ, НЕ ЗАПИСЬ`.
+
+#### EvidencePlate — the presentation rule
+
+**REAL OUTPUT MUST REMAIN REAL. ART DIRECTION MAY FRAME EVIDENCE, BUT MUST NOT
+RECONSTRUCT OR OBSCURE IT.**
+
+A plate is not a card, a phone mockup, a gallery tile or a floating image. It is an
+editorial information plate sitting in the case's own column grid:
+
+| part | rule |
+|---|---|
+| the capture | **CLEAN and untreated, always.** No dither, no halftone, no distortion, no blur, no overlay, no redraw. Capped at its source width (320px desktop) so it is never upscaled |
+| the id | echoes the system map — `05 QUALIFY` produces `05.A`, `07 DIGEST` produces `07.A`. The plate whose node carries the accent in the map carries it here too |
+| provenance | `← 05 QUALIFY` names the node the output comes from. No connector lines are drawn across the page: the link is id, label, grid position and one shared metadata grammar |
+| metadata | a mono key/value table **under** the capture, never overlaid on it, saying what the frame proves — never what it would be convenient for it to prove |
+| frame | inset hairline, registration marks, column-aligned edges. The hairline is drawn inside the aspect box so it cannot skew the ratio and crop a line off the capture |
+| mobile | its own tighter crop of the same source, never a shrunk desktop frame |
+
+A raster seam on the plate edge was built and then removed: these captures are dense text
+that starts at the very edge, so any edge treatment ate the first character of every line.
+Systemness comes from the grid, the ids and the metadata, not from a filter.
+
+**Scores are not product metrics.** `92/100` and `78/100` are the fit scores of two
+specific leads. They are labelled `FIT / ЭТОТ ЛИД` and must never be presented as accuracy,
+success rate or result.
 
 | project | still missing | how the page handles it |
 |---|---|---|
