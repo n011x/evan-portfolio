@@ -1,0 +1,57 @@
+# dependencies
+node_modules
+.pnp
+.pnp.*
+
+# build output
+.next
+out
+dist
+build
+.turbo
+*.tsbuildinfo
+next-env.d.ts
+
+# environment — the only committed variant is the example
+.env
+.env.*
+!.env.example
+
+# credentials / keys — nothing of the kind belongs in this repository
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+id_rsa*
+id_ed25519*
+.npmrc
+.netrc
+
+# test / audit output
+coverage
+playwright-report
+test-results
+*.har
+lighthouse-*.json
+
+# review artifacts — screenshots, motion captures and Figma exports produced during
+# the staged reviews. Not part of the site; regenerate with the scripts in scripts/.
+.screens/
+.figma/
+.motion/
+shots/
+
+# local tooling
+.claude/
+.vscode/
+.idea/
+
+# os
+.DS_Store
+Thumbs.db
+*.log
+
+# internal working notes — open questions and fact gaps, not for the public repo
+docs/CONTENT_TODO.md

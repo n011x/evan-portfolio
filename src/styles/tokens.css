@@ -1,0 +1,103 @@
+/* ============================================================
+   DESIGN TOKENS — INDEX & FOG
+   Accent is final: REGISTRATION RED, one hue, two surface values.
+   The distortion field is the single large motion material.
+   ============================================================ */
+
+:root {
+  /* ---- surface / ink -------------------------------------- */
+  --paper: #f2f1ee;
+  --paper-2: #e9e8e4;
+  --paper-3: #dedcd7;
+  --ink: #0b0b0c;
+  --graphite: #3a3b3e;
+  --gray: #65666b;               /* 5.07:1 on --paper · 4.67:1 on --paper-2 */
+  --gray-2: #c7c7c4;
+  --night: #101012;
+
+  --rule: rgba(11, 11, 12, 0.14);
+  --rule-soft: rgba(11, 11, 12, 0.07);
+  --rule-strong: rgba(11, 11, 12, 0.32);
+
+  /* ---- accent — REGISTRATION RED, one hue, two surfaces ---- */
+  --accent: #cc2e24;              /* light surface · 4.67:1 on --paper  */
+  --accent-on-dark: #ff6b5e;      /* dark surface  · 6.80:1 on --night  */
+  --accent-mark: rgba(204, 46, 36, 0.14);
+
+  /* ---- distortion / fog field (the one large motion motif) -- */
+  --field-strength: 0;            /* per-section, 0…1                   */
+  --field-blur: 110px;
+  --field-tone: rgba(58, 59, 62, 0.2);
+  --field-light: rgba(255, 255, 255, 0.95);
+  --grain: 0.035;
+
+  /* ---- type ----------------------------------------------- */
+  --font-display: var(--font-inter-tight), "Helvetica Neue", Arial, sans-serif;
+  --font-text: var(--font-inter-tight), "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SF Mono", Menlo, monospace;
+
+  --fs-display: clamp(4.5rem, 15.5vw, 15rem);
+  --fs-display-2: clamp(3rem, 9.4vw, 8.5rem);
+  --fs-h1: clamp(2.75rem, 7.2vw, 7.5rem);
+  --fs-h2: clamp(2rem, 4.4vw, 4.25rem);
+  --fs-h3: clamp(1.375rem, 2.2vw, 2.125rem);
+  --fs-h4: clamp(1.0625rem, 1.35vw, 1.3125rem);
+  --fs-lead: clamp(1.0625rem, 1.28vw, 1.375rem);
+  --fs-body: 1rem;
+  --fs-small: 0.875rem;
+  --fs-micro: 0.6875rem;
+  --fs-nano: 0.625rem;
+
+  --track-display: -0.045em;
+  --track-tight: -0.02em;
+  --track-micro: 0.09em;
+  --track-nano: 0.14em;
+
+  --leading-display: 0.84;
+  --leading-tight: 1.02;
+  --leading-text: 1.5;
+
+  /* ---- grid / space --------------------------------------- */
+  --rail: 0px;
+  --margin: 20px;
+  --gutter: 12px;
+  --maxw: 1512px;
+
+  --band: 96px;      /* vertical padding of a normal band */
+  --band-lg: 128px;  /* dense / important band */
+  --step: 8px;       /* baseline step */
+
+  /* ---- motion (defined now, used from Stage 4) ------------ */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 180ms;
+  --dur-mid: 420ms;
+  --dur-slow: 700ms;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --margin: 28px;
+    --gutter: 16px;
+    --band: 128px;
+    --band-lg: 176px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --rail: 44px;
+    --margin: 40px;
+    --gutter: 20px;
+    --band: 160px;
+    --band-lg: 224px;
+  }
+}
+
+@media (min-width: 1440px) {
+  :root {
+    --margin: 64px;
+    --gutter: 24px;
+    --band: 176px;
+    --band-lg: 248px;
+  }
+}

@@ -1,0 +1,20 @@
+import { profile } from "@/content/profile";
+
+/** Left edge of the page frame. Present from 1024px up. */
+export function Rail() {
+  return (
+    <div
+      aria-hidden="true"
+      className="hidden lg:block"
+      style={{ borderRight: "1px solid var(--rule)" }}
+    >
+      <div className="sticky top-0 flex h-svh flex-col items-center justify-between py-4">
+        <span className="nano">EC</span>
+        <span className="vertical-text nano" style={{ letterSpacing: "0.22em" }}>
+          {profile.wordmark} — AI PRODUCTS · WEB · AUTOMATION
+        </span>
+        <span className="nano">{profile.year}</span>
+      </div>
+    </div>
+  );
+}
