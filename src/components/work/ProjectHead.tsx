@@ -6,7 +6,7 @@ export function ProjectIndex({ index }: { index: string }) {
   return (
     <span
       aria-hidden="true"
-      className="display-2 block"
+      className="display-2 hidden md:block"
       style={{ color: "var(--ghost-index)", fontWeight: 500, lineHeight: 0.8 }}
     >
       ({index})
