@@ -95,9 +95,10 @@ export function Hero() {
                 href={profile.telegram}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Написать мне в Telegram"
                 className="btn-solid btn-solid--accent flex-1 sm:flex-none"
               >
-                <span>TELEGRAM</span>
+                <span>WORK WITH ME</span>
                 <span aria-hidden="true">↗</span>
               </a>
             </div>

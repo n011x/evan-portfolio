@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
-import { coreProjects, projects, leadRadarPipeline } from "@/content/projects";
+import { coreProjects, showcaseProjects, projects, leadRadarPipeline } from "@/content/projects";
 import { cases } from "@/content/cases";
 import { profile } from "@/content/profile";
 import { CaseBand } from "@/components/case/CaseBand";
@@ -45,8 +45,13 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
   if (project?.tier === "web") redirect("/work#web");
   if (!project || !study) notFound();
 
-  const order = coreProjects.findIndex((p) => p.slug === slug);
-  const next = coreProjects[(order + 1) % coreProjects.length]!;
+  // the chain runs through the projects the homepage shows, so it never lands on a
+  // case with nothing to look at. ROUTE sits outside it and points back in.
+  const order = showcaseProjects.findIndex((p) => p.slug === slug);
+  const next =
+    order === -1
+      ? showcaseProjects[0]!
+      : showcaseProjects[(order + 1) % showcaseProjects.length]!;
   const media = project.visual.kind === "media" ? project.visual : null;
   /** the evidence band takes a number of its own, so everything after it moves up one */
   const bandId = (n: number) => String(study.evidence ? n + 1 : n).padStart(2, "0");
@@ -63,7 +68,7 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
               {project.type} · {project.year}
             </span>
             <span className="nano col-span-4 md:col-span-2 lg:col-span-6 mt-2 md:mt-0 md:justify-self-end">
-              CASE STUDY · {`0${order + 1}/0${coreProjects.length}`}
+              CASE STUDY · {`0${coreProjects.findIndex((p) => p.slug === slug) + 1}/0${coreProjects.length}`}
             </span>
           </div>
 

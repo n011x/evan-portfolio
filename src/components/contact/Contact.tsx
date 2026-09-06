@@ -8,12 +8,12 @@ export function Contact() {
     <section id="contact" className="band band-dark pt-14 lg:pt-20" aria-labelledby="contact-title">
       <DistortionField variant="contact" />
       <div className="wrap relative">
-        <div className="grid12 rule-t pt-3 pb-16 lg:pb-24">
+        <div className="grid12 rule-t pt-3 pb-10 lg:pb-14">
           <span
             className="pixel col-span-1 block text-[34px] leading-none md:text-[42px]"
             style={{ color: "var(--paper)" }}
           >
-            /06
+            /05
           </span>
           <h2 id="contact-title" className="micro micro-ink col-span-3 md:col-span-3 lg:col-span-6">
             CONTACT
@@ -21,6 +21,21 @@ export function Contact() {
           <span className="nano col-span-4 md:col-span-2 lg:col-span-5 mt-3 md:mt-0 md:justify-self-end">
             STATUS: {profile.status} · {profile.workMode}
           </span>
+        </div>
+
+        {/* what to write, before the channels to write it to */}
+        <div className="grid12 pb-10 lg:pb-14">
+          <div className="col-span-4 md:col-span-4 lg:col-span-6 lg:col-start-5">
+            <p className="body">
+              Опишите задачу в двух-трёх предложениях — своими словами, без ТЗ.
+            </p>
+            <div className="mt-4">
+              <p className="body">
+                Отвечаю в течение дня. Если задача понятна, в ответ присылаю: что можно
+                собрать, за какой срок и что нужно от вас.
+              </p>
+            </div>
+          </div>
         </div>
 
         <ul>

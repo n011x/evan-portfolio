@@ -1,23 +1,21 @@
-import { coreProjects } from "@/content/projects";
+import { showcaseProjects } from "@/content/projects";
 import { MaybeLink } from "@/components/ui/MaybeLink";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ProjectDiagram } from "./ProjectDiagram";
 import { ProjectMetrics } from "./ProjectMetrics";
-import { ProjectTypographic } from "./ProjectTypographic";
 
 export function SelectedWork() {
-  const [p1, p2, p3] = coreProjects;
+  const [p1, p2] = showcaseProjects;
 
   return (
     <section id="work" className="band pt-16 lg:pt-24" aria-labelledby="work-title">
-      <SectionHeader id="02" name="CORE WORK" right={`0${coreProjects.length} SYSTEMS`} />
+      <SectionHeader id="02" name="CORE WORK" right={`0${showcaseProjects.length} SYSTEMS`} />
       <span id="work-title" className="sr-only">
         Основные работы
       </span>
 
       {p1 ? <ProjectDiagram project={p1} /> : null}
       {p2 ? <ProjectMetrics project={p2} /> : null}
-      {p3 ? <ProjectTypographic project={p3} /> : null}
 
       <div className="wrap pt-20 lg:pt-28 pb-4 lg:pb-6">
         <div className="grid12">

@@ -1,58 +1,26 @@
 /**
- * WHAT I BUILD answers "what can this person build", not "which methods does he use".
- * PROMPT ENGINEERING deliberately lives in APPROACH + STACK instead.
- * DIGITAL SYSTEMS is used as the umbrella term for the section, not as a sixth row:
- * as a row it only repeats 01/02/04.
+ * What ABOUT offers and how it gets made. Both lists are deliberately name-only:
+ * the descriptions that used to hang under them repeat the CONTEXT / PROBLEM /
+ * APPROACH bands inside the cases, where they are backed by real work.
  *
- * `proof` points at the work that backs the row. Core systems are named by their index;
- * landing work is named `WEB`, because it is a capability example rather than a numbered
- * project in the same series — the numbering must not imply five peers.
+ * Written lowercase on purpose — the section speaks in the first person, and the
+ * uppercase mono labels elsewhere are system chrome, not speech.
  */
-export const capabilities = [
-  {
-    index: "01",
-    name: "AI PRODUCTS / AGENTS",
-    line: "Агент в Telegram, который помнит контекст и работает по расписанию.",
-    proof: ["01", "02"],
-    glyph: "node",
-  },
-  {
-    index: "02",
-    name: "AUTOMATION",
-    line: "Задачи по расписанию: дайджест утром, сводка в понедельник.",
-    proof: ["01", "02"],
-    glyph: "cycle",
-  },
-  {
-    index: "03",
-    name: "WEB / LANDINGS",
-    line: "Одностраничные сайты с формой заявки: от структуры до рабочей ссылки.",
-    proof: ["WEB"],
-    glyph: "frame",
-  },
-  {
-    index: "04",
-    name: "INTERFACES",
-    line: "Проектирую экраны и переходы между ними до того, как появится код.",
-    proof: ["03"],
-    glyph: "screens",
-  },
-  {
-    index: "05",
-    name: "AI VISUAL",
-    line: "Собираю изображения и видео, в том числе нодовыми пайплайнами.",
-    proof: [],
-    glyph: "raster",
-  },
+export const helpWith = [
+  { index: "01", name: "ai-агенты под ваши задачи" },
+  { index: "02", name: "сайты и веб-приложения" },
+  { index: "03", name: "автоматизация бизнес-процессов" },
+  { index: "04", name: "интеграции и ai-воркфлоу" },
+  { index: "05", name: "mvp и прототипы" },
+  { index: "06", name: "ai-визуал: изображения и видео" },
+  { index: "07", name: "ai-инструменты для бизнеса и личной работы" },
 ] as const;
 
-export const capabilitiesUmbrella = "DIGITAL SYSTEMS";
-
-export const approach = [
-  { index: "01", label: "PROBLEM IN WORDS", line: "Формулирую проблему словами, а не списком фич." },
-  { index: "02", label: "HOW A PERSON USES IT", line: "Описываю, как человек этим пользуется." },
-  { index: "03", label: "BUILD THE WORKING VERSION", line: "Собираю рабочую версию в Claude Code / Codex." },
-  { index: "04", label: "TEST ON MYSELF", line: "Проверяю в реальном использовании, на себе." },
-  { index: "05", label: "FIX WHAT BROKE", line: "Правлю по тому, что сломалось." },
+/** The loop, as one line. The last step returns to the first. */
+export const flow = [
+  "проблема словами",
+  "сценарий использования",
+  "рабочая версия",
+  "проверка на себе",
+  "правки",
 ] as const;
-

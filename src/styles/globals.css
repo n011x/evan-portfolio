@@ -316,25 +316,6 @@ a {
    states: one asset, two renderings, nothing hidden behind an interaction.
    ============================================================ */
 
-.web-preview img {
-  filter: grayscale(1) contrast(1.02);
-  transition: filter 320ms var(--ease-out);
-}
-
-.web-example:hover .web-preview img,
-.web-example:focus-within .web-preview img {
-  filter: grayscale(0) contrast(1);
-}
-
-@media (hover: none) {
-  /* no hover to reveal with, so the colour is simply there */
-  .web-preview img { filter: none; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .web-preview img { transition: none; }
-}
-
 /* ============================================================
    EVIDENCE WINDOW — a real capture presented as system output
 
@@ -382,6 +363,26 @@ a {
 .band-dark .btn-solid {
   background: var(--paper);
   color: var(--night);
+}
+
+/* ABOUT speaks in the first person, so its own labels stay lowercase while the mono
+   labels around them keep the system's uppercase. At 11px, lowercase mono puts less
+   ink on the page than caps do, so the weight goes up a step to compensate — the
+   colour is already --ink and has nowhere left to go. */
+.block-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  line-height: 1.4;
+  letter-spacing: var(--track-micro);
+  font-weight: 500;
+  text-transform: none;
+  color: var(--ink);
+}
+
+/* the five steps read as one sentence; the arrows are spacing, not punctuation */
+.flow-chain__mark {
+  color: var(--gray);
+  padding: 0 0.5em;
 }
 
 .link-arrow {
@@ -444,6 +445,58 @@ a {
   letter-spacing: var(--track-nano);
   text-transform: uppercase;
   color: var(--ink);
+}
+
+/* NAVIGATION — the same control the cases use for VIEW CASE / SOURCE, so the header
+   speaks the system's existing button and invents nothing. Only what differs from a
+   control in a card is set here: the nav is read at a glance, so it keeps .micro's
+   size and tracking rather than dropping to nano, and body ink at weight 500 rather
+   than the faint --gray it used to carry (5.07:1 → 9.92:1).
+
+   Every selector below is an element plus a class, so it outranks .ctl and .ctl:hover
+   wherever those happen to sit in this file — .ctl:hover paints the border accent,
+   and accent here means "you are here" and nothing else. Hover and the current
+   section are mutually exclusive by construction rather than by order, so moving
+   this block cannot silently merge the two states. */
+a.nav-link {
+  font-size: var(--fs-micro);
+  letter-spacing: var(--track-micro);
+  font-weight: 500;
+  color: var(--graphite);
+  border-color: var(--rule-strong);
+  position: relative;
+  transition:
+    color var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
+}
+
+/* WCAG 2.2 · 2.5.8 — the box is 32px like every other .ctl; the target stays 44px
+   through a transparent extension, the same trick .link-arrow uses. */
+a.nav-link::after {
+  content: "";
+  position: absolute;
+  inset: -6px 0;
+}
+
+/* a fill rather than a heavier rule: thickening the border would nudge every
+   neighbour by a pixel on hover */
+a.nav-link:hover:not([aria-current="page"]),
+a.nav-link:focus-visible:not([aria-current="page"]) {
+  background: var(--paper-2);
+  border-color: var(--rule-strong);
+  color: var(--ink);
+}
+
+/* where the reader is now */
+a.nav-link[aria-current="page"] {
+  border-color: var(--accent);
+  color: var(--ink);
+}
+
+/* the current section still answers the pointer — it just keeps its accent */
+a.nav-link[aria-current="page"]:hover {
+  background: var(--paper-2);
 }
 
 .ctl__mark {
