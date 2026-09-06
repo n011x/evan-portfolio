@@ -10,7 +10,7 @@ export function SiteHeader() {
     >
       <div className="wrap">
         <div className="grid12 h-14 items-center">
-          <div className="col-span-2 md:col-span-2 lg:col-span-3 flex items-baseline gap-2">
+          <div className="col-span-1 md:col-span-2 lg:col-span-3 flex items-baseline gap-2">
             <Link href="/" className="micro micro-ink inline-flex min-h-[44px] items-center">
               {profile.name}
             </Link>

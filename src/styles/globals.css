@@ -385,36 +385,6 @@ a {
   padding: 0 0.5em;
 }
 
-/* NAVIGATION — the header is the one place where a label has to be read at a glance
-   rather than scanned. Body ink and one step of weight, no box: the grid and the
-   section numbers already own every rectangle on the page. */
-.nav-link {
-  color: var(--graphite);
-  font-weight: 500;
-  /* the tap target is 44px tall, so the mark has to hang off the text itself —
-     a border would draw it against the header rule instead */
-  text-decoration: underline solid transparent 1px;
-  text-underline-offset: 5px;
-  transition:
-    color var(--dur-fast) var(--ease-out),
-    text-decoration-color var(--dur-fast) var(--ease-out);
-}
-
-/* accent on the rule, not on the label: tinting the text itself would drop it from
-   9.9:1 to 4.7:1, so the loudest state would be the least readable one */
-.nav-link:hover,
-.nav-link:focus-visible {
-  color: var(--ink);
-  text-decoration-color: var(--accent);
-}
-
-/* where the reader is now — the same mark, held, and twice as heavy */
-.nav-link[data-active="true"] {
-  color: var(--ink);
-  text-decoration-color: var(--accent);
-  text-decoration-thickness: 2px;
-}
-
 .link-arrow {
   position: relative;
   display: inline-flex;
@@ -475,6 +445,31 @@ a {
   letter-spacing: var(--track-nano);
   text-transform: uppercase;
   color: var(--ink);
+}
+
+/* NAVIGATION — the same control the cases use for VIEW CASE / SOURCE, so the header
+   speaks the system's existing button and invents nothing. Only what differs from a
+   control in a card is set here: the nav is read at a glance, so it keeps .micro's
+   size and tracking rather than dropping to nano, and body ink at weight 500 rather
+   than the faint --gray it used to carry (5.07:1 → 9.92:1). */
+.nav-link {
+  font-size: var(--fs-micro);
+  letter-spacing: var(--track-micro);
+  font-weight: 500;
+  color: var(--graphite);
+  position: relative;
+  transition:
+    color var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
+}
+
+/* WCAG 2.2 · 2.5.8 — the box is 32px like every other .ctl; the target stays 44px
+   through a transparent extension, the same trick .link-arrow uses. */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  inset: -6px 0;
 }
 
 .ctl__mark {
@@ -764,6 +759,23 @@ a {
 .ctl:hover .ctl__mark {
   transform: translate(1px, -1px);
 }
+
+/* a fill rather than a heavier rule: thickening the border would nudge every
+   neighbour by a pixel on hover. The border stays neutral so that accent keeps
+   meaning "you are here" and nothing else. */
+.nav-link:hover,
+.nav-link:focus-visible {
+  background: var(--paper-2);
+  border-color: var(--rule-strong);
+  color: var(--ink);
+}
+
+/* where the reader is now */
+.nav-link[data-active="true"] {
+  border-color: var(--accent);
+  color: var(--ink);
+}
+
 
 .ctl__mark {
   transition: transform 200ms var(--ease-out);

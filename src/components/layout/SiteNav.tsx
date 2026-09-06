@@ -47,7 +47,7 @@ export function SiteNav() {
   return (
     <nav
       aria-label="Основная навигация"
-      className="col-span-2 md:col-span-3 lg:col-span-6 -mr-2 flex justify-end gap-1 md:justify-start md:gap-4 lg:gap-6"
+      className="col-span-3 md:col-span-3 lg:col-span-6 flex flex-nowrap justify-end gap-2 md:justify-start md:gap-3 lg:gap-4"
     >
       {nav.map((item) => {
         const active = item.section ? section === item.section : onWork;
@@ -57,7 +57,7 @@ export function SiteNav() {
             href={item.href}
             aria-current={active ? "page" : undefined}
             data-active={active ? "true" : undefined}
-            className="nav-link micro inline-flex min-h-[44px] items-center px-2 first:pl-0"
+            className="nav-link ctl"
           >
             {item.label}
           </Link>
