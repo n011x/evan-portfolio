@@ -6,7 +6,7 @@ export function WhatIBuild() {
   return (
     <section id="build" className="band pt-16 lg:pt-24" data-field="low" aria-labelledby="build-title">
       <SectionHeader
-        id="03"
+        id="04"
         name="WHAT I BUILD"
         right={capabilitiesUmbrella}
       />

@@ -8,7 +8,7 @@ import { Reveal } from "@/components/motion/Reveal";
  * deliberately carry none of the case grammar — no ROLE, no RESULT, no system map, no
  * pagination. One preview, one line, one live link each.
  */
-export function WebExamples({ id = "05" }: { id?: string }) {
+export function WebExamples({ id = "06" }: { id?: string }) {
   return (
     <section id="web" className="band pt-16 lg:pt-24" aria-labelledby="web-title">
       <SectionHeader id={id} name="WEB / LANDING" right={`0${webExamples.length} EXAMPLES`} />

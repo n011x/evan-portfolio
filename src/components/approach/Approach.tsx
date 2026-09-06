@@ -6,7 +6,7 @@ export function Approach() {
   return (
     <section id="approach" className="band pt-16 lg:pt-24" data-field="low" aria-labelledby="approach-title">
       <SectionHeader
-        id="04"
+        id="05"
         name="APPROACH"
         right="05 STEPS · LOOP"
       />
