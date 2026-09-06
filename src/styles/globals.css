@@ -451,12 +451,19 @@ a {
    speaks the system's existing button and invents nothing. Only what differs from a
    control in a card is set here: the nav is read at a glance, so it keeps .micro's
    size and tracking rather than dropping to nano, and body ink at weight 500 rather
-   than the faint --gray it used to carry (5.07:1 → 9.92:1). */
-.nav-link {
+   than the faint --gray it used to carry (5.07:1 → 9.92:1).
+
+   Every selector below is an element plus a class, so it outranks .ctl and .ctl:hover
+   wherever those happen to sit in this file — .ctl:hover paints the border accent,
+   and accent here means "you are here" and nothing else. Hover and the current
+   section are mutually exclusive by construction rather than by order, so moving
+   this block cannot silently merge the two states. */
+a.nav-link {
   font-size: var(--fs-micro);
   letter-spacing: var(--track-micro);
   font-weight: 500;
   color: var(--graphite);
+  border-color: var(--rule-strong);
   position: relative;
   transition:
     color var(--dur-fast) var(--ease-out),
@@ -466,10 +473,30 @@ a {
 
 /* WCAG 2.2 · 2.5.8 — the box is 32px like every other .ctl; the target stays 44px
    through a transparent extension, the same trick .link-arrow uses. */
-.nav-link::after {
+a.nav-link::after {
   content: "";
   position: absolute;
   inset: -6px 0;
+}
+
+/* a fill rather than a heavier rule: thickening the border would nudge every
+   neighbour by a pixel on hover */
+a.nav-link:hover:not([aria-current="page"]),
+a.nav-link:focus-visible:not([aria-current="page"]) {
+  background: var(--paper-2);
+  border-color: var(--rule-strong);
+  color: var(--ink);
+}
+
+/* where the reader is now */
+a.nav-link[aria-current="page"] {
+  border-color: var(--accent);
+  color: var(--ink);
+}
+
+/* the current section still answers the pointer — it just keeps its accent */
+a.nav-link[aria-current="page"]:hover {
+  background: var(--paper-2);
 }
 
 .ctl__mark {
@@ -759,23 +786,6 @@ a {
 .ctl:hover .ctl__mark {
   transform: translate(1px, -1px);
 }
-
-/* a fill rather than a heavier rule: thickening the border would nudge every
-   neighbour by a pixel on hover. The border stays neutral so that accent keeps
-   meaning "you are here" and nothing else. */
-.nav-link:hover,
-.nav-link:focus-visible {
-  background: var(--paper-2);
-  border-color: var(--rule-strong);
-  color: var(--ink);
-}
-
-/* where the reader is now */
-.nav-link[data-active="true"] {
-  border-color: var(--accent);
-  color: var(--ink);
-}
-
 
 .ctl__mark {
   transition: transform 200ms var(--ease-out);

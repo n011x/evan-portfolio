@@ -56,7 +56,6 @@ export function SiteNav() {
             key={item.href}
             href={item.href}
             aria-current={active ? "page" : undefined}
-            data-active={active ? "true" : undefined}
             className="nav-link ctl"
           >
             {item.label}
