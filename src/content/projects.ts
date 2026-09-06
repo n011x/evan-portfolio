@@ -1,3 +1,6 @@
+/** The public snapshot of Lead Radar. One place, so it changes in one place. */
+export const LEAD_RADAR_SOURCE = "https://github.com/n011x/lead-radar-public";
+
 export type ProjectVisual =
   | { kind: "diagram" }
   | {
@@ -42,6 +45,12 @@ export type Project = {
    *          link; it is not a separate product achievement and never gets a case page.
    */
   tier: "core" | "web";
+  /**
+   * Shown in the homepage CORE WORK showcase. ROUTE is a mockup with no screens yet,
+   * so it would fill a third of the shelf with placeholders — it stays a core project
+   * with its own case and its row in the archive, just not in the shop window.
+   */
+  showcase?: false;
 };
 
 export const projects: Project[] = [
@@ -59,7 +68,7 @@ export const projects: Project[] = [
     stack: ["Python", "SQLite/WAL", "Telegram", "Groq", "systemd", "Ubuntu VDS"],
     result: [],
     links: [
-      { label: "SOURCE", href: "https://github.com/n011x/lead-radar" },
+      { label: "SOURCE", href: LEAD_RADAR_SOURCE },
       { label: "VIEW CASE", href: "/work/lead-radar" },
     ],
     visual: { kind: "diagram" },
@@ -113,6 +122,7 @@ export const projects: Project[] = [
     result: ["5 экранов", "4 этапа пути"],
     links: [{ label: "VIEW CASE", href: "/work/route" }],
     visual: { kind: "filmstrip", frames: 5, ratio: "9 / 19.5", status: "pending", note: "VISUAL PENDING" },
+    showcase: false,
     tier: "core",
   },
   {
@@ -171,8 +181,10 @@ export const projects: Project[] = [
   },
 ];
 
-/** The three systems that carry a full case study. */
+/** Every system with a full case study — drives /work and the case routes. */
 export const coreProjects = projects.filter((p) => p.tier === "core");
+/** The ones the homepage actually shows, and the ones NEXT PROJECT cycles through. */
+export const showcaseProjects = coreProjects.filter((p) => p.showcase !== false);
 /** Landing work, shown as a capability rather than as separate products. */
 export const webExamples = projects.filter((p) => p.tier === "web");
 
