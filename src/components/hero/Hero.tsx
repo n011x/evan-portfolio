@@ -25,6 +25,12 @@ export function Hero() {
           <span className="nano col-span-4 md:col-span-2 lg:col-span-6 mt-1 md:mt-0 md:justify-self-end">
             <span style={{ color: "var(--ink)" }}>/01</span> — HERO · IDENTITY
           </span>
+          {/* the header hides the status below md, and it is a signal rather than
+              decoration — so it rejoins the hero's own metadata line there */}
+          <span className="nano col-span-4 mt-1 md:hidden">
+            STATUS: <span style={{ color: "var(--accent)" }}>{profile.status}</span> ·{" "}
+            {profile.workMode}
+          </span>
         </div>
 
         {/* row 1 — name + positioning */}
@@ -80,7 +86,7 @@ export function Hero() {
 
             {/* one CTA group: black for navigation, Registration Red for contact.
                 The accent comes from colour, not from size — both buttons match. */}
-            <div className="mt-8 lg:mt-10 flex flex-col gap-2 sm:flex-row">
+            <div className="mt-8 lg:mt-10 flex gap-2">
               <a href="#work" className="btn-solid flex-1 sm:flex-none">
                 <span>VIEW WORK</span>
                 <span aria-hidden="true">↓</span>

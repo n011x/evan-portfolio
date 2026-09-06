@@ -19,7 +19,7 @@ export function SelectedWork() {
       {p2 ? <ProjectMetrics project={p2} /> : null}
       {p3 ? <ProjectTypographic project={p3} /> : null}
 
-      <div className="wrap pt-20 lg:pt-28 pb-16 lg:pb-24">
+      <div className="wrap pt-20 lg:pt-28 pb-4 lg:pb-6">
         <div className="grid12">
           <MaybeLink
             href="/work"
