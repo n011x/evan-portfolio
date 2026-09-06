@@ -37,7 +37,7 @@ export function About() {
               <h3 className="block-label">с чем помогу</h3>
             </Reveal>
             <ul className="mt-4 lg:mt-5">
-              {helpWith.map((item, i) => (
+              {helpWith.map((item) => (
                 <Reveal as="li" key={item.index} className="flex gap-4 py-1.5">
                   <span className="nano shrink-0 pt-1" style={{ width: "2ch" }}>
                     {item.index}

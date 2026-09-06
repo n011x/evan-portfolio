@@ -29,7 +29,7 @@ export function CaseBand({
             </h2>
           </Reveal>
           <div className="col-span-4 md:col-span-4 lg:col-span-7 lg:col-start-5 mt-5 lg:mt-0">
-            {body?.map((paragraph, i) => (
+            {body?.map((paragraph) => (
               <Reveal key={paragraph} className="mb-6 last:mb-0">
                 <p className="body" style={{ maxWidth: "52ch" }}>
                   {paragraph}

@@ -31,7 +31,7 @@ export function WebExamples({ id = "04" }: { id?: string }) {
         </p>
 
         <ul className="mt-10 lg:mt-14">
-          {webExamples.map((project, i) => {
+          {webExamples.map((project) => {
             const live = project.links.find((l) => l.label === "LIVE");
             return (
               <Reveal
