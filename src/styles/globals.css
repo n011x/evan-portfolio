@@ -365,6 +365,18 @@ a {
   color: var(--night);
 }
 
+/* ABOUT speaks in the first person, so its list and its chain stay lowercase while
+   the mono labels around them keep the system's uppercase. */
+.lowercase-label {
+  text-transform: none;
+}
+
+/* the five steps read as one sentence; the arrows are spacing, not punctuation */
+.flow-chain__mark {
+  color: var(--gray);
+  padding: 0 0.5em;
+}
+
 /* NAVIGATION — the header is the one place where a label has to be read at a glance
    rather than scanned. Body ink and one step of weight, no box: the grid and the
    section numbers already own every rectangle on the page. */

@@ -8,7 +8,7 @@ import { Reveal } from "@/components/motion/Reveal";
  * pagination. A screenshot of a landing proves nothing a live link does not prove better,
  * so each one is a single row: name, type, one line, stack, the site itself.
  */
-export function WebExamples({ id = "06" }: { id?: string }) {
+export function WebExamples({ id = "04" }: { id?: string }) {
   return (
     <section
       id="web"
