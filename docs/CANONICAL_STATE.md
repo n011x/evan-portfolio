@@ -2,7 +2,8 @@
 
 **The single authoritative snapshot of this project as it exists now.**
 
-Last synchronised: 2026-09-06, after Stage 8 — **the site is live at https://evancartex.com**.
+Last synchronised: 2026-09-06, after the interface cleanup that followed Stage 8.
+**The site is live at https://evancartex.com.**
 
 Every statement below carries one of these labels where its status is not obvious:
 **SHIPPED** · **VERIFIED FACT** · **PENDING REAL ASSET** · **NEEDS USER FACT** ·
@@ -161,13 +162,33 @@ ROUTE carries **no typographic distortion at all**. The wordmark reads as one mo
 black mass, word first, material second. Its aggression comes from scale and the frame
 crop, not from treatment. Its five screens are placeholders labelled `VISUAL PENDING`.
 
-### Statement
+### Removed from the homepage
 
-STATEMENT_A. One line, split across two lines with an indent, in a near-empty band. Void
-is part of the composition. The field is at `none` here — the statement is the calmest
-moment on the page.
+Four things were taken out because they added length without adding clarity, not because
+they failed:
 
-Text: «Идея вечером — рабочая ссылка утром.»
+| removed | why |
+|---|---|
+| the ASCII sculpture and its `FIELD 01` label | on the first screen it read as a stray mark rather than as a computational object. Nothing replaced it; the hero closed up on spacing alone |
+| the STATEMENT band (`STATEMENT_A`) | a quote slowed the read between the work and the capabilities |
+| CAPABILITIES / STACK | a global stack list invites inflation. Every project already states its own stack, which is the more provable place for it |
+| ABOUT, with its background and fun facts | a personal tail after the structure had already made its point |
+
+`ProjectWide`, `StatementBand`, `Stack` and `About` are deleted, along with the content
+they owned. Sections renumbered `/01 … /06`; the header nav dropped `ABOUT`.
+
+### The accent is functional
+
+Registration Red now marks the things that *do* something rather than only decorating:
+the left rail wordmark, `STATUS: OPEN TO WORK`, the arrow on every system control, and the
+Telegram CTA. It stays one hue, still rare, never a large decorative fill.
+
+### Hero call to action
+
+Two buttons of identical geometry read as one group: `VIEW WORK ↓` in ink for navigation,
+`TELEGRAM ↗` in `--accent` for contact, opening `t.me/n011x` in a new tab with
+`rel="noopener noreferrer"`. The accent comes from colour, not from size. On a narrow
+screen they stack full-width and still read as one group.
 
 ### HERMES — what the project is
 
@@ -240,7 +261,7 @@ counters or the composition may put the two tiers on one level again.
 
 | route | render |
 |---|---|
-| `/` | static — HERO · CORE WORK (3) · STATEMENT · WHAT I BUILD · APPROACH · STACK · WEB / LANDING · ABOUT · CONTACT |
+| `/` | static — HERO · CORE WORK (3) · WHAT I BUILD · APPROACH · WEB / LANDING · CONTACT |
 | `/work` | static — the three core systems as an index, then the WEB / LANDING band, then the contact sheet. **No filter UI** |
 | `/work/lead-radar` · `/hermes` · `/route` | `generateStaticParams`, static |
 | `/work/luma-english` · `/work/yasno-house` | **308 → `/work#web`**, permanent redirect in `next.config.ts`. These URLs existed, so they are never allowed to 404 |
@@ -352,6 +373,10 @@ real compositions built from the real assets: `107:2` Lead Radar desktop, `108:1
 Radar mobile, `108:2` Hermes desktop, `108:211` Hermes mobile. `SYS / MEDIA TREATMENT`
 remains the source of processing rules; this board is the source of composition rules.
 
+**System controls.** `SOURCE`, `VIEW CASE`, `LIVE` and `VIEW LIVE` are `.ctl` — a hairline
+rectangle, a mono label and one accent arrow. Light system controls, not buttons: no fill,
+no shadow, no weight competing with the project names.
+
 **Scores are not product metrics.** `92/100` and `78/100` are the fit scores of two
 specific leads. They are labelled `FIT / ЭТОТ ЛИД` and must never be presented as accuracy,
 success rate or result.
@@ -458,9 +483,9 @@ full rendering; the QA capture script lifts it explicitly.
 Responsive: 7 routes × 9 widths (320/375/390/430/768/1024/1280/1440/1920) — zero
 horizontal overflow, zero console errors, everywhere.
 
-Lighthouse's `font-size` audit fails on mobile `/` because the ASCII sculpture is counted
-as illegible text. It is an `aria-hidden` graphic made of characters. Accepted; costs
-4 best-practices points.
+Lighthouse's `font-size` audit used to fail on mobile `/` because the ASCII sculpture was
+counted as illegible text. **The sculpture was removed in the interface cleanup, so mobile
+best-practices is now 100.** O12 is closed by deletion rather than by argument.
 
 ---
 
@@ -631,8 +656,8 @@ O1, the production domain, is **closed**: the site is live at https://evancartex
 | # | item | status |
 |---|---|---|
 | O5 | Ghost project index at 2.09–2.26:1 (§5) | **SHIPPED** at 6.1; below the 3:1 tool threshold by decision |
-| O8 | **AI VISUAL has no project.** Re-audited again: nothing in the repositories is a publishable AI-visual deliverable — the résumé records it as a capability with tools and no named output. The capability stays in WHAT I BUILD, STACK and ABOUT because it is factually correct there. A deliberate absence. | **INTENTIONALLY NO PROJECT / FUTURE REAL ASSET** |
-| O12 | Lighthouse `font-size` on mobile `/` — the ASCII sculpture counted as illegible text | **DEFERRED** |
+| O8 | **AI VISUAL has no project.** Re-audited again: nothing in the repositories is a publishable AI-visual deliverable — the résumé records it as a capability with tools and no named output. The capability stays in WHAT I BUILD because it is factually correct there. A deliberate absence. | **INTENTIONALLY NO PROJECT / FUTURE REAL ASSET** |
+| O12 | Lighthouse `font-size` on mobile `/` | **CLOSED** — the ASCII sculpture was removed, and the audit passes |
 
 ---
 

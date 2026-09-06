@@ -16,12 +16,12 @@ export function ProjectIndex({ index }: { index: string }) {
 
 export function ProjectLinks({ project }: { project: Project }) {
   return (
-    <ul className="flex flex-wrap gap-x-8 gap-y-3">
+    <ul className="flex flex-wrap gap-x-3 gap-y-3">
       {project.links.map((link) => (
         <li key={link.label}>
-          <MaybeLink className="link-arrow" href={link.href}>
-            <span className="micro micro-ink">{link.label}</span>
-            <span className="nano" aria-hidden="true">
+          <MaybeLink className="ctl" href={link.href}>
+            <span>{link.label}</span>
+            <span className="ctl__mark" aria-hidden="true">
               ↗
             </span>
           </MaybeLink>

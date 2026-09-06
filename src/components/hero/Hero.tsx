@@ -1,8 +1,6 @@
 import { profile } from "@/content/profile";
-import { AsciiSculpture } from "@/components/graphics/AsciiSculpture";
 import { DistortionField } from "@/components/graphics/DistortionField";
 import { GlassPlate } from "@/components/ui/GlassPlate";
-import { RegMarks } from "@/components/ui/RegMarks";
 import { ArrowLink } from "@/components/ui/ArrowLink";
 
 export function Hero() {
@@ -12,7 +10,7 @@ export function Hero() {
       className="band band--eager flex flex-col"
       aria-labelledby="hero-name"
       data-field="high"
-      style={{ minHeight: "calc(100svh - 3.5rem)" }}
+      style={{ minHeight: "calc(84svh - 3.5rem)" }}
     >
       <DistortionField variant="hero" />
       <div className="wrap relative flex flex-1 flex-col">
@@ -80,26 +78,26 @@ export function Hero() {
               ))}
             </dl>
 
-            <a href="#work" className="btn-solid mt-8 lg:mt-10 w-full md:w-auto">
-              <span>VIEW WORK</span>
-              <span aria-hidden="true">↓</span>
-            </a>
+            {/* one CTA group: black for navigation, Registration Red for contact.
+                The accent comes from colour, not from size — both buttons match. */}
+            <div className="mt-8 lg:mt-10 flex flex-col gap-2 sm:flex-row">
+              <a href="#work" className="btn-solid flex-1 sm:flex-none">
+                <span>VIEW WORK</span>
+                <span aria-hidden="true">↓</span>
+              </a>
+              <a
+                href={profile.telegram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-solid btn-solid--accent flex-1 sm:flex-none"
+              >
+                <span>TELEGRAM</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+            </div>
           </div>
 
-          <div
-            className="col-span-4 md:col-span-3 lg:col-span-8 mt-10 md:mt-0 z-0 -ml-[var(--margin)] md:ml-0 relative"
-            style={{ marginRight: "calc(var(--margin) * -1)" }}
-          >
-            <div className="relative overflow-hidden h-[34vh] min-h-[220px] md:h-[46vh] lg:h-[52vh] lg:min-h-[340px]">
-              <RegMarks inset={6} size={9} />
-              <div className="hidden md:block absolute left-0 top-1/2 -translate-y-1/2">
-                <AsciiSculpture />
-              </div>
-              <div className="md:hidden absolute left-0 top-1/2 -translate-y-1/2">
-                <AsciiSculpture compact />
-              </div>
-              <span className="nano absolute left-0 bottom-0">FIELD 01 · COMPUTATIONAL</span>
-            </div>
+          <div className="col-span-4 md:col-span-3 lg:col-span-8 mt-10 md:mt-0 relative">
             <GlassPlate
               rows={[...profile.systemPlate]}
               className="hidden lg:block absolute right-[var(--margin)] top-4 w-[200px]"

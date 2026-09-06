@@ -4,7 +4,6 @@ import { profile } from "@/content/profile";
 const nav = [
   { label: "WORK", href: "/work" },
   { label: "APPROACH", href: "/#approach" },
-  { label: "ABOUT", href: "/#about" },
   { label: "CONTACT", href: "/#contact" },
 ];
 
@@ -42,7 +41,8 @@ export function SiteHeader() {
 
           <div className="hidden md:flex md:col-span-1 lg:col-span-3 justify-end gap-4">
             <span className="nano">
-              STATUS: <span style={{ color: "var(--ink)" }}>{profile.status}</span>
+              {/* a functional status, so it reads as a signal rather than as metadata */}
+              STATUS: <span style={{ color: "var(--accent)" }}>{profile.status}</span>
             </span>
             <span className="nano hidden lg:inline">{profile.workMode}</span>
           </div>

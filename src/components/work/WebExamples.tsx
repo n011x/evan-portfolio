@@ -8,7 +8,7 @@ import { Reveal } from "@/components/motion/Reveal";
  * deliberately carry none of the case grammar — no ROLE, no RESULT, no system map, no
  * pagination. One preview, one line, one live link each.
  */
-export function WebExamples({ id = "06" }: { id?: string }) {
+export function WebExamples({ id = "05" }: { id?: string }) {
   return (
     <section id="web" className="band pt-16 lg:pt-24" aria-labelledby="web-title">
       <SectionHeader id={id} name="WEB / LANDING" right={`0${webExamples.length} EXAMPLES`} />
@@ -31,10 +31,10 @@ export function WebExamples({ id = "06" }: { id?: string }) {
                 as="li"
                 key={project.slug}
                 delay={i === 0 ? 1 : 2}
-                className="col-span-4 md:col-span-3 lg:col-span-6 mb-12 md:mb-0"
+                className="web-example col-span-4 md:col-span-3 lg:col-span-6 mb-12 md:mb-0"
               >
                 <div
-                  className="rule-t relative overflow-hidden"
+                  className="rule-t web-preview relative overflow-hidden"
                   style={{ aspectRatio: "16 / 10", background: "var(--paper-2)" }}
                 >
                   {clean ? (
@@ -61,12 +61,13 @@ export function WebExamples({ id = "06" }: { id?: string }) {
 
                 {live ? (
                   <a
-                    className="link-arrow micro micro-ink mt-5 inline-flex"
+                    className="ctl mt-5"
                     href={live.href}
                     target="_blank"
                     rel="noreferrer noopener"
                   >
-                    VIEW LIVE <span aria-hidden="true">↗</span>
+                    <span>VIEW LIVE</span>
+                    <span className="ctl__mark" aria-hidden="true">↗</span>
                   </a>
                 ) : null}
               </Reveal>

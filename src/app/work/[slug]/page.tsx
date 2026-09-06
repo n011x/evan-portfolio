@@ -83,19 +83,19 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
                   { k: "STATUS", v: project.status },
                 ]}
               />
-              <ul className="mt-5 flex flex-wrap gap-x-8 gap-y-3">
+              <ul className="mt-5 flex flex-wrap gap-x-3 gap-y-3">
                 {project.links
                   .filter((l) => l.href.startsWith("http"))
                   .map((link) => (
                     <li key={link.label}>
                       <a
-                        className="link-arrow"
+                        className="ctl"
                         href={link.href}
                         target="_blank"
                         rel="noreferrer noopener"
                       >
-                        <span className="micro micro-ink">{link.label}</span>
-                        <span className="nano" aria-hidden="true">
+                        <span>{link.label}</span>
+                        <span className="ctl__mark" aria-hidden="true">
                           ↗
                         </span>
                       </a>

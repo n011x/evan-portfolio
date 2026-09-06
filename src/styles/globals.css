@@ -308,6 +308,34 @@ a {
 }
 
 /* ============================================================
+   WEB EXAMPLES — the site's own monochrome first, their colour on demand
+
+   These are examples of execution, not products, so at rest they sit inside the
+   page's material like everything else. Hovering the card — or reaching it with a
+   keyboard — lets each landing show its own character. Same idea as the media
+   states: one asset, two renderings, nothing hidden behind an interaction.
+   ============================================================ */
+
+.web-preview img {
+  filter: grayscale(1) contrast(1.02);
+  transition: filter 320ms var(--ease-out);
+}
+
+.web-example:hover .web-preview img,
+.web-example:focus-within .web-preview img {
+  filter: grayscale(0) contrast(1);
+}
+
+@media (hover: none) {
+  /* no hover to reveal with, so the colour is simply there */
+  .web-preview img { filter: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .web-preview img { transition: none; }
+}
+
+/* ============================================================
    EVIDENCE WINDOW — a real capture presented as system output
 
    SANITIZE MAY CROP. LAYOUT MUST NOT CROP REAL OUTPUT.
@@ -324,19 +352,14 @@ a {
   background: var(--paper-2);
 }
 
-.statement-void {
-  min-height: clamp(300px, 46vh, 520px);
-}
-
-@media (min-width: 1024px) {
-  .statement-void {
-    min-height: clamp(360px, 52vh, 640px);
-  }
-}
-
 .vertical-text {
   writing-mode: vertical-rl;
   transform: rotate(180deg);
+}
+
+/* the rail is the page frame's own signal, not secondary metadata */
+.rail-signal {
+  color: var(--accent);
 }
 
 .band-dark {
@@ -396,6 +419,33 @@ a {
   font-size: var(--fs-micro);
   letter-spacing: var(--track-micro);
   text-transform: uppercase;
+}
+
+/* the contact CTA: same geometry as the black one, accent instead of ink */
+.btn-solid--accent {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+/* SOURCE / VIEW CASE — light rectangular system controls, not buttons.
+   A hairline box, mono label, one accent signal. No fill, no shadow. */
+.ctl {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  min-height: 32px;
+  padding: 6px 10px;
+  border: 1px solid var(--rule-strong);
+  font-family: var(--font-mono);
+  font-size: var(--fs-nano);
+  letter-spacing: var(--track-nano);
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.ctl__mark {
+  color: var(--accent);
 }
 
 .skip-link {
@@ -657,6 +707,29 @@ a {
 
 .btn-solid:hover {
   background: var(--accent);
+}
+
+/* already accent — darken a step rather than switching hue */
+.btn-solid--accent:hover {
+  background: #b52820;
+}
+
+.ctl {
+  transition:
+    border-color 200ms var(--ease-out),
+    color 200ms var(--ease-out);
+}
+
+.ctl:hover {
+  border-color: var(--accent);
+}
+
+.ctl:hover .ctl__mark {
+  transform: translate(1px, -1px);
+}
+
+.ctl__mark {
+  transition: transform 200ms var(--ease-out);
 }
 
 header a,
