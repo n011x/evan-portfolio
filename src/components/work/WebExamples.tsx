@@ -58,6 +58,7 @@ export function WebExamples({ id = "04" }: { id?: string }) {
                       href={live.href}
                       target="_blank"
                       rel="noreferrer noopener"
+                      aria-label={`VIEW LIVE — открыть демоверсию лендинга ${project.name}`}
                     >
                       <span>VIEW LIVE</span>
                       <span className="ctl__mark" aria-hidden="true">

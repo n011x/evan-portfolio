@@ -78,7 +78,12 @@ export default function RootLayout({
           <Rail />
           <div className="page-main relative z-10">
             <SiteHeader />
-            <main id="main">{children}</main>
+            {/* #top is the footer's way back and has to exist on every page, not only
+                where the hero happens to be */}
+            <main id="main">
+              <span id="top" aria-hidden="true" />
+              {children}
+            </main>
             <SiteFooter />
           </div>
         </div>

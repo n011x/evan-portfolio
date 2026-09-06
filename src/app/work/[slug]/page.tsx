@@ -4,6 +4,7 @@ import { notFound, redirect } from "next/navigation";
 import { coreProjects, showcaseProjects, projects, leadRadarPipeline } from "@/content/projects";
 import { cases } from "@/content/cases";
 import { profile } from "@/content/profile";
+import { describeLink } from "@/components/work/ProjectHead";
 import { CaseBand } from "@/components/case/CaseBand";
 import { CaseGallery } from "@/components/case/CaseGallery";
 import { EvidenceBand } from "@/components/case/EvidencePlate";
@@ -98,6 +99,7 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
                         href={link.href}
                         target="_blank"
                         rel="noreferrer noopener"
+                        aria-label={describeLink(link.label, project)}
                       >
                         <span>{link.label}</span>
                         <span className="ctl__mark" aria-hidden="true">

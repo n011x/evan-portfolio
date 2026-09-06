@@ -5,15 +5,17 @@ type Props = {
   href: string;
   className?: string;
   children: React.ReactNode;
+  /** WCAG 2.5.3 — whatever is passed must still contain the visible label text. */
+  "aria-label"?: string;
 };
 
 /** Renders a real link when its route exists, otherwise an inert element. */
-export function MaybeLink({ href, className = "", children }: Props) {
+export function MaybeLink({ href, className = "", children, "aria-label": ariaLabel }: Props) {
   const internal = isInternalRoute(href);
 
   if (internal && !caseRoutesEnabled) {
     return (
-      <span className={className} data-route-pending="true" aria-disabled="true">
+      <span className={className} data-route-pending="true" aria-disabled="true" aria-label={ariaLabel}>
         {children}
       </span>
     );
@@ -21,14 +23,14 @@ export function MaybeLink({ href, className = "", children }: Props) {
 
   if (internal) {
     return (
-      <Link className={className} href={href}>
+      <Link className={className} href={href} aria-label={ariaLabel}>
         {children}
       </Link>
     );
   }
 
   return (
-    <a className={className} href={href} target="_blank" rel="noreferrer noopener">
+    <a className={className} href={href} target="_blank" rel="noreferrer noopener" aria-label={ariaLabel}>
       {children}
     </a>
   );

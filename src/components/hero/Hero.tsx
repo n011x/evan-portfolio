@@ -7,7 +7,6 @@ import { ArrowLink } from "@/components/ui/ArrowLink";
 export function Hero() {
   return (
     <section
-      id="top"
       className="band band--eager flex flex-col"
       aria-labelledby="hero-name"
       data-field="high"
@@ -85,7 +84,7 @@ export function Hero() {
                 href={profile.telegram}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Написать мне в Telegram"
+                aria-label="WORK WITH ME — написать мне в Telegram"
                 className="btn-solid btn-solid--accent flex-1 sm:flex-none"
               >
                 <span>WORK WITH ME</span>
