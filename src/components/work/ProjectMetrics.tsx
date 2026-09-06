@@ -45,9 +45,9 @@ export function ProjectMetrics({ project }: { project: Project }) {
                 style={{
                   fontFamily: "var(--font-display)",
                   fontWeight: 500,
-                  fontSize: "clamp(5.5rem, 13vw, 13rem)",
-                  lineHeight: 0.78,
-                  letterSpacing: "-0.05em",
+                  fontSize: "var(--fs-h2)",
+                  lineHeight: 0.9,
+                  letterSpacing: "-0.04em",
                 }}
               >
                 {first.value}
@@ -63,9 +63,9 @@ export function ProjectMetrics({ project }: { project: Project }) {
                 style={{
                   fontFamily: "var(--font-display)",
                   fontWeight: 500,
-                  fontSize: "clamp(2.5rem, 5vw, 4.5rem)",
-                  lineHeight: 0.9,
-                  letterSpacing: "-0.04em",
+                  fontSize: "var(--fs-h3)",
+                  lineHeight: 1,
+                  letterSpacing: "-0.03em",
                 }}
               >
                 {second.value}
@@ -81,9 +81,9 @@ export function ProjectMetrics({ project }: { project: Project }) {
                 style={{
                   fontFamily: "var(--font-display)",
                   fontWeight: 400,
-                  fontSize: "clamp(1.75rem, 2.6vw, 2.5rem)",
-                  lineHeight: 1,
-                  letterSpacing: "-0.03em",
+                  fontSize: "var(--fs-h4)",
+                  lineHeight: 1.1,
+                  letterSpacing: "-0.02em",
                 }}
               >
                 {third.value}

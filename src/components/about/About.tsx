@@ -26,7 +26,7 @@ export function About() {
             <div className="mt-4 lg:mt-5">
               {profile.about.map((paragraph, i) => (
                 <Reveal key={i} className="mb-4 last:mb-0">
-                  <p className={i === 0 ? "lead" : "body"}>{paragraph}</p>
+                  <p className={i === 0 ? "h3" : "body"}>{paragraph}</p>
                 </Reveal>
               ))}
             </div>

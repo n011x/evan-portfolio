@@ -17,10 +17,15 @@ export function SectionHeader({ id, name, right, note }: Props) {
       <Reveal kind="rule" className="rule-t block" />
       <div className="grid12 items-start pt-3 pb-8 md:pb-10">
         <Reveal className="col-span-1">
-          <span className="pixel block text-[34px] leading-none md:text-[42px]">/{id}</span>
+          <span
+            className="pixel block text-[34px] leading-none md:text-[42px]"
+            style={{ color: "var(--ghost-index)" }}
+          >
+            /{id}
+          </span>
         </Reveal>
         <Reveal className="col-span-3 md:col-span-2 lg:col-span-4">
-          <h2 className="micro micro-ink">{name}</h2>
+          <h2 className="h3">{name}</h2>
         </Reveal>
         {note ? (
           <p className="nano col-span-4 md:col-span-2 lg:col-span-4 mt-3 md:mt-0 max-w-[44ch]">
