@@ -130,8 +130,14 @@ a {
 
 /* Offscreen bands are not styled, laid out or painted until they approach the
    viewport. Purely a rendering optimisation — geometry and appearance are identical.
-   `auto` remembers the real height once rendered, so the scrollbar stays honest. */
-.band:not(.band--eager) {
+   `auto` remembers the real height once rendered, so the scrollbar stays honest.
+
+   The dark band is excluded. It redefines --ink for its own ground, and while a
+   subtree is skipped those custom properties do not resolve: getComputedStyle hands
+   back black, so every audit that reads colour without scrolling there sees black
+   text on a near-black band and reports a contrast failure that does not exist. One
+   band's worth of skipped painting is not worth an audit nobody can trust. */
+.band:not(.band--eager):not(.band-dark) {
   content-visibility: auto;
   contain-intrinsic-size: auto 980px;
 }
@@ -737,9 +743,13 @@ a.nav-link[aria-current="page"]:hover {
   }
 }
 
+/* No opacity here on purpose. A scroll-driven fade means that at any scroll
+   position something on the page is part-way transparent, and a contrast checker
+   reads the blended colour: axe reported 1.71:1 for a heading that is #0b0b0c the
+   moment it settles. Keeping text at full opacity throughout makes the animation
+   honest to every tool that measures the page, and to anyone reading it mid-scroll. */
 @keyframes reveal-in {
   from {
-    opacity: 0;
     transform: translate3d(0, 14px, 0);
   }
 }
