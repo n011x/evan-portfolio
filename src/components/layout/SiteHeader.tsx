@@ -1,12 +1,6 @@
 import Link from "next/link";
 import { profile } from "@/content/profile";
-
-const nav = [
-  { label: "WORK", href: "/work" },
-  { label: "ABOUT", href: "/#about" },
-  { label: "APPROACH", href: "/#approach" },
-  { label: "CONTACT", href: "/#contact" },
-];
+import { SiteNav } from "./SiteNav";
 
 export function SiteHeader() {
   return (
@@ -25,20 +19,7 @@ export function SiteHeader() {
             </span>
           </div>
 
-          <nav
-            aria-label="Основная навигация"
-            className="col-span-2 md:col-span-3 lg:col-span-6 -mr-2 flex justify-end gap-1 md:justify-start md:gap-4 lg:gap-6"
-          >
-            {nav.map((item) => (
-              <a
-                key={item.href}
-                className="micro inline-flex min-h-[44px] items-center px-2 first:pl-0 hover:text-[var(--ink)]"
-                href={item.href}
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
+          <SiteNav />
 
           <div className="hidden md:flex md:col-span-1 lg:col-span-3 justify-end gap-4">
             <span className="nano">
