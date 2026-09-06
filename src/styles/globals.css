@@ -365,10 +365,18 @@ a {
   color: var(--night);
 }
 
-/* ABOUT speaks in the first person, so its list and its chain stay lowercase while
-   the mono labels around them keep the system's uppercase. */
-.lowercase-label {
+/* ABOUT speaks in the first person, so its own labels stay lowercase while the mono
+   labels around them keep the system's uppercase. At 11px, lowercase mono puts less
+   ink on the page than caps do, so the weight goes up a step to compensate — the
+   colour is already --ink and has nowhere left to go. */
+.block-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  line-height: 1.4;
+  letter-spacing: var(--track-micro);
+  font-weight: 500;
   text-transform: none;
+  color: var(--ink);
 }
 
 /* the five steps read as one sentence; the arrows are spacing, not punctuation */
