@@ -153,10 +153,12 @@ export function ProjectMetrics({ project }: { project: Project }) {
           </div>
         </div>
 
-        <div className="grid12 mt-10 hidden md:grid">
-          <span className="col-span-4 md:col-span-6 lg:col-span-12 lg:justify-self-end">
-            <ProjectIndex index={project.index} />
-          </span>
+        <div className="hidden md:block">
+          <div className="grid12 mt-10">
+            <span className="col-span-4 md:col-span-6 lg:col-span-12 lg:justify-self-end">
+              <ProjectIndex index={project.index} />
+            </span>
+          </div>
         </div>
       </div>
     </article>

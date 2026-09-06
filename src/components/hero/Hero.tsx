@@ -14,12 +14,16 @@ export function Hero() {
     >
       <DistortionField variant="hero" />
       <div className="wrap relative flex flex-1 flex-col">
-        {/* coded header strip — one line, and it is a signal */}
-        <div className="grid12 rule-b py-2.5">
-          <span className="nano col-span-4 md:col-span-6 lg:col-span-12">
-            STATUS: <span style={{ color: "var(--accent)" }}>{profile.status}</span> ·{" "}
-            {profile.workMode}
-          </span>
+        {/* The strip is down to its one signal, and above md the site header already
+            carries that signal three centimetres higher — so there the row would be a
+            duplicate under a hairline. It survives only where the header hides it. */}
+        <div className="md:hidden">
+          <div className="grid12 rule-b py-2.5">
+            <span className="nano col-span-4">
+              STATUS: <span style={{ color: "var(--accent)" }}>{profile.status}</span> ·{" "}
+              {profile.workMode}
+            </span>
+          </div>
         </div>
 
         {/* row 1 — name + positioning */}
