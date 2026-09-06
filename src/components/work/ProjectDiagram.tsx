@@ -44,7 +44,7 @@ export function ProjectDiagram({ project }: { project: Project }) {
         />
       </div>
 
-      <div className="wrap pb-12 lg:pb-20">
+      <div className="wrap pb-8 lg:pb-12">
         <div className="grid12 rule-t pt-6 lg:pt-8">
           <Reveal className="col-span-4 md:col-span-4 lg:col-span-5">
             <h3 id={`project-${project.slug}`} className="h1">

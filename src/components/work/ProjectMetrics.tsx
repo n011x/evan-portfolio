@@ -15,7 +15,7 @@ export function ProjectMetrics({ project }: { project: Project }) {
   const [first, second, third] = project.metrics ?? [];
 
   return (
-    <article className="band pt-20 lg:pt-32" data-field="low" aria-labelledby={`project-${project.slug}`}>
+    <article className="band pt-14 lg:pt-20" data-field="low" aria-labelledby={`project-${project.slug}`}>
       <div className="wrap">
         <div className="grid12 rule-t pt-3">
           <span className="nano col-span-1 lg:col-span-1">({project.index})</span>

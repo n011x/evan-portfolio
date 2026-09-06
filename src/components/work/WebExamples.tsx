@@ -12,7 +12,7 @@ export function WebExamples({ id = "04" }: { id?: string }) {
   return (
     <section
       id="web"
-      className="band pt-16 lg:pt-24"
+      className="band pt-12 lg:pt-16"
       aria-labelledby="web-title"
     >
       <SectionHeader
@@ -24,7 +24,7 @@ export function WebExamples({ id = "04" }: { id?: string }) {
         Веб и лендинги
       </span>
 
-      <div className="wrap pb-16 lg:pb-24">
+      <div className="wrap pb-10 lg:pb-14">
         <p className="body" style={{ maxWidth: "52ch" }}>
           Собираю лендинги и небольшие веб-инструменты под задачу. Ниже —
           примеры исполнения, а не отдельные продукты.

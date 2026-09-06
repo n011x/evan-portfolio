@@ -18,7 +18,7 @@ export function CaseBand({
   field?: "low" | "min" | "none";
 }) {
   return (
-    <section className="band pt-16 lg:pt-24" data-field={field ?? "min"} aria-labelledby={`band-${id}`}>
+    <section className="band pt-12 lg:pt-16" data-field={field ?? "min"} aria-labelledby={`band-${id}`}>
       <div className="wrap">
         <Reveal kind="rule" className="rule-t block" />
         <div className="grid12 pt-3">

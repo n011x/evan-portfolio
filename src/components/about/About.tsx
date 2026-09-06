@@ -11,13 +11,13 @@ import { helpWith, flow } from "@/content/capabilities";
  */
 export function About() {
   return (
-    <section id="about" className="band pt-16 lg:pt-24" data-field="low" aria-labelledby="about-title">
+    <section id="about" className="band pt-12 lg:pt-16" data-field="low" aria-labelledby="about-title">
       <SectionHeader id="03" name="ABOUT" right="REMOTE · SOLO" />
       <span id="about-title" className="sr-only">
         Обо мне
       </span>
 
-      <div className="wrap pb-16 lg:pb-24">
+      <div className="wrap pb-10 lg:pb-14">
         <div className="grid12 items-start">
           <div className="col-span-4 md:col-span-3 lg:col-span-6">
             <Reveal>

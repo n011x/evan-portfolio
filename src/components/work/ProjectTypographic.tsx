@@ -13,7 +13,7 @@ export function ProjectTypographic({ project }: { project: Project }) {
 
   return (
     <article
-      className="band pt-20 lg:pt-32"
+      className="band pt-14 lg:pt-20"
       data-field="medium"
       aria-labelledby={`project-${project.slug}`}
       style={{ overflow: "clip" }}
