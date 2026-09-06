@@ -37,7 +37,6 @@ export function WebExamples({ id = "04" }: { id?: string }) {
               <Reveal
                 as="li"
                 key={project.slug}
-                delay={i === 0 ? 1 : 2}
                 className="rule-t grid12 py-6 lg:py-8"
               >
                 <div className="col-span-4 md:col-span-3 lg:col-span-4">

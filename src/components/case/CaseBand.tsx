@@ -23,14 +23,14 @@ export function CaseBand({
         <Reveal kind="rule" className="rule-t block" />
         <div className="grid12 pt-3">
           <span className="nano col-span-1">{id}</span>
-          <Reveal delay={1} className="col-span-3 md:col-span-2 lg:col-span-3">
+          <Reveal className="col-span-3 md:col-span-2 lg:col-span-3">
             <h2 id={`band-${id}`} className="micro micro-ink">
               {title}
             </h2>
           </Reveal>
           <div className="col-span-4 md:col-span-4 lg:col-span-7 lg:col-start-5 mt-5 lg:mt-0">
             {body?.map((paragraph, i) => (
-              <Reveal key={paragraph} delay={i === 0 ? 1 : 2} className="mb-6 last:mb-0">
+              <Reveal key={paragraph} className="mb-6 last:mb-0">
                 <p className="body" style={{ maxWidth: "52ch" }}>
                   {paragraph}
                 </p>

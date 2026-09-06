@@ -76,7 +76,7 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
             <Reveal as="h1" className="h1 col-span-4 md:col-span-6 lg:col-span-8">
               <span id="case-name">{project.name}</span>
             </Reveal>
-            <Reveal delay={1} className="col-span-4 md:col-span-6 lg:col-span-6 mt-6 lg:mt-8">
+            <Reveal className="col-span-4 md:col-span-6 lg:col-span-6 mt-6 lg:mt-8">
               <p className="lead">{study.deck}</p>
             </Reveal>
             <div className="col-span-4 md:col-span-3 lg:col-span-4 lg:col-start-9 mt-8 lg:mt-8">

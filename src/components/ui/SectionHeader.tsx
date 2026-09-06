@@ -19,7 +19,7 @@ export function SectionHeader({ id, name, right, note }: Props) {
         <Reveal className="col-span-1">
           <span className="pixel block text-[34px] leading-none md:text-[42px]">/{id}</span>
         </Reveal>
-        <Reveal delay={1} className="col-span-3 md:col-span-2 lg:col-span-4">
+        <Reveal className="col-span-3 md:col-span-2 lg:col-span-4">
           <h2 className="micro micro-ink">{name}</h2>
         </Reveal>
         {note ? (

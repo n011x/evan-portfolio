@@ -25,7 +25,7 @@ export function About() {
             </Reveal>
             <div className="mt-4 lg:mt-5">
               {profile.about.map((paragraph, i) => (
-                <Reveal key={i} delay={i === 0 ? 0 : 1} className="mb-4 last:mb-0">
+                <Reveal key={i} className="mb-4 last:mb-0">
                   <p className={i === 0 ? "lead" : "body"}>{paragraph}</p>
                 </Reveal>
               ))}
@@ -33,12 +33,12 @@ export function About() {
           </div>
 
           <div className="col-span-4 md:col-span-3 lg:col-span-6 mt-10 md:mt-0">
-            <Reveal delay={1}>
+            <Reveal>
               <h3 className="block-label">с чем помогу</h3>
             </Reveal>
             <ul className="mt-4 lg:mt-5">
               {helpWith.map((item, i) => (
-                <Reveal as="li" key={item.index} delay={i < 3 ? 1 : 2} className="flex gap-4 py-1.5">
+                <Reveal as="li" key={item.index} className="flex gap-4 py-1.5">
                   <span className="nano shrink-0 pt-1" style={{ width: "2ch" }}>
                     {item.index}
                   </span>
@@ -57,7 +57,7 @@ export function About() {
             <Reveal>
               <h3 className="block-label">как работаю</h3>
             </Reveal>
-            <Reveal delay={1} className="mt-4 lg:mt-5">
+            <Reveal className="mt-4 lg:mt-5">
               <p className="body flow-chain" style={{ maxWidth: "none" }}>
                 {flow.map((step, i) => (
                   <span key={step}>
