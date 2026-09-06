@@ -8,11 +8,11 @@ import { Reveal } from "@/components/motion/Reveal";
  * pagination. A screenshot of a landing proves nothing a live link does not prove better,
  * so each one is a single row: name, type, one line, stack, the site itself.
  */
-export function WebExamples({ id = "04" }: { id?: string }) {
+export function WebExamples({ id = "03" }: { id?: string }) {
   return (
     <section
       id="web"
-      className="band pt-16 lg:pt-24"
+      className="band pt-12 lg:pt-16"
       aria-labelledby="web-title"
     >
       <SectionHeader
@@ -24,20 +24,19 @@ export function WebExamples({ id = "04" }: { id?: string }) {
         Веб и лендинги
       </span>
 
-      <div className="wrap pb-16 lg:pb-24">
+      <div className="wrap pb-10 lg:pb-14">
         <p className="body" style={{ maxWidth: "52ch" }}>
           Собираю лендинги и небольшие веб-инструменты под задачу. Ниже —
           примеры исполнения, а не отдельные продукты.
         </p>
 
         <ul className="mt-10 lg:mt-14">
-          {webExamples.map((project, i) => {
+          {webExamples.map((project) => {
             const live = project.links.find((l) => l.label === "LIVE");
             return (
               <Reveal
                 as="li"
                 key={project.slug}
-                delay={i === 0 ? 1 : 2}
                 className="rule-t grid12 py-6 lg:py-8"
               >
                 <div className="col-span-4 md:col-span-3 lg:col-span-4">
@@ -59,6 +58,7 @@ export function WebExamples({ id = "04" }: { id?: string }) {
                       href={live.href}
                       target="_blank"
                       rel="noreferrer noopener"
+                      aria-label={`VIEW LIVE — открыть демоверсию лендинга ${project.name}`}
                     >
                       <span>VIEW LIVE</span>
                       <span className="ctl__mark" aria-hidden="true">

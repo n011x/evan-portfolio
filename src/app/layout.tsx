@@ -74,7 +74,10 @@ export default function RootLayout({
         <MotionGate />
         <GridGuides />
         <Grain />
-        <div className="page">
+        {/* #top is the footer's way back. It has to exist on every page, not only
+            where the hero happens to be, and it has to sit above the sticky header —
+            anchored inside <main> the browser stopped 56px short of the actual top. */}
+        <div className="page" id="top">
           <Rail />
           <div className="page-main relative z-10">
             <SiteHeader />

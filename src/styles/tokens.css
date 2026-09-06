@@ -12,7 +12,7 @@
   /* The oversized ghost project index. Its own token, not the surface tint: it is read
      as type, so it is tuned for contrast rather than as a fill. 2.26:1 on --paper and
      2.09:1 on --paper-2 — a deliberate quiet layer, still far below --gray at 5.07:1. */
-  --ghost-index: #a4a29a;
+  --ghost-index: #8b8983;      /* 3.10:1 on --paper — a background number is still text */
   --ink: #0b0b0c;
   --graphite: #3a3b3e;
   --gray: #65666b;               /* 5.07:1 on --paper · 4.67:1 on --paper-2 */

@@ -130,8 +130,14 @@ a {
 
 /* Offscreen bands are not styled, laid out or painted until they approach the
    viewport. Purely a rendering optimisation — geometry and appearance are identical.
-   `auto` remembers the real height once rendered, so the scrollbar stays honest. */
-.band:not(.band--eager) {
+   `auto` remembers the real height once rendered, so the scrollbar stays honest.
+
+   The dark band is excluded. It redefines --ink for its own ground, and while a
+   subtree is skipped those custom properties do not resolve: getComputedStyle hands
+   back black, so every audit that reads colour without scrolling there sees black
+   text on a near-black band and reports a contrast failure that does not exist. One
+   band's worth of skipped painting is not worth an audit nobody can trust. */
+.band:not(.band--eager):not(.band-dark) {
   content-visibility: auto;
   contain-intrinsic-size: auto 980px;
 }
@@ -708,42 +714,49 @@ a.nav-link[aria-current="page"]:hover {
    ============================================================ */
 
 [data-reveal] {
-  opacity: 0;
-  transform: translate3d(0, 14px, 0);
-  transition:
-    opacity 620ms var(--ease-out),
-    transform 620ms var(--ease-out);
+  /* deliberately empty at rest: the static composition IS the finished state, and
+     nothing below may hide it. See Reveal.tsx. */
 }
 
-[data-reveal][data-revealed="true"] {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
+/* The entry animation exists only where the browser can drive it from scroll
+   position. Everywhere else this block does not apply and the content is simply
+   there — which is also what happens with JavaScript off. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    [data-reveal="block"] {
+      animation: reveal-in 200ms var(--ease-out) both;
+      animation-timeline: view();
+      /* done by the time the element is half-entered — early enough that it is never
+         caught mid-fade, and short enough that the last elements on the page, which
+         can never scroll further, still finish */
+      animation-range: entry 0% entry 50%;
+    }
+
+    /* the hairline wipes open on the compositor. Never clip-path: a self-clipped
+       element reports an empty intersection rect to anything that measures it. */
+    [data-reveal="rule"] {
+      animation: reveal-rule 220ms var(--ease-out) both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 50%;
+      transform-origin: left center;
+    }
+  }
 }
 
-/* The hairline wipes open on the compositor. It must NOT be clipped with clip-path:
-   a self-clipped element reports an empty intersection rect, so the observer that
-   would reveal it never fires — the rule would stay invisible forever. */
-[data-reveal="rule"] {
-  opacity: 1;
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform 720ms var(--ease-out);
+/* No opacity here on purpose. A scroll-driven fade means that at any scroll
+   position something on the page is part-way transparent, and a contrast checker
+   reads the blended colour: axe reported 1.71:1 for a heading that is #0b0b0c the
+   moment it settles. Keeping text at full opacity throughout makes the animation
+   honest to every tool that measures the page, and to anyone reading it mid-scroll. */
+@keyframes reveal-in {
+  from {
+    transform: translate3d(0, 14px, 0);
+  }
 }
 
-[data-reveal="rule"][data-revealed="true"] {
-  transform: scaleX(1);
-}
-
-[data-reveal-delay="1"] { transition-delay: 90ms; }
-[data-reveal-delay="2"] { transition-delay: 180ms; }
-[data-reveal-delay="3"] { transition-delay: 270ms; }
-
-@media (prefers-reduced-motion: reduce) {
-  [data-reveal] {
-    opacity: 1 !important;
-    transform: none !important;
-    clip-path: none !important;
-    transition: none !important;
+@keyframes reveal-rule {
+  from {
+    transform: scaleX(0);
   }
 }
 
@@ -841,4 +854,15 @@ header nav a:hover {
 
 @media (prefers-reduced-motion: reduce) {
   .media-states__clean { transition: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

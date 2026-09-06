@@ -203,3 +203,17 @@ export const leadRadarPipeline = [
   { id: "07", label: "DIGEST", note: "два окна в день, до 10 карточек", x: 77.2, y: 34 },
   { id: "08", label: "OWNER", note: "решение владельца", x: 90, y: 84 },
 ];
+
+/**
+ * The hero's three figures. Derived rather than typed out: the "03 CORE BUILDS /
+ * 02 SYSTEMS" contradiction on the live site came from a hand-kept copy of numbers
+ * that the data had already moved past.
+ */
+export const proof = [
+  { value: String(showcaseProjects.length).padStart(2, "0"), label: "CORE BUILDS" },
+  { value: String(webExamples.length).padStart(2, "0"), label: "WEB EXAMPLES" },
+  {
+    value: String(projects.filter((p) => p.links.some((l) => l.label === "LIVE")).length).padStart(2, "0"),
+    label: "LIVE LINKS",
+  },
+] as const;

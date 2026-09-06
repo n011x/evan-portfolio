@@ -13,7 +13,7 @@ export function ProjectWide({ project }: { project: Project }) {
   const note = media ? media.note : "";
 
   return (
-    <article className="band pt-20 lg:pt-32" data-field="low" aria-labelledby={`project-${project.slug}`}>
+    <article className="band pt-14 lg:pt-20" data-field="low" aria-labelledby={`project-${project.slug}`}>
       <DistortionField variant="media" />
       <div className="wrap relative">
         <div className="grid12 rule-t pt-3">

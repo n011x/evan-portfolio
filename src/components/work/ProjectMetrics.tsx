@@ -15,7 +15,7 @@ export function ProjectMetrics({ project }: { project: Project }) {
   const [first, second, third] = project.metrics ?? [];
 
   return (
-    <article className="band pt-20 lg:pt-32" data-field="low" aria-labelledby={`project-${project.slug}`}>
+    <article className="band pt-14 lg:pt-20" data-field="low" aria-labelledby={`project-${project.slug}`}>
       <div className="wrap">
         <div className="grid12 rule-t pt-3">
           <span className="nano col-span-1 lg:col-span-1">({project.index})</span>
@@ -45,9 +45,9 @@ export function ProjectMetrics({ project }: { project: Project }) {
                 style={{
                   fontFamily: "var(--font-display)",
                   fontWeight: 500,
-                  fontSize: "clamp(5.5rem, 13vw, 13rem)",
-                  lineHeight: 0.78,
-                  letterSpacing: "-0.05em",
+                  fontSize: "var(--fs-h2)",
+                  lineHeight: 0.9,
+                  letterSpacing: "-0.04em",
                 }}
               >
                 {first.value}
@@ -63,9 +63,9 @@ export function ProjectMetrics({ project }: { project: Project }) {
                 style={{
                   fontFamily: "var(--font-display)",
                   fontWeight: 500,
-                  fontSize: "clamp(2.5rem, 5vw, 4.5rem)",
-                  lineHeight: 0.9,
-                  letterSpacing: "-0.04em",
+                  fontSize: "var(--fs-h3)",
+                  lineHeight: 1,
+                  letterSpacing: "-0.03em",
                 }}
               >
                 {second.value}
@@ -81,9 +81,9 @@ export function ProjectMetrics({ project }: { project: Project }) {
                 style={{
                   fontFamily: "var(--font-display)",
                   fontWeight: 400,
-                  fontSize: "clamp(1.75rem, 2.6vw, 2.5rem)",
-                  lineHeight: 1,
-                  letterSpacing: "-0.03em",
+                  fontSize: "var(--fs-h4)",
+                  lineHeight: 1.1,
+                  letterSpacing: "-0.02em",
                 }}
               >
                 {third.value}
@@ -153,10 +153,12 @@ export function ProjectMetrics({ project }: { project: Project }) {
           </div>
         </div>
 
-        <div className="grid12 mt-10">
-          <span className="col-span-4 md:col-span-6 lg:col-span-12 lg:justify-self-end">
-            <ProjectIndex index={project.index} />
-          </span>
+        <div className="hidden md:block">
+          <div className="grid12 mt-10">
+            <span className="col-span-4 md:col-span-6 lg:col-span-12 lg:justify-self-end">
+              <ProjectIndex index={project.index} />
+            </span>
+          </div>
         </div>
       </div>
     </article>

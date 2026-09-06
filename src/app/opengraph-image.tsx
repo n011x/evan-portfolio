@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { profile } from "@/content/profile";
+import { proof } from "@/content/projects";
 
 export const alt = "EVAN — системы, веб, автоматизации";
 export const size = { width: 1200, height: 630 };
@@ -30,7 +31,7 @@ export default function OpenGraphImage() {
         }}
       >
         <div style={{ display: "flex", justifyContent: "space-between", fontSize: 20, letterSpacing: 2, color: "#65666B" }}>
-          <span>{profile.year} · BUILD {profile.build}</span>
+          <span>ОБНОВЛЕНО {profile.updated}</span>
           <span>PORTFOLIO / INDEX</span>
         </div>
 
@@ -48,7 +49,7 @@ export default function OpenGraphImage() {
             {profile.statement}
           </span>
           <div style={{ display: "flex", gap: 32, fontSize: 20, letterSpacing: 2, color: "#65666B" }}>
-            {profile.proof.map((item) => (
+            {proof.map((item) => (
               <span key={item.label} style={{ display: "flex", flexDirection: "column" }}>
                 <span style={{ fontSize: 40, color: "#0B0B0C" }}>{item.value}</span>
                 <span>{item.label}</span>

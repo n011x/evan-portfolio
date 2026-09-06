@@ -107,12 +107,12 @@ export function EvidenceBand({
   plates: EvidencePlateSpec[];
 }) {
   return (
-    <section className="band pt-16 lg:pt-24" data-field="min" aria-labelledby={`band-${id}`}>
+    <section className="band pt-12 lg:pt-16" data-field="min" aria-labelledby={`band-${id}`}>
       <div className="wrap">
         <Reveal kind="rule" className="rule-t block" />
         <div className="grid12 pt-3">
           <span className="nano col-span-1">{id}</span>
-          <Reveal delay={1} className="col-span-3 md:col-span-2 lg:col-span-3">
+          <Reveal className="col-span-3 md:col-span-2 lg:col-span-3">
             <h2 id={`band-${id}`} className="micro micro-ink">
               {title}
             </h2>

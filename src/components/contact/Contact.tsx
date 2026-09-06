@@ -5,7 +5,7 @@ import { GlassPlate } from "@/components/ui/GlassPlate";
 /** The single dark region of the homepage. A finish, not a sales form. */
 export function Contact() {
   return (
-    <section id="contact" className="band band-dark pt-14 lg:pt-20" aria-labelledby="contact-title">
+    <section id="contact" className="band band-dark pt-10 lg:pt-14" aria-labelledby="contact-title">
       <DistortionField variant="contact" />
       <div className="wrap relative">
         <div className="grid12 rule-t pt-3 pb-10 lg:pb-14">
@@ -13,7 +13,7 @@ export function Contact() {
             className="pixel col-span-1 block text-[34px] leading-none md:text-[42px]"
             style={{ color: "var(--paper)" }}
           >
-            /05
+            /04
           </span>
           <h2 id="contact-title" className="micro micro-ink col-span-3 md:col-span-3 lg:col-span-6">
             CONTACT
@@ -63,15 +63,15 @@ export function Contact() {
           ))}
         </ul>
 
-        <div className="grid12 rule-t mt-10 py-6 pb-24 lg:pb-40 items-end">
+        <div className="grid12 rule-t mt-10 py-6 pb-16 lg:pb-24 items-end">
           <p className="nano col-span-4 md:col-span-3 lg:col-span-6 flex items-center gap-2">
             <span className="signal-dot" aria-hidden="true" />
             <span className="signal">STATUS: {profile.status}</span>
           </p>
           <GlassPlate
             rows={[
-              { k: "BUILD", v: `${profile.build} · ${profile.year}` },
-              { k: "CALIBRATION", v: profile.workMode },
+              { k: "ОБНОВЛЕНО", v: profile.updated },
+              { k: "РЕЖИМ", v: profile.workMode },
             ]}
             className="col-span-4 md:col-span-3 lg:col-span-4 lg:col-start-9 mt-6 md:mt-0 w-full max-w-[240px] md:justify-self-end"
           />
