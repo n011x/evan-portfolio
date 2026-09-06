@@ -32,7 +32,7 @@ export default function WorkPage() {
         <div className="wrap relative">
           <div className="grid12 rule-b pb-3">
             <span className="nano col-span-2 md:col-span-2 lg:col-span-3">
-              {profile.year} · BUILD {profile.build}
+              ОБНОВЛЕНО {profile.updated}
             </span>
             <span className="nano col-span-2 md:col-span-2 lg:col-span-4">WORK / INDEX</span>
             <span className="nano col-span-4 md:col-span-2 lg:col-span-5 mt-2 md:mt-0 md:justify-self-end">

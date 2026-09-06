@@ -1,4 +1,5 @@
 import { profile } from "@/content/profile";
+import { proof } from "@/content/projects";
 import { DistortionField } from "@/components/graphics/DistortionField";
 import { GlassPlate } from "@/components/ui/GlassPlate";
 import { ArrowLink } from "@/components/ui/ArrowLink";
@@ -14,20 +15,9 @@ export function Hero() {
     >
       <DistortionField variant="hero" />
       <div className="wrap relative flex flex-1 flex-col">
-        {/* coded header strip */}
+        {/* coded header strip — one line, and it is a signal */}
         <div className="grid12 rule-b py-2.5">
-          <span className="nano col-span-2 md:col-span-2 lg:col-span-3">
-            {profile.year} · BUILD {profile.build}
-          </span>
-          <span className="nano col-span-2 md:col-span-2 lg:col-span-3 justify-self-end md:justify-self-start">
-            PORTFOLIO / INDEX
-          </span>
-          <span className="nano col-span-4 md:col-span-2 lg:col-span-6 mt-1 md:mt-0 md:justify-self-end">
-            <span style={{ color: "var(--ink)" }}>/01</span> — HERO · IDENTITY
-          </span>
-          {/* the header hides the status below md, and it is a signal rather than
-              decoration — so it rejoins the hero's own metadata line there */}
-          <span className="nano col-span-4 mt-1 md:hidden">
+          <span className="nano col-span-4 md:col-span-6 lg:col-span-12">
             STATUS: <span style={{ color: "var(--accent)" }}>{profile.status}</span> ·{" "}
             {profile.workMode}
           </span>
@@ -73,7 +63,7 @@ export function Hero() {
             <p className="lead">{profile.statement}</p>
 
             <dl className="mt-8 lg:mt-10 grid grid-cols-3 gap-4 lg:gap-6">
-              {profile.proof.map((item) => (
+              {proof.map((item) => (
                 <div key={item.label} className="rule-t pt-3">
                   <dt className="sr-only">{item.label}</dt>
                   <dd>

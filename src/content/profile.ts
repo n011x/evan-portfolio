@@ -16,19 +16,11 @@ export const profile = {
   telegram: "https://t.me/n011x",
   workMode: "REMOTE",
   year: "2026",
-  build: "0.1.0",
-  /**
-   * Three systems carry a case study; the landings are execution examples, not separate
-   * products. No uptime claim: the start month is provable, a continuous window is not.
-   */
-  proof: [
-    { value: "03", label: "CORE BUILDS" },
-    { value: "02", label: "WEB EXAMPLES" },
-    { value: "03", label: "LIVE LINKS" },
-  ],
+  /** last meaningful change to the site, shown instead of a version number */
+  updated: "09.2026",
   /** Small facts for the hero glass plate — system metadata, not a badge. */
   systemPlate: [
-    { k: "BUILD", v: "0.1.0 · 2026" },
+    { k: "ОБНОВЛЕНО", v: "09.2026" },
     { k: "STATE", v: "OPEN TO WORK" },
   ],
   /** ABOUT — supplied verbatim, one entry per paragraph. */
@@ -41,7 +33,6 @@ export const profile = {
   ],
   contacts: [
     { label: "TELEGRAM", handle: "@n011x", href: "https://t.me/n011x" },
-    { label: "EMAIL", handle: "kostyuchenko.corp@gmail.com", href: "mailto:kostyuchenko.corp@gmail.com" },
     { label: "GITHUB", handle: "github.com/n011x", href: "https://github.com/n011x" },
   ],
 } as const;

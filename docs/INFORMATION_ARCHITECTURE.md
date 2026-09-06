@@ -232,7 +232,6 @@ prompts and under my control. No logo wall.
 ## 10. CONTACT
 
 - `TELEGRAM ↗` `@n011x`
-- `EMAIL ↗` `kostyuchenko.corp@gmail.com`
 - `GITHUB ↗` `github.com/n011x` — the site-wide GitHub link (hero, contact, footer)
   always points at the **profile**, never at a single repository
 - availability: `STATUS: OPEN TO WORK` + `REMOTE`, rendered as system metadata, not as a CTA

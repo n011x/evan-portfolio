@@ -8,17 +8,15 @@ import { siteUrl } from "@/lib/site";
  * no invented ratings, no fake organisation.
  */
 export function StructuredData() {
-  const email = profile.contacts.find((c) => c.label === "EMAIL")?.handle ?? "";
   const person = {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: profile.name,
-    alternateName: profile.wordmark,
+    name: "Evan",
+    alternateName: "n011x",
     url: siteUrl,
-    email: email ? `mailto:${email}` : undefined,
-    jobTitle: "Разработчик систем, веба и автоматизаций",
-    description: profile.statement,
-    knowsAbout: ["AI agents", "Automation", "Web development", "Interface design"],
+    jobTitle: "AI Product Developer",
+    description: "Собираю AI-агентов, автоматизации и веб-инструменты",
+    knowsAbout: ["AI agents", "Automation", "Python", "Telegram bots", "Web development"],
     sameAs: profile.contacts.filter((c) => c.href.startsWith("http")).map((c) => c.href),
     hasPart: projects.map((project) => ({
       "@type": "CreativeWork",

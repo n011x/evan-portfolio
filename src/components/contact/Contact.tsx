@@ -70,8 +70,8 @@ export function Contact() {
           </p>
           <GlassPlate
             rows={[
-              { k: "BUILD", v: `${profile.build} · ${profile.year}` },
-              { k: "CALIBRATION", v: profile.workMode },
+              { k: "ОБНОВЛЕНО", v: profile.updated },
+              { k: "РЕЖИМ", v: profile.workMode },
             ]}
             className="col-span-4 md:col-span-3 lg:col-span-4 lg:col-start-9 mt-6 md:mt-0 w-full max-w-[240px] md:justify-self-end"
           />
