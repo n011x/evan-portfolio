@@ -651,11 +651,17 @@ O1, the production domain, is **closed**: the site is live at https://evancartex
 | O9 · O10 | Résumé count and enumeration | **SHIPPED** — five documents now say «три системы» plus web work, matching the portfolio. The registry fact changed with them, and all five PDFs were rebuilt inside the page-fit constraints. |
 | O11 | `index-bold` missing «20–30 в неделю» | **SHIPPED** — the figure was already in `content.json` and `content.md`; the document was simply out of step. `sync.py` now reports **no discrepancies at all**, for the first time. |
 
+### Known traps
+
+| # | item | status |
+|---|---|---|
+| T1 | **Unlayered CSS beats Tailwind utilities.** `globals.css` is imported after `tailwindcss` and declares its classes outside any cascade layer, so every rule in it outranks Tailwind's layered utilities regardless of specificity or source order. Two consequences seen in practice: the reset's `p, h1..h4, ul, ol { margin: 0 }` silently voids `mt-*` / `mb-*` on those elements, and `.grid12 { display: grid }` silently voids `hidden` / `md:hidden` / `md:block` on any element carrying it. Both fail with no error and no visual hint that the class was ignored — the workaround in the current code is to put spacing and display utilities on a plain wrapper instead. Deferred deliberately: untangling the layers touches every component and belongs in its own pass, not in a content change. | **OPEN — OWN TASK** |
+
 ### Standing decisions, not blockers
 
 | # | item | status |
 |---|---|---|
-| O5 | Ghost project index at 2.09–2.26:1 (§5) | **SHIPPED** at 6.1; below the 3:1 tool threshold by decision |
+| O5 | Ghost project index contrast | **CLOSED** — `--ghost-index` moved #a4a29a → #8b8983, 2.26:1 → 3.10:1, and it is hidden below 768px. Lighthouse flags this text despite `aria-hidden`, so the decision to sit below 3:1 cost a point on every page. |
 | O8 | **AI VISUAL has no project.** Re-audited again: nothing in the repositories is a publishable AI-visual deliverable — the résumé records it as a capability with tools and no named output. The capability stays in WHAT I BUILD because it is factually correct there. A deliberate absence. | **INTENTIONALLY NO PROJECT / FUTURE REAL ASSET** |
 | O12 | Lighthouse `font-size` on mobile `/` | **CLOSED** — the ASCII sculpture was removed, and the audit passes |
 

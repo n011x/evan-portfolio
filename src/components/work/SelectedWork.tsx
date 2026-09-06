@@ -9,7 +9,7 @@ export function SelectedWork() {
 
   return (
     <section id="work" className="band pt-12 lg:pt-16" aria-labelledby="work-title">
-      <SectionHeader id="02" name="CORE WORK" right={`0${showcaseProjects.length} SYSTEMS`} />
+      <SectionHeader id="01" name="CORE WORK" right={`0${showcaseProjects.length} SYSTEMS`} />
       <span id="work-title" className="sr-only">
         Основные работы
       </span>

@@ -12,7 +12,7 @@ import { helpWith, flow } from "@/content/capabilities";
 export function About() {
   return (
     <section id="about" className="band pt-12 lg:pt-16" data-field="low" aria-labelledby="about-title">
-      <SectionHeader id="03" name="ABOUT" right="REMOTE · SOLO" />
+      <SectionHeader id="02" name="ABOUT" right="REMOTE · SOLO" />
       <span id="about-title" className="sr-only">
         Обо мне
       </span>
