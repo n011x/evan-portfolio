@@ -10,16 +10,24 @@ import { Reveal } from "@/components/motion/Reveal";
  */
 export function WebExamples({ id = "06" }: { id?: string }) {
   return (
-    <section id="web" className="band pt-16 lg:pt-24" aria-labelledby="web-title">
-      <SectionHeader id={id} name="WEB / LANDING" right={`0${webExamples.length} EXAMPLES`} />
+    <section
+      id="web"
+      className="band pt-16 lg:pt-24"
+      aria-labelledby="web-title"
+    >
+      <SectionHeader
+        id={id}
+        name="WEB / LANDING"
+        right={`0${webExamples.length} EXAMPLES`}
+      />
       <span id="web-title" className="sr-only">
         Веб и лендинги
       </span>
 
       <div className="wrap pb-16 lg:pb-24">
         <p className="body" style={{ maxWidth: "52ch" }}>
-          Собираю лендинги и небольшие веб-инструменты под задачу. Ниже — примеры
-          исполнения, а не отдельные продукты.
+          Собираю лендинги и небольшие веб-инструменты под задачу. Ниже —
+          примеры исполнения, а не отдельные продукты.
         </p>
 
         <ul className="mt-10 lg:mt-14">
@@ -37,16 +45,25 @@ export function WebExamples({ id = "06" }: { id?: string }) {
                   <span className="nano mt-2 block">{project.type}</span>
                 </div>
 
-                <p className="body col-span-4 md:col-span-3 lg:col-span-5 mt-3 md:mt-0">
-                  {project.summary}
-                  <span className="nano mt-3 block">{project.stack.join(" · ")}</span>
-                </p>
+                <div className="col-span-4 md:col-span-3 lg:col-span-5 mt-3 md:mt-0">
+                  <p className="body">{project.summary}</p>
+                  <p className="nano" style={{ marginTop: "0.75rem" }}>
+                    {project.stack.join(" · ")}
+                  </p>
+                </div>
 
                 {live ? (
                   <div className="col-span-4 md:col-span-6 lg:col-span-3 mt-4 lg:mt-0 md:justify-self-end">
-                    <a className="ctl" href={live.href} target="_blank" rel="noreferrer noopener">
+                    <a
+                      className="ctl"
+                      href={live.href}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                    >
                       <span>VIEW LIVE</span>
-                      <span className="ctl__mark" aria-hidden="true">↗</span>
+                      <span className="ctl__mark" aria-hidden="true">
+                        ↗
+                      </span>
                     </a>
                   </div>
                 ) : null}

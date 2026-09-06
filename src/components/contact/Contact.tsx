@@ -9,17 +9,24 @@ export function Contact() {
   const secondary = profile.contacts.filter((c) => c.label !== "TELEGRAM");
 
   return (
-    <section id="contact" className="band band-dark pt-14 lg:pt-20" aria-labelledby="contact-title">
+    <section
+      id="contact"
+      className="band band-dark pt-14 lg:pt-20"
+      aria-labelledby="contact-title"
+    >
       <DistortionField variant="contact" />
       <div className="wrap relative">
-        <div className="grid12 rule-t pt-3 pb-16 lg:pb-24">
+        <div className="grid12 rule-t pt-3 pb-10 lg:pb-14">
           <span
             className="pixel col-span-1 block text-[34px] leading-none md:text-[42px]"
             style={{ color: "var(--paper)" }}
           >
             /07
           </span>
-          <h2 id="contact-title" className="micro micro-ink col-span-3 md:col-span-3 lg:col-span-6">
+          <h2
+            id="contact-title"
+            className="micro micro-ink col-span-3 md:col-span-3 lg:col-span-6"
+          >
             CONTACT
           </h2>
           <span className="nano col-span-4 md:col-span-2 lg:col-span-5 mt-3 md:mt-0 md:justify-self-end">
@@ -32,10 +39,12 @@ export function Contact() {
             <p className="lead">
               Опишите задачу в двух-трёх предложениях — своими словами, без ТЗ.
             </p>
-            <p className="body mt-5">
-              Отвечаю в течение дня. Если задача понятна, в ответ присылаю: что можно
-              собрать, за какой срок и что нужно от вас.
-            </p>
+            <div className="mt-5">
+              <p className="body">
+                Отвечаю в течение дня. Если задача понятна, в ответ присылаю:
+                что можно собрать, за какой срок и что нужно от вас.
+              </p>
+            </div>
           </div>
 
           <div className="col-span-4 md:col-span-3 lg:col-span-5 lg:col-start-8 mt-8 md:mt-0">
@@ -60,8 +69,14 @@ export function Contact() {
                   <a
                     className="micro link-arrow"
                     href={contact.href}
-                    target={contact.href.startsWith("http") ? "_blank" : undefined}
-                    rel={contact.href.startsWith("http") ? "noreferrer noopener" : undefined}
+                    target={
+                      contact.href.startsWith("http") ? "_blank" : undefined
+                    }
+                    rel={
+                      contact.href.startsWith("http")
+                        ? "noreferrer noopener"
+                        : undefined
+                    }
                     style={{ overflowWrap: "anywhere" }}
                   >
                     {contact.label} — {contact.handle}

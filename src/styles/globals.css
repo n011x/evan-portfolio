@@ -365,6 +365,17 @@ a {
   color: var(--night);
 }
 
+/* the contact CTA keeps its accent on the dark band — in the dark band's own tone of
+   it, since the light-band red goes muddy against near-black */
+.band-dark .btn-solid--accent {
+  background: var(--accent);
+  color: var(--night);
+}
+
+.band-dark .btn-solid--accent:hover {
+  background: var(--paper);
+}
+
 .link-arrow {
   position: relative;
   display: inline-flex;
